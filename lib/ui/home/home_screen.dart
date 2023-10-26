@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:scan_sense/common/styles.dart';
 
 class HomeScreen extends StatefulWidget {
   static const String routeName = '/home-screen';
@@ -13,6 +14,7 @@ class _HomeScreenState extends State<HomeScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: backgroundColor,
       body: Center(
         child: Text("Home Screen"),
       ),

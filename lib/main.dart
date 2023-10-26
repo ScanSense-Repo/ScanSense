@@ -1,3 +1,4 @@
+import 'package:camera/camera.dart';
 import 'package:flutter/material.dart';
 import 'package:scan_sense/common/navigation.dart';
 import 'package:scan_sense/ui/home/home_screen.dart';
@@ -5,9 +6,13 @@ import 'package:scan_sense/ui/layout/layout_screen.dart';
 import 'package:scan_sense/ui/login/login_screen.dart';
 import 'package:scan_sense/ui/onboarding/onboarding_screen.dart';
 import 'package:scan_sense/ui/register/register_screen.dart';
+import 'package:scan_sense/ui/scan/scan_screen.dart';
 import 'package:scan_sense/ui/splash/splash_screen.dart';
+import 'package:scan_sense/utils/helper.dart';
 
-void main() {
+Future<void> main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  cameras = await availableCameras();
   runApp(const MyApp());
 }
 
@@ -42,6 +47,7 @@ class MyApp extends StatelessWidget {
       routes: {
         SplashScreen.routeName: (context) => SplashScreen(),
         HomeScreen.routeName: (context) => HomeScreen(),
+        ScanScreen.routeName: (context) => ScanScreen(),
         OnboardingScreen.routeName: (context) => OnboardingScreen(),
         LoginScreen.routeName: (context) => LoginScreen(),
         RegisterScreen.routeName: (context) => RegisterScreen(),
