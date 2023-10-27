@@ -1,6 +1,7 @@
 import 'package:camera/camera.dart';
 import 'package:flutter/material.dart';
 import 'package:scan_sense/common/navigation.dart';
+import 'package:scan_sense/ui/history/detail_history.dart';
 import 'package:scan_sense/ui/home/home_screen.dart';
 import 'package:scan_sense/ui/layout/layout_screen.dart';
 import 'package:scan_sense/ui/login/login_screen.dart';
@@ -47,6 +48,7 @@ class MyApp extends StatelessWidget {
       routes: {
         SplashScreen.routeName: (context) => SplashScreen(),
         HomeScreen.routeName: (context) => HomeScreen(),
+        HistoryScreen.routeName: (context) => HistoryScreen(),
         ScanScreen.routeName: (context) => ScanScreen(),
         OnboardingScreen.routeName: (context) => OnboardingScreen(),
         LoginScreen.routeName: (context) => LoginScreen(),
