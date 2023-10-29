@@ -23,6 +23,7 @@ class _LoginScreenState extends State<LoginScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      resizeToAvoidBottomInset: false,
       backgroundColor: backgroundColor,
       body: SafeArea(
         child: Padding(
@@ -58,6 +59,7 @@ class _LoginScreenState extends State<LoginScreen> {
                     controller: cPassword,
                     hint: "Kata Sandi",
                     isObscure: true,
+                    isPassword: true,
                   ),
                   const SizedBox(
                     height: 16,

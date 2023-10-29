@@ -1,4 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
+import 'package:scan_sense/common/styles.dart';
+import 'package:scan_sense/widgets/custom_input.dart';
 
 class ProfileScreen extends StatefulWidget {
   static const String routeName = '/profile-screen';
@@ -10,11 +13,82 @@ class ProfileScreen extends StatefulWidget {
 }
 
 class _ProfileScreenState extends State<ProfileScreen> {
+  TextEditingController cNama = TextEditingController();
+  TextEditingController cEmail = TextEditingController();
+  TextEditingController cTelp = TextEditingController();
+
+  @override
+  void initState() {
+    cEmail.text = "ronny@gmail.com";
+    cNama.text = "Ronny";
+    cTelp.text = "0835627326372";
+    // TODO: implement initState
+    super.initState();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Center(
-        child: Text("Profile Screen"),
+      appBar: AppBar(
+        title: Align(
+          alignment: Alignment.centerRight,
+          child: Text(
+            "Profile",
+            style: GoogleFonts.poppins(
+                fontSize: 18, fontWeight: FontWeight.w600, color: blackColor),
+          ),
+        ),
+      ),
+      body: Padding(
+        padding: const EdgeInsets.symmetric(horizontal: 24),
+        child: ListView(
+          children: [
+            Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                ClipOval(
+                  child: Container(
+                    width: 140,
+                    height: 140,
+                    color: primaryColor,
+                  ),
+                ),
+              ],
+            ),
+            const SizedBox(
+              height: 16,
+            ),
+            Text(
+              "Ubah Foto Profil",
+              style: GoogleFonts.poppins(
+                  fontSize: 13,
+                  fontWeight: FontWeight.w600,
+                  color: primaryColor),
+              textAlign: TextAlign.center,
+            ),
+            const SizedBox(
+              height: 24,
+            ),
+            CustomInput(
+              controller: cNama,
+              hint: "7312042510720002",
+            ),
+            const SizedBox(
+              height: 16,
+            ),
+            CustomInput(
+              controller: cEmail,
+              hint: "E-mail",
+            ),
+            const SizedBox(
+              height: 16,
+            ),
+            CustomInput(
+              controller: cTelp,
+              hint: "No Telepon",
+            ),
+          ],
+        ),
       ),
     );
   }

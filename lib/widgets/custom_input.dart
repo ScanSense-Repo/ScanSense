@@ -5,11 +5,13 @@ import 'package:scan_sense/common/styles.dart';
 class CustomInput extends StatefulWidget {
   TextEditingController controller;
   bool isObscure = false;
+  bool isPassword = false;
   String hint;
   CustomInput({
     required this.controller,
     required this.hint,
     this.isObscure = false,
+    this.isPassword = false,
     super.key,
   });
 
@@ -36,7 +38,7 @@ class _CustomInputState extends State<CustomInput> {
               fontSize: 13,
               color: grayColor,
             ),
-            suffixIcon: (widget.isObscure)
+            suffixIcon: (widget.isPassword)
                 ? IconButton(
                     onPressed: () {
                       setState(() {

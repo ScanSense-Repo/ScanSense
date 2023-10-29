@@ -12,5 +12,11 @@ class Navigation {
         ?.pushReplacementNamed(routeName, arguments: arguments);
   }
 
+  static replaceUntilNamed({required routeName, Object? arguments}) {
+    navigatorKey.currentState?.pushNamedAndRemoveUntil(
+        routeName, (Route<dynamic> route) => false,
+        arguments: arguments);
+  }
+
   static back() => navigatorKey.currentState?.pop();
 }

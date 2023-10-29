@@ -3,7 +3,9 @@ import 'dart:typed_data';
 import 'package:camera/camera.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:scan_sense/common/navigation.dart';
 import 'package:scan_sense/common/styles.dart';
+import 'package:scan_sense/ui/scan/result_screen.dart';
 import 'package:scan_sense/utils/helper.dart';
 
 class ScanScreen extends StatefulWidget {
@@ -53,7 +55,13 @@ class _ScanScreenState extends State<ScanScreen> {
             floating: true,
             title: Align(
               alignment: Alignment.centerRight,
-              child: Text("Verifikasi KTP"),
+              child: Text(
+                "Verifikasi KTP",
+                style: GoogleFonts.poppins(
+                    fontSize: 18,
+                    fontWeight: FontWeight.w600,
+                    color: blackColor),
+              ),
             ),
             primary: true,
             backgroundColor: backgroundColor,
@@ -77,11 +85,10 @@ class _ScanScreenState extends State<ScanScreen> {
                     const SizedBox(
                       height: 16,
                     ),
-                    SizedBox(
-                      width: MediaQuery.of(context).size.width,
-                      height: 300,
-                      child: ClipRRect(
-                        borderRadius: BorderRadius.circular(16),
+                    ClipRRect(
+                      borderRadius: BorderRadius.circular(16),
+                      child: AspectRatio(
+                        aspectRatio: 1,
                         child: CameraPreview(controller),
                       ),
                     ),
@@ -89,7 +96,8 @@ class _ScanScreenState extends State<ScanScreen> {
                       height: 16,
                     ),
                     ElevatedButton(
-                      onPressed: () {},
+                      onPressed: () =>
+                          Navigation.toNamed(routeName: ResultScreen.routeName),
                       style: ElevatedButton.styleFrom(
                           padding: const EdgeInsets.symmetric(vertical: 20),
                           shape: RoundedRectangleBorder(
@@ -111,7 +119,8 @@ class _ScanScreenState extends State<ScanScreen> {
                       height: 8,
                     ),
                     ElevatedButton(
-                      onPressed: () {},
+                      onPressed: () =>
+                          Navigation.toNamed(routeName: ResultScreen.routeName),
                       style: ElevatedButton.styleFrom(
                           padding: const EdgeInsets.symmetric(vertical: 20),
                           shape: RoundedRectangleBorder(

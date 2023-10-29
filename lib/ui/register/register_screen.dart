@@ -20,6 +20,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      resizeToAvoidBottomInset: false,
       backgroundColor: backgroundColor,
       body: SafeArea(
         child: Padding(
@@ -33,18 +34,21 @@ class _RegisterScreenState extends State<RegisterScreen> {
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
-                      IconButton(
-                          padding: const EdgeInsets.all(0),
-                          onPressed: () => Navigation.back(),
-                          icon: Icon(Icons.arrow_back_rounded)),
+                      InkWell(
+                        onTap: () => Navigation.back(),
+                        child: Icon(Icons.arrow_back_rounded),
+                      ),
                       Text(
                         "Halaman Daftar",
                         style: GoogleFonts.poppins(
                             fontSize: 18,
-                            fontWeight: FontWeight.bold,
+                            fontWeight: FontWeight.w600,
                             color: blackColor),
                       ),
                     ],
+                  ),
+                  const SizedBox(
+                    height: 24,
                   ),
                   Text(
                     "Silahkan mendaftarkan akun anda agar bisa mengakses aplikasi kami.",
@@ -78,6 +82,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                     controller: cPassword,
                     hint: "Kata Sandi",
                     isObscure: true,
+                    isPassword: true,
                   ),
                   const SizedBox(
                     height: 16,
@@ -86,6 +91,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                     controller: cPassword,
                     hint: "Konfirmasi Kata Sandi",
                     isObscure: true,
+                    isPassword: true,
                   ),
                 ],
               ),
@@ -102,7 +108,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                         backgroundColor: primaryColor,
                       ),
                       child: Text(
-                        "Masuk",
+                        "Daftar",
                         style: GoogleFonts.poppins(
                           fontSize: 14,
                           fontWeight: FontWeight.w600,

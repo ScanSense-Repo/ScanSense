@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:persistent_bottom_nav_bar/persistent_tab_view.dart';
 import 'package:scan_sense/common/navigation.dart';
 import 'package:scan_sense/common/styles.dart';
-import 'package:scan_sense/ui/history/detail_history.dart';
+import 'package:scan_sense/ui/history/history_screen.dart';
 import 'package:scan_sense/ui/home/home_screen.dart';
 import 'package:scan_sense/ui/profile/profile_screen.dart';
 import 'package:scan_sense/ui/scan/scan_screen.dart';
