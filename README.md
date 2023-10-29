@@ -2,7 +2,7 @@
 | Absen | Nama Anggota          | NIM <br>
 |-------|-----------------------|----------
 | 03    | Adinda Wahyu L.       |2141720096 
-| 04    | ALfan Olivan          | 2141720078
+| 04    | Alfan Olivan          | 2141720078
 | 15    | Lukas Valentino       | 2141720032
 | 17    | M. Driya Ananta       | 2141720224
 | 28    | Wiradarma Nurmagika B.| 2141720184
