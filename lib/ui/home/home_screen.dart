@@ -30,12 +30,12 @@ class _HomeScreenState extends State<HomeScreen> {
             Row(
               children: [
                 ClipOval(
-                  child: Container(
-                    width: 64,
-                    height: 64,
-                    color: primaryColor,
-                  ),
-                ),
+                    child: Image.asset(
+                  'assets/illustrations/profile.png',
+                  width: 64,
+                  height: 64,
+                  fit: BoxFit.cover,
+                )),
                 const SizedBox(
                   width: 16,
                 ),
@@ -135,6 +135,8 @@ class _HomeScreenState extends State<HomeScreen> {
                             child: Text(
                               "Valid",
                               style: GoogleFonts.poppins(
+                                color: Colors.green,
+                                fontWeight: FontWeight.w600,
                                 fontSize: 12,
                               ),
                               textAlign: TextAlign.center,
@@ -189,6 +191,8 @@ class _HomeScreenState extends State<HomeScreen> {
                             child: Text(
                               "Tidak Valid",
                               style: GoogleFonts.poppins(
+                                color: Colors.red,
+                                fontWeight: FontWeight.w600,
                                 fontSize: 12,
                               ),
                               textAlign: TextAlign.center,

@@ -30,6 +30,7 @@ class _HistoryScreenState extends State<HistoryScreen> {
           Image.network(
             "https://raw.githubusercontent.com/Shashank02051997/FancyGifDialog-Android/master/GIF's/gif14.gif",
             height: 0,
+            color: Colors.white,
             fit: BoxFit.cover,
           ),
           title: Text(
@@ -218,7 +219,8 @@ class _HistoryScreenState extends State<HistoryScreen> {
                 child: InkWell(
                   onTap: () => showDetail(),
                   child: Card(
-                    elevation: 5,
+                    shadowColor: inputBackground,
+                    elevation: 3,
                     surfaceTintColor: whiteColor,
                     shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(10),
@@ -249,7 +251,7 @@ class _HistoryScreenState extends State<HistoryScreen> {
                                     padding: const EdgeInsets.all(8.0),
                                     child: Icon(
                                       Icons.history,
-                                      color: Colors.blue,
+                                      color: Color.fromARGB(91, 0, 0, 0),
                                     ),
                                   ),
                                 ],

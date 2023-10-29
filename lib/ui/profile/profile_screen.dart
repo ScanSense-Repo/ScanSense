@@ -47,11 +47,10 @@ class _ProfileScreenState extends State<ProfileScreen> {
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 ClipOval(
-                  child: Container(
+                  child: Image.asset('assets/illustrations/profile.png',
                     width: 140,
                     height: 140,
-                    color: primaryColor,
-                  ),
+                    fit: BoxFit.cover,)
                 ),
               ],
             ),
