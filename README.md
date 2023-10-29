@@ -21,15 +21,13 @@ Tampilan dari aplikasi ScanSense:
 | 2  | On Boarding        | -     | Mr. X |
 | 3  | Login              | -     | Mr. X |
 | 4  | Register           | -     | Mr. X |
-| 5  | Homepage           | -     | Mr. X |
-| 6  | History            | -     | Mr. X |
-| 7  | Detail History     | -     | Mr. X |
-| 8  | OCR Screen         | -     | Mr. X |
-| 9  | Verication Result  | -     | Mr. X |
-| 10 | OCR Result         | -     | Mr. X |
-
-
-dst
+| 5  | Profil             | -     | Mr. X |
+| 6  | Homepage           | -     | Mr. X |
+| 7  | History            | -     | Mr. X |
+| 8  | Detail History     | -     | Mr. X |
+| 9  | OCR Screen         | -     | Mr. X |
+| 10  | Verication Result  | -     | Mr. X |
+| 11 | OCR Result         | -     | Mr. X |
 
 
 # Link Figma 
@@ -42,12 +40,13 @@ SCREENSHOT SCREEN :
 4. [Halaman On Boarding 3](https://cdn.discordapp.com/attachments/1125078229133295648/1168125387646173285/WhatsApp_Image_2023-10-29_at_15.45.24_2.jpeg?ex=6550a08b&is=653e2b8b&hm=7595e0c8cf26d5867c008f39c18a5732ef73ad4538c4874d49fe6398ec8ea82d&)
 5. [Halaman Login](https://cdn.discordapp.com/attachments/1125078229133295648/1168125387272892527/WhatsApp_Image_2023-10-29_at_15.45.24_1.jpeg?ex=6550a08b&is=653e2b8b&hm=0ae4b30fe41fe674dd7474c98a556b16e5807a61320b16f74746da22f9cc30f7&)
 6. [Halaman Register](https://cdn.discordapp.com/attachments/1125078229133295648/1168125387981721611/WhatsApp_Image_2023-10-29_at_15.45.24.jpeg?ex=6550a08b&is=653e2b8b&hm=7701e4599f8855b6f9e1cb07c61b7ea5d06d66da274dea646e6d20600bed6518&)
-7. [Halaman Homepage](https://cdn.discordapp.com/attachments/1125078229133295648/1168125386664706160/WhatsApp_Image_2023-10-29_at_15.45.23_2.jpeg?ex=6550a08a&is=653e2b8a&hm=d1c277f66eef4ccdde8fd8388dbe7d02cbe4844f6acea0dac79e585d68718883&)
-8. [Halaman History](https://cdn.discordapp.com/attachments/1125078229133295648/1168142639204401264/WhatsApp_Image_2023-10-29_at_17.49.07.jpeg?ex=6550b09c&is=653e3b9c&hm=02ccd0b681229bb9f9cc580c2abb7818b905c0c98236be089996ddb6267f1c86&)
-9. [Halaman Detail History](https://cdn.discordapp.com/attachments/1125078229133295648/1168130684477526146/WhatsApp_Image_2023-10-29_at_17.09.54.jpeg?ex=6550a579&is=653e3079&hm=6dd51cff9b2816709481f8a2bc7bdf9dea2f65fe0e12358c835c890a32779355&)
-10. [OCR Screen](https://cdn.discordapp.com/attachments/1125078229133295648/1168125386962505828/WhatsApp_Image_2023-10-29_at_15.45.23.jpeg?ex=6550a08a&is=653e2b8a&hm=05352876e4c708d84b51fe99b4ec47efa157d260c9a3e10b11e9403422c054b5&)
-11. [Halaman Hasil Verifikasi](https://cdn.discordapp.com/attachments/1125078229133295648/1168125389005140090/WhatsApp_Image_2023-10-29_at_15.45.22_1.jpeg?ex=6550a08b&is=653e2b8b&hm=f68c46ee7fa5194b027c834e8c5d669e264f3fe1c439c0a03871a5eb90403f08&)
-12. [Halaman Hasil OCR](https://cdn.discordapp.com/attachments/1125078229133295648/1168125389298729020/WhatsApp_Image_2023-10-29_at_15.45.22.jpeg?ex=6550a08b&is=653e2b8b&hm=ae64e4ec44f8ecebdaf68e3c1aec30b3ecef29cffeb3e1f5102994a1092d5458&)
+7. [Halaman Profil](https://cdn.discordapp.com/attachments/1125078229133295648/1168125386253676574/WhatsApp_Image_2023-10-29_at_15.45.23_1.jpeg?ex=6550a08a&is=653e2b8a&hm=ab483144977864a302f27bc7cd5e1e090e427ee05a296c56e4018a0e94cd479f&)
+8. [Halaman Homepage](https://cdn.discordapp.com/attachments/1125078229133295648/1168125386664706160/WhatsApp_Image_2023-10-29_at_15.45.23_2.jpeg?ex=6550a08a&is=653e2b8a&hm=d1c277f66eef4ccdde8fd8388dbe7d02cbe4844f6acea0dac79e585d68718883&)
+9. [Halaman History](https://cdn.discordapp.com/attachments/1125078229133295648/1168142639204401264/WhatsApp_Image_2023-10-29_at_17.49.07.jpeg?ex=6550b09c&is=653e3b9c&hm=02ccd0b681229bb9f9cc580c2abb7818b905c0c98236be089996ddb6267f1c86&)
+10. [Halaman Detail History](https://cdn.discordapp.com/attachments/1125078229133295648/1168130684477526146/WhatsApp_Image_2023-10-29_at_17.09.54.jpeg?ex=6550a579&is=653e3079&hm=6dd51cff9b2816709481f8a2bc7bdf9dea2f65fe0e12358c835c890a32779355&)
+11. [OCR Screen](https://cdn.discordapp.com/attachments/1125078229133295648/1168125386962505828/WhatsApp_Image_2023-10-29_at_15.45.23.jpeg?ex=6550a08a&is=653e2b8a&hm=05352876e4c708d84b51fe99b4ec47efa157d260c9a3e10b11e9403422c054b5&)
+12. [Halaman Hasil Verifikasi](https://cdn.discordapp.com/attachments/1125078229133295648/1168125389005140090/WhatsApp_Image_2023-10-29_at_15.45.22_1.jpeg?ex=6550a08b&is=653e2b8b&hm=f68c46ee7fa5194b027c834e8c5d669e264f3fe1c439c0a03871a5eb90403f08&)
+13. [Halaman Hasil OCR](https://cdn.discordapp.com/attachments/1125078229133295648/1168125389298729020/WhatsApp_Image_2023-10-29_at_15.45.22.jpeg?ex=6550a08b&is=653e2b8b&hm=ae64e4ec44f8ecebdaf68e3c1aec30b3ecef29cffeb3e1f5102994a1092d5458&)
 
 
 # Fitur Unggulan
