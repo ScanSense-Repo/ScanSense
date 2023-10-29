@@ -1,6 +1,6 @@
 # About ScanSense
-| Absen | Nama Anggota          | NIM |<br>
-|-------|-----------------------|----------|-
+| Absen | Nama Anggota          | NIM <br>
+|-------|-----------------------|----------
 | 03    | Adinda Wahyu L.       |2141720096 
 | 04    | ALfan Olivan          | 2141720078
 | 15    | Lukas Valentino       | 2141720032
