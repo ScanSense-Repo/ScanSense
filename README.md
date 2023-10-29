@@ -96,13 +96,13 @@ SCREENSHOT SCREEN :
 
 Fitur unggulan di aplikasi ScanSense adalah aplikasi erifikasi identitas pengguna dengan menggunakan KTP dan adanya kemampuan OCR (Optical Character Recognition) serta integrasi dengan database Polinema. Adapun fitur unggalan seperti berikut:
 
-1. Antarmuka pengguna yang mudah digunakan dan pengguna dapat mengunggah gambar KTP mereka
-2. Modul OCR yang bertanggung jawab untuk menjalankan proses OCR pada gambar KTP yang diunggah. Hal ini akan mengidentifikasi dan mengekstrak teks dari gambar tersebut
-3. Formulir pengisian data, dimana data yang telah diekstrak dari KTP akan ditampilkan dalam sebuah formulir yang bisa diedit oleh pengguna. Pengguna dapat memeriksa dan (jika perlu) memperbarui data-data tersebut
-4. Integrasi database yang terhubung dengan database sistem lain yang berisi data pengguna yang telah terverifikasi sebelumnya. Integrasi ini memungkinkan untuk memeriksa dan membandingkan data yang diunggah oleh pengguna dengan data yang ada di database
-5. Proses verifikasi yang akan membandingkan data dengan data yang ada di database. Jika data sesuai, maka verifikasi identitas dianggap berhasil
-6. Pengiriman hasil verifikasi yang akan diberikan kepada pengguna dalam bentuk pesan ataupun notifikasi yang menegaskan apakah verifikasi berhasil atau gagal
-7. Keamanan aplikasi ini memiliki lapisan yang kuat untuk melindungi data yang sensitif, seperti penggunaan enkripsi data dan akses yang terkendali ke basis data
+1. Antarmuka pengguna yang mudah digunakan dan pengguna dapat mengunggah gambar KTP mereka.
+2. Modul OCR yang bertanggung jawab untuk menjalankan proses OCR pada gambar KTP yang diunggah. Hal ini akan mengidentifikasi dan mengekstrak teks dari gambar tersebut.
+3. Formulir pengisian data, dimana data yang telah diekstrak dari KTP akan ditampilkan dalam sebuah formulir yang bisa diedit oleh pengguna. Pengguna dapat memeriksa dan (jika perlu) memperbarui data-data tersebut.
+4. Integrasi database yang terhubung dengan database sistem lain yang berisi data pengguna yang telah terverifikasi sebelumnya. Integrasi ini memungkinkan untuk memeriksa dan membandingkan data yang diunggah oleh pengguna dengan data yang ada di database.
+5. Proses verifikasi yang akan membandingkan data dengan data yang ada di database. Jika data sesuai, maka verifikasi identitas dianggap berhasil.
+6. Pengiriman hasil verifikasi yang akan diberikan kepada pengguna dalam bentuk pesan ataupun notifikasi yang menegaskan apakah verifikasi berhasil atau gagal.
+7. Keamanan aplikasi ini memiliki lapisan yang kuat untuk melindungi data yang sensitif, seperti penggunaan enkripsi data dan akses yang terkendali ke basis data.
 
 # Credits
 
