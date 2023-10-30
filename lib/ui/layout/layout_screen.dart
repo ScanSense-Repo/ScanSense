@@ -5,8 +5,8 @@ import 'package:scan_sense/common/navigation.dart';
 import 'package:scan_sense/common/styles.dart';
 import 'package:scan_sense/ui/history/history_screen.dart';
 import 'package:scan_sense/ui/home/home_screen.dart';
-import 'package:scan_sense/ui/profile/profile_screen.dart';
 import 'package:scan_sense/ui/scan/scan_screen.dart';
+import 'package:scan_sense/ui/setting/setting_screen.dart';
 
 class LayoutScreen extends StatefulWidget {
   static const String routeName = '/layout-screen';
@@ -22,7 +22,7 @@ class _LayoutScreenState extends State<LayoutScreen> {
       PersistentTabController(initialIndex: 0);
 
   List<Widget> _buildScreens() {
-    return [HomeScreen(), SizedBox(), ProfileScreen()];
+    return [HomeScreen(), SizedBox(), SettingScreen()];
   }
 
   List<PersistentBottomNavBarItem> _navBarsItems() {
@@ -35,7 +35,7 @@ class _LayoutScreenState extends State<LayoutScreen> {
       ),
       PersistentBottomNavBarItem(
         icon: Icon(
-          CupertinoIcons.add,
+          CupertinoIcons.camera,
           color: whiteColor,
         ),
         onPressed: (context) =>
@@ -45,7 +45,9 @@ class _LayoutScreenState extends State<LayoutScreen> {
       ),
       PersistentBottomNavBarItem(
         icon: Icon(CupertinoIcons.settings),
-        title: ("Profile"),
+        onPressed: (context) =>
+            Navigation.toNamed(routeName: SettingScreen.routeName),
+        title: ("Setting"),
         activeColorPrimary: CupertinoColors.activeBlue,
         inactiveColorPrimary: CupertinoColors.systemGrey,
       ),

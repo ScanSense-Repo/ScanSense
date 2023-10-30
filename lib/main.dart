@@ -9,6 +9,7 @@ import 'package:scan_sense/ui/onboarding/onboarding_screen.dart';
 import 'package:scan_sense/ui/register/register_screen.dart';
 import 'package:scan_sense/ui/scan/result_screen.dart';
 import 'package:scan_sense/ui/scan/scan_screen.dart';
+import 'package:scan_sense/ui/setting/setting_screen.dart';
 import 'package:scan_sense/ui/splash/splash_screen.dart';
 import 'package:scan_sense/utils/helper.dart';
 
@@ -41,6 +42,7 @@ class MyApp extends StatelessWidget {
         LoginScreen.routeName: (context) => LoginScreen(),
         RegisterScreen.routeName: (context) => RegisterScreen(),
         LayoutScreen.routeName: (context) => LayoutScreen(),
+        SettingScreen.routeName: (context) => SettingScreen(),
       },
       navigatorKey: navigatorKey,
     );
