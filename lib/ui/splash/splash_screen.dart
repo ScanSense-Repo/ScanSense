@@ -42,7 +42,7 @@ class _SplashScreenState extends State<SplashScreen> {
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  Image.asset('assets/illustrations/logo-ocr.png'),
+                  Image.asset('assets/illustrations/'),
                   Text(
                     "ScanSense",
                     style: GoogleFonts.poppins(
