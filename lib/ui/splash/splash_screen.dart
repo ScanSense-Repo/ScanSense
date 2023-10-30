@@ -54,6 +54,22 @@ class _SplashScreenState extends State<SplashScreen> {
                 ],
               ),
             ),
+            Positioned(
+              bottom: 0,
+              right: 0,
+              left: 0,
+              child: Padding(
+                padding: const EdgeInsets.only(bottom: 50),
+                child: Text(
+                  "Politeknik Negeri Malang",
+                  style: GoogleFonts.poppins(
+                    fontSize: 18,
+                    color: whiteColor,
+                  ),
+                  textAlign: TextAlign.center,
+                ),
+              ),
+            )
           ],
         ));
   }
