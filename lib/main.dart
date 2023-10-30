@@ -6,6 +6,7 @@ import 'package:scan_sense/ui/home/home_screen.dart';
 import 'package:scan_sense/ui/layout/layout_screen.dart';
 import 'package:scan_sense/ui/login/login_screen.dart';
 import 'package:scan_sense/ui/onboarding/onboarding_screen.dart';
+import 'package:scan_sense/ui/profile/profile_screen.dart';
 import 'package:scan_sense/ui/register/register_screen.dart';
 import 'package:scan_sense/ui/scan/result_screen.dart';
 import 'package:scan_sense/ui/scan/scan_screen.dart';
@@ -43,6 +44,7 @@ class MyApp extends StatelessWidget {
         RegisterScreen.routeName: (context) => RegisterScreen(),
         LayoutScreen.routeName: (context) => LayoutScreen(),
         SettingScreen.routeName: (context) => SettingScreen(),
+        ProfileScreen.routeName: (context) => ProfileScreen(),
       },
       navigatorKey: navigatorKey,
     );

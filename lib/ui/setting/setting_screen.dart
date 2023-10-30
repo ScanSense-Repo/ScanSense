@@ -3,6 +3,7 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:scan_sense/common/navigation.dart';
 import 'package:scan_sense/common/styles.dart';
 import 'package:scan_sense/ui/profile/profile_screen.dart';
+import 'package:flutter/services.dart';
 
 class SettingScreen extends StatefulWidget {
   static const String routeName = '/setting-screen';
@@ -86,13 +87,15 @@ class _SettingScreenState extends State<SettingScreen> {
               ),
             ),
           ),
+          const SizedBox(
+            height: 16,
+          ),
           Container(
             width: 350,
             height: 60,
             margin: EdgeInsets.only(bottom: 20),
             child: OutlinedButton(
-              onPressed: () =>
-                  Navigation.toNamed(routeName: ProfileScreen.routeName),
+              onPressed: () => SystemNavigator.pop(),
               style: OutlinedButton.styleFrom(
                 padding: const EdgeInsets.symmetric(vertical: 20),
                 shape: RoundedRectangleBorder(
