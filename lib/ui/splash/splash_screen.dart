@@ -15,13 +15,13 @@ class SplashScreen extends StatefulWidget {
 }
 
 class _SplashScreenState extends State<SplashScreen> {
-  @override
-  void initState() {
-    Future.delayed(Duration(seconds: 3), () {
-      Navigation.replaceNamed(routeName: OnboardingScreen.routeName);
-    });
-    super.initState();
-  }
+  // @override
+  // void initState() {
+  //   Future.delayed(Duration(seconds: 10), () {
+  //     Navigation.replaceNamed(routeName: OnboardingScreen.routeName);
+  //   });
+  //   super.initState();
+  // }
 
   @override
   Widget build(BuildContext context) {
@@ -42,15 +42,8 @@ class _SplashScreenState extends State<SplashScreen> {
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  Image.asset('assets/illustrations/'),
-                  Text(
-                    "ScanSense",
-                    style: GoogleFonts.poppins(
-                      fontWeight: FontWeight.bold,
-                      fontSize: 25,
-                      color: whiteColor,
-                    ),
-                  )
+                  Image.asset('assets/illustrations/logo-ocr-white-rev.png',
+                      width: 250, height: 250),
                 ],
               ),
             ),
@@ -63,7 +56,7 @@ class _SplashScreenState extends State<SplashScreen> {
                 child: Text(
                   "Politeknik Negeri Malang",
                   style: GoogleFonts.poppins(
-                    fontSize: 18,
+                    fontSize: 15,
                     color: whiteColor,
                   ),
                   textAlign: TextAlign.center,
