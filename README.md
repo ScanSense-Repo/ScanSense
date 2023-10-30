@@ -33,6 +33,7 @@ Tampilan 2:
 | 9   | OCR Screen        | -     | Wiradarma Nurmagika B. |
 | 10  | Verication Result | -     | Wiradarma Nurmagika B. |
 | 11  | OCR Result        | -     | M. Driya Ananta        |
+| 12  | Setting           | -     | Lukas Valentino        |
 
 # Link Figma
 
