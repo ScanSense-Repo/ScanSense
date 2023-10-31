@@ -95,10 +95,19 @@ class _ProfileScreenState extends State<ProfileScreen> {
               width: 350,
               height: 60,
               margin: EdgeInsets.only(bottom: 20),
-              child: ElevatedButton(
+              child: ElevatedButton.icon(
                 onPressed: () {
                   // Simpan perubahan profil pengguna
                 },
+                icon: Icon(Icons.save, color: Colors.white),
+                label: Text(
+                  "Simpan",
+                  style: GoogleFonts.poppins(
+                    fontSize: 14,
+                    fontWeight: FontWeight.w600,
+                    color: Colors.white,
+                  ),
+                ),
                 style: ElevatedButton.styleFrom(
                   padding: const EdgeInsets.symmetric(vertical: 20),
                   shape: RoundedRectangleBorder(
@@ -106,14 +115,6 @@ class _ProfileScreenState extends State<ProfileScreen> {
                   ),
                   backgroundColor: primaryColor,
                   fixedSize: Size.fromWidth(MediaQuery.of(context).size.width),
-                ),
-                child: Text(
-                  "Simpan",
-                  style: GoogleFonts.poppins(
-                    fontSize: 14,
-                    fontWeight: FontWeight.w600,
-                    color: whiteColor,
-                  ),
                 ),
               ),
             ),

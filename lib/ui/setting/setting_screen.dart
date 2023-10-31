@@ -4,6 +4,7 @@ import 'package:scan_sense/common/navigation.dart';
 import 'package:scan_sense/common/styles.dart';
 import 'package:scan_sense/ui/profile/profile_screen.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter/cupertino.dart';
 
 class SettingScreen extends StatefulWidget {
   static const String routeName = '/setting-screen';
@@ -41,9 +42,18 @@ class _SettingScreenState extends State<SettingScreen> {
             width: 350,
             height: 60,
             margin: EdgeInsets.only(bottom: 20),
-            child: ElevatedButton(
+            child: ElevatedButton.icon(
               onPressed: () =>
                   Navigation.toNamed(routeName: ProfileScreen.routeName),
+              icon: Icon(CupertinoIcons.pencil_outline, color: Colors.white),
+              label: Text(
+                "Ubah Profil",
+                style: GoogleFonts.poppins(
+                  fontSize: 14,
+                  fontWeight: FontWeight.w600,
+                  color: Colors.white,
+                ),
+              ),
               style: ElevatedButton.styleFrom(
                 padding: const EdgeInsets.symmetric(vertical: 20),
                 shape: RoundedRectangleBorder(
@@ -51,14 +61,6 @@ class _SettingScreenState extends State<SettingScreen> {
                 ),
                 backgroundColor: primaryColor,
                 fixedSize: Size.fromWidth(MediaQuery.of(context).size.width),
-              ),
-              child: Text(
-                "Ubah Profil",
-                style: GoogleFonts.poppins(
-                  fontSize: 14,
-                  fontWeight: FontWeight.w600,
-                  color: whiteColor,
-                ),
               ),
             ),
           ),
@@ -66,9 +68,18 @@ class _SettingScreenState extends State<SettingScreen> {
             width: 350,
             height: 60,
             margin: EdgeInsets.only(bottom: 20),
-            child: ElevatedButton(
+            child: ElevatedButton.icon(
               onPressed: () =>
                   Navigation.toNamed(routeName: ProfileScreen.routeName),
+              icon: Icon(Icons.info_outline, color: Colors.white),
+              label: Text(
+                "Tentang Kami",
+                style: GoogleFonts.poppins(
+                  fontSize: 14,
+                  fontWeight: FontWeight.w600,
+                  color: Colors.white,
+                ),
+              ),
               style: ElevatedButton.styleFrom(
                 padding: const EdgeInsets.symmetric(vertical: 20),
                 shape: RoundedRectangleBorder(
@@ -76,14 +87,6 @@ class _SettingScreenState extends State<SettingScreen> {
                 ),
                 backgroundColor: primaryColor,
                 fixedSize: Size.fromWidth(MediaQuery.of(context).size.width),
-              ),
-              child: Text(
-                "Tentang Kami",
-                style: GoogleFonts.poppins(
-                  fontSize: 14,
-                  fontWeight: FontWeight.w600,
-                  color: whiteColor,
-                ),
               ),
             ),
           ),
@@ -94,8 +97,17 @@ class _SettingScreenState extends State<SettingScreen> {
             width: 350,
             height: 60,
             margin: EdgeInsets.only(bottom: 20),
-            child: OutlinedButton(
+            child: OutlinedButton.icon(
               onPressed: () => SystemNavigator.pop(),
+              icon: Icon(Icons.logout, color: primaryColor),
+              label: Text(
+                "Log out",
+                style: GoogleFonts.poppins(
+                  fontSize: 14,
+                  fontWeight: FontWeight.w600,
+                  color: primaryColor,
+                ),
+              ),
               style: OutlinedButton.styleFrom(
                 padding: const EdgeInsets.symmetric(vertical: 20),
                 shape: RoundedRectangleBorder(
@@ -104,14 +116,6 @@ class _SettingScreenState extends State<SettingScreen> {
                 backgroundColor: whiteColor,
                 fixedSize: Size.fromWidth(MediaQuery.of(context).size.width),
                 side: BorderSide(color: primaryColor, width: 2),
-              ),
-              child: Text(
-                "Logout",
-                style: GoogleFonts.poppins(
-                  fontSize: 14,
-                  fontWeight: FontWeight.w600,
-                  color: primaryColor,
-                ),
               ),
             ),
           )
