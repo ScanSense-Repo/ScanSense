@@ -78,7 +78,7 @@ class _SettingScreenState extends State<SettingScreen> {
                 fixedSize: Size.fromWidth(MediaQuery.of(context).size.width),
               ),
               child: Text(
-                "About Me",
+                "Tentang Kami",
                 style: GoogleFonts.poppins(
                   fontSize: 14,
                   fontWeight: FontWeight.w600,

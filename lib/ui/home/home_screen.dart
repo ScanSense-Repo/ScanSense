@@ -5,6 +5,7 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:scan_sense/common/navigation.dart';
 import 'package:scan_sense/common/styles.dart';
 import 'package:scan_sense/ui/history/history_screen.dart';
+import 'package:scan_sense/ui/profile/profile_screen.dart';
 
 class HomeScreen extends StatefulWidget {
   static const String routeName = '/home-screen';
@@ -29,13 +30,18 @@ class _HomeScreenState extends State<HomeScreen> {
             ),
             Row(
               children: [
-                ClipOval(
-                    child: Image.asset(
-                  'assets/illustrations/profile.png',
-                  width: 64,
-                  height: 64,
-                  fit: BoxFit.cover,
-                )),
+                GestureDetector(
+                  onTap: () {
+                    Navigation.toNamed(routeName: ProfileScreen.routeName);
+                  },
+                  child: ClipOval(
+                      child: Image.asset(
+                    'assets/illustrations/profile.png',
+                    width: 64,
+                    height: 64,
+                    fit: BoxFit.cover,
+                  )),
+                ),
                 const SizedBox(
                   width: 16,
                 ),

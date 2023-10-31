@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:scan_sense/common/styles.dart';
 import 'package:scan_sense/widgets/custom_input.dart';
+import 'package:scan_sense/ui/layout/layout_screen.dart';
 
 class ProfileScreen extends StatefulWidget {
   static const String routeName = '/profile-screen';
@@ -86,6 +87,35 @@ class _ProfileScreenState extends State<ProfileScreen> {
             CustomInput(
               controller: cTelp,
               hint: "No Telepon",
+            ),
+            const SizedBox(
+              height: 60,
+            ),
+            Container(
+              width: 350,
+              height: 60,
+              margin: EdgeInsets.only(bottom: 20),
+              child: ElevatedButton(
+                onPressed: () {
+                  // Simpan perubahan profil pengguna
+                },
+                style: ElevatedButton.styleFrom(
+                  padding: const EdgeInsets.symmetric(vertical: 20),
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(8),
+                  ),
+                  backgroundColor: primaryColor,
+                  fixedSize: Size.fromWidth(MediaQuery.of(context).size.width),
+                ),
+                child: Text(
+                  "Simpan",
+                  style: GoogleFonts.poppins(
+                    fontSize: 14,
+                    fontWeight: FontWeight.w600,
+                    color: whiteColor,
+                  ),
+                ),
+              ),
             ),
           ],
         ),
