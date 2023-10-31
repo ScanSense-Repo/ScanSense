@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:scan_sense/common/navigation.dart';
 import 'package:scan_sense/common/styles.dart';
-import 'package:scan_sense/ui/home/home_screen.dart';
 import 'package:scan_sense/ui/layout/layout_screen.dart';
 import 'package:scan_sense/ui/register/register_screen.dart';
 import 'package:scan_sense/widgets/custom_input.dart';
@@ -42,7 +41,7 @@ class _LoginScreenState extends State<LoginScreen> {
                         color: blackColor),
                   ),
                   Text(
-                    "Silahkan login dengan memasukkan nama sekolah, nis, dan password kamu.",
+                    "Silahkan login dengan memasukkan username dan password kamu.",
                     style: GoogleFonts.poppins(fontSize: 13, color: grayColor),
                   ),
                   const SizedBox(
@@ -67,7 +66,7 @@ class _LoginScreenState extends State<LoginScreen> {
                   Align(
                     alignment: Alignment.centerRight,
                     child: Text(
-                      "Lupa kata sandi ?",
+                      "Lupa kata sandi?",
                       style: GoogleFonts.poppins(
                           color: primaryColor, fontSize: 13),
                     ),

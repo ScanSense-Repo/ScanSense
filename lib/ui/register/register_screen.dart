@@ -36,7 +36,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                     children: [
                       InkWell(
                         onTap: () => Navigation.back(),
-                        child: Icon(Icons.arrow_back_rounded),
+                        child: const Icon(Icons.arrow_back_rounded),
                       ),
                       Text(
                         "Halaman Daftar",
@@ -51,7 +51,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                     height: 24,
                   ),
                   Text(
-                    "Silahkan mendaftarkan akun anda agar bisa mengakses aplikasi kami.",
+                    "Silahkan mendaftarkan akun anda.",
                     style: GoogleFonts.poppins(fontSize: 13, color: grayColor),
                   ),
                   const SizedBox(
