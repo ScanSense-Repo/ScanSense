@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:scan_sense/common/styles.dart';
 import 'package:scan_sense/widgets/custom_input.dart';
-import 'package:scan_sense/ui/layout/layout_screen.dart';
 
 class ProfileScreen extends StatefulWidget {
   static const String routeName = '/profile-screen';
@@ -94,12 +93,12 @@ class _ProfileScreenState extends State<ProfileScreen> {
             Container(
               width: 350,
               height: 60,
-              margin: EdgeInsets.only(bottom: 20),
+              margin: const EdgeInsets.only(bottom: 20),
               child: ElevatedButton.icon(
                 onPressed: () {
                   // Simpan perubahan profil pengguna
                 },
-                icon: Icon(Icons.save, color: Colors.white),
+                icon: const Icon(Icons.save, color: Colors.white),
                 label: Text(
                   "Simpan",
                   style: GoogleFonts.poppins(

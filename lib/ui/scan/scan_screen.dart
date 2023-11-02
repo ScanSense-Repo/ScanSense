@@ -6,7 +6,6 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:scan_sense/common/navigation.dart';
 import 'package:scan_sense/common/styles.dart';
 import 'package:scan_sense/ui/scan/result_screen.dart';
-import 'package:scan_sense/utils/helper.dart';
 
 class ScanScreen extends StatefulWidget {
   static const String routeName = '/scan-screen';
@@ -18,40 +17,64 @@ class ScanScreen extends StatefulWidget {
 }
 
 class _ScanScreenState extends State<ScanScreen> {
-  late CameraController controller;
+  CameraController? controller;
+  List<CameraDescription>? cameras;
 
   @override
   void initState() {
     super.initState();
-    controller = CameraController(cameras[0], ResolutionPreset.max);
-    controller.initialize().then((_) {
-      if (!mounted) {
-        return;
-      }
-      setState(() {});
-    }).catchError((Object e) {
-      if (e is CameraException) {
-        switch (e.code) {
-          case 'CameraAccessDenied':
-            // Handle access errors here.
-            break;
-          default:
-            // Handle other errors here.
-            break;
-        }
+    availableCameras().then((availableCameras) {
+      cameras = availableCameras;
+      if (cameras!.isNotEmpty) {
+        controller = CameraController(cameras![0], ResolutionPreset.max);
+        controller!.initialize().then((_) {
+          if (!mounted) {
+            return;
+          }
+          setState(() {});
+        }).catchError((Object e) {
+          if (e is CameraException) {
+            switch (e.code) {
+              case 'CameraAccessDenied':
+                // Handle access errors here.
+                break;
+              default:
+                // Handle other errors here.
+                break;
+            }
+          }
+        });
       }
     });
   }
 
   @override
+  void dispose() {
+    controller?.dispose();
+    super.dispose();
+  }
+
+  @override
   Widget build(BuildContext context) {
+    if (controller == null || !controller!.value.isInitialized) {
+      return const Scaffold(
+        backgroundColor: backgroundColor,
+        body: Center(
+            child: CircularProgressIndicator(
+          color: primaryColor,
+        )),
+      );
+    }
+
+    final size = MediaQuery.of(context).size;
+    var scale = size.aspectRatio * controller!.value.aspectRatio;
+    if (scale < 1) scale = 1 / scale;
+
     return Scaffold(
       backgroundColor: backgroundColor,
       body: CustomScrollView(
         slivers: <Widget>[
-          //2
           SliverAppBar(
-            // expandedHeight: 100.0,
             floating: true,
             title: Align(
               alignment: Alignment.centerRight,
@@ -67,7 +90,6 @@ class _ScanScreenState extends State<ScanScreen> {
             backgroundColor: backgroundColor,
             surfaceTintColor: backgroundColor,
           ),
-
           SliverList(
             delegate: SliverChildListDelegate([
               Padding(
@@ -86,10 +108,33 @@ class _ScanScreenState extends State<ScanScreen> {
                       height: 16,
                     ),
                     ClipRRect(
-                      borderRadius: BorderRadius.circular(16),
+                      borderRadius: BorderRadius.circular(12),
                       child: AspectRatio(
-                        aspectRatio: 1,
-                        child: CameraPreview(controller),
+                        aspectRatio:
+                            3 / 4.5, // Set the desired aspect ratio, e.g., 16/9
+                        child: Transform.scale(
+                          scale: controller!.value.aspectRatio,
+                          child: Center(
+                            child: CameraPreview(
+                              controller!,
+                              child: Padding(
+                                padding:
+                                    const EdgeInsets.symmetric(horizontal: 24),
+                                child: Center(
+                                  child: Container(
+                                    height: 120,
+                                    width: 180,
+                                    decoration: BoxDecoration(
+                                      border: Border.all(
+                                          color: Colors.white70, width: 1),
+                                      borderRadius: BorderRadius.circular(8),
+                                    ),
+                                  ),
+                                ),
+                              ),
+                            ),
+                          ),
+                        ),
                       ),
                     ),
                     const SizedBox(
@@ -99,13 +144,14 @@ class _ScanScreenState extends State<ScanScreen> {
                       onPressed: () =>
                           Navigation.toNamed(routeName: ResultScreen.routeName),
                       style: ElevatedButton.styleFrom(
-                          padding: const EdgeInsets.symmetric(vertical: 20),
-                          shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(8),
-                          ),
-                          backgroundColor: primaryColor,
-                          fixedSize: Size.fromWidth(
-                              MediaQuery.of(context).size.width)),
+                        padding: const EdgeInsets.symmetric(vertical: 20),
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(8),
+                        ),
+                        backgroundColor: primaryColor,
+                        fixedSize:
+                            Size.fromWidth(MediaQuery.of(context).size.width),
+                      ),
                       child: Text(
                         "Verifikasi",
                         style: GoogleFonts.poppins(
@@ -122,16 +168,16 @@ class _ScanScreenState extends State<ScanScreen> {
                       onPressed: () =>
                           Navigation.toNamed(routeName: ResultScreen.routeName),
                       style: ElevatedButton.styleFrom(
-                          padding: const EdgeInsets.symmetric(vertical: 20),
-                          shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(8),
-                            side:
-                                const BorderSide(color: primaryColor, width: 1),
-                          ),
-                          backgroundColor: backgroundColor,
-                          elevation: 0,
-                          fixedSize: Size.fromWidth(
-                              MediaQuery.of(context).size.width)),
+                        padding: const EdgeInsets.symmetric(vertical: 20),
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(8),
+                          side: const BorderSide(color: primaryColor, width: 1),
+                        ),
+                        backgroundColor: backgroundColor,
+                        elevation: 0,
+                        fixedSize:
+                            Size.fromWidth(MediaQuery.of(context).size.width),
+                      ),
                       child: Text(
                         "Unggah Gambar",
                         style: GoogleFonts.poppins(

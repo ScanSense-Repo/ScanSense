@@ -18,7 +18,7 @@ class _HistoryScreenState extends State<HistoryScreen> {
       context: context,
       clipBehavior: Clip.antiAlias,
       isScrollControlled: true,
-      shape: RoundedRectangleBorder(
+      shape: const RoundedRectangleBorder(
         borderRadius: BorderRadius.vertical(
           top: Radius.circular(32),
         ),
@@ -31,7 +31,7 @@ class _HistoryScreenState extends State<HistoryScreen> {
             color: Colors.white,
             fit: BoxFit.cover,
           ),
-          title: Text(
+          title: const Text(
             'Detail Riwayat',
             textAlign: TextAlign.start,
           ),
@@ -177,7 +177,7 @@ class _HistoryScreenState extends State<HistoryScreen> {
             title: Align(
               alignment: Alignment.centerRight,
               child: Text(
-                "Detail History",
+                "Detail Riwayat",
                 style: GoogleFonts.poppins(
                     fontSize: 18,
                     fontWeight: FontWeight.w600,
@@ -202,7 +202,7 @@ class _HistoryScreenState extends State<HistoryScreen> {
                       color: blackColor,
                     ),
                   ),
-                  Icon(
+                  const Icon(
                     Icons.filter_alt_outlined,
                     color: blackColor,
                   ),
@@ -245,8 +245,8 @@ class _HistoryScreenState extends State<HistoryScreen> {
                                       ),
                                     ),
                                   ),
-                                  Padding(
-                                    padding: const EdgeInsets.all(8.0),
+                                  const Padding(
+                                    padding: EdgeInsets.all(8.0),
                                     child: Icon(
                                       Icons.history,
                                       color: Color.fromARGB(91, 0, 0, 0),
@@ -287,11 +287,12 @@ class _HistoryScreenState extends State<HistoryScreen> {
                                         ],
                                       ),
                                       Container(
-                                        margin: EdgeInsets.only(
+                                        margin: const EdgeInsets.only(
                                             bottom: 8.0, left: 70.0),
                                         height: 45,
                                         width: 2,
-                                        color: Color.fromARGB(100, 0, 0, 0),
+                                        color:
+                                            const Color.fromARGB(100, 0, 0, 0),
                                       ),
                                       Row(
                                         children: [

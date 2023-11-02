@@ -24,7 +24,7 @@ class _SettingScreenState extends State<SettingScreen> {
         title: Align(
           alignment: Alignment.centerRight,
           child: Text(
-            "Setting",
+            "Pengaturan",
             style: GoogleFonts.poppins(
                 fontSize: 18, fontWeight: FontWeight.w600, color: blackColor),
           ),
@@ -32,9 +32,12 @@ class _SettingScreenState extends State<SettingScreen> {
       ),
       body: Column(
         children: [
+          const SizedBox(
+            height: 16,
+          ),
           // Logo
           Container(
-            margin: EdgeInsets.all(20),
+            margin: const EdgeInsets.all(20),
             child: Image.asset('assets/illustrations/logo-ocr-rev.png'),
           ),
 
@@ -42,11 +45,12 @@ class _SettingScreenState extends State<SettingScreen> {
           Container(
             width: 350,
             height: 60,
-            margin: EdgeInsets.only(bottom: 20),
+            margin: const EdgeInsets.only(bottom: 20),
             child: ElevatedButton.icon(
               onPressed: () =>
                   Navigation.toNamed(routeName: ProfileScreen.routeName),
-              icon: Icon(CupertinoIcons.pencil_outline, color: Colors.white),
+              icon: const Icon(CupertinoIcons.pencil_outline,
+                  color: Colors.white),
               label: Text(
                 "Ubah Profil",
                 style: GoogleFonts.poppins(
@@ -68,11 +72,11 @@ class _SettingScreenState extends State<SettingScreen> {
           Container(
             width: 350,
             height: 60,
-            margin: EdgeInsets.only(bottom: 20),
+            margin: const EdgeInsets.only(bottom: 20),
             child: ElevatedButton.icon(
               onPressed: () =>
                   Navigation.toNamed(routeName: AboutUsScreen.routeName),
-              icon: Icon(Icons.info_outline, color: Colors.white),
+              icon: const Icon(Icons.info_outline, color: Colors.white),
               label: Text(
                 "Tentang Kami",
                 style: GoogleFonts.poppins(
@@ -97,10 +101,10 @@ class _SettingScreenState extends State<SettingScreen> {
           Container(
             width: 350,
             height: 60,
-            margin: EdgeInsets.only(bottom: 20),
+            margin: const EdgeInsets.only(bottom: 20),
             child: OutlinedButton.icon(
               onPressed: () => SystemNavigator.pop(),
-              icon: Icon(Icons.logout, color: primaryColor),
+              icon: const Icon(Icons.logout, color: primaryColor),
               label: Text(
                 "Log out",
                 style: GoogleFonts.poppins(
@@ -116,7 +120,7 @@ class _SettingScreenState extends State<SettingScreen> {
                 ),
                 backgroundColor: whiteColor,
                 fixedSize: Size.fromWidth(MediaQuery.of(context).size.width),
-                side: BorderSide(color: primaryColor, width: 2),
+                side: const BorderSide(color: primaryColor, width: 2),
               ),
             ),
           )

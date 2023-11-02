@@ -19,7 +19,7 @@ class _AboutUsScreenState extends State<AboutUsScreen> {
         title: Align(
           alignment: Alignment.centerRight,
           child: Text(
-            "About Us",
+            "Tentang Kami",
             style: GoogleFonts.poppins(
                 fontSize: 18, fontWeight: FontWeight.w600, color: Colors.black),
           ),
@@ -29,11 +29,11 @@ class _AboutUsScreenState extends State<AboutUsScreen> {
         children: [
           // Logo
           Container(
-            margin: EdgeInsets.all(10),
+            margin: const EdgeInsets.all(10),
             child: Image.asset('assets/illustrations/logo-ocr-rev.png'),
           ),
           Padding(
-            padding: EdgeInsets.all(10),
+            padding: const EdgeInsets.all(10),
             child: Column(
               children: [
                 Text(
@@ -44,7 +44,7 @@ class _AboutUsScreenState extends State<AboutUsScreen> {
                       fontWeight: FontWeight.w400,
                       color: primaryColor),
                 ),
-                SizedBox(
+                const SizedBox(
                   height: 20,
                 ),
 
@@ -71,7 +71,7 @@ class _AboutUsScreenState extends State<AboutUsScreen> {
                       fontWeight: FontWeight.w400,
                       color: primaryColor),
                 ),
-                SizedBox(
+                const SizedBox(
                   height: 20,
                 ),
                 Column(
@@ -85,15 +85,15 @@ class _AboutUsScreenState extends State<AboutUsScreen> {
                         onPressed: () {
                           // Navigate to the privacy policy page
                         },
-                        child: Text("Kebijakan Privasi",
-                            style: TextStyle(color: Colors.white)),
                         style: ElevatedButton.styleFrom(
-                          primary: primaryColor,
-                          textStyle: TextStyle(color: Colors.white),
+                          backgroundColor: primaryColor,
+                          textStyle: const TextStyle(color: Colors.white),
                         ),
+                        child: const Text("Kebijakan Privasi",
+                            style: TextStyle(color: Colors.white)),
                       ),
                     ),
-                    SizedBox(
+                    const SizedBox(
                       height: 10,
                     ),
 
@@ -105,13 +105,37 @@ class _AboutUsScreenState extends State<AboutUsScreen> {
                         onPressed: () {
                           // Navigate to the privacy policy page
                         },
-                        child: Text("Pusat Bantuan",
-                            style: TextStyle(color: Colors.white)),
                         style: ElevatedButton.styleFrom(
-                          primary: primaryColor,
-                          textStyle: TextStyle(color: Colors.white),
+                          backgroundColor: primaryColor,
+                          textStyle: const TextStyle(color: Colors.white),
                         ),
+                        child: const Text("Pusat Bantuan",
+                            style: TextStyle(color: Colors.white)),
                       ),
+                    )
+                  ],
+                ),
+                const SizedBox(
+                  height: 100,
+                ),
+                Column(
+                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                  children: [
+                    Text(
+                      "Version",
+                      textAlign: TextAlign.center,
+                      style: GoogleFonts.poppins(
+                          fontSize: 12,
+                          fontWeight: FontWeight.w400,
+                          color: Colors.black45),
+                    ),
+                    Text(
+                      "4.1.5",
+                      textAlign: TextAlign.center,
+                      style: GoogleFonts.poppins(
+                          fontSize: 12,
+                          fontWeight: FontWeight.w400,
+                          color: Colors.black45),
                     )
                   ],
                 )
