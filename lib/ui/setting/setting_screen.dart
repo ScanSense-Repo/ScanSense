@@ -5,6 +5,7 @@ import 'package:scan_sense/common/styles.dart';
 import 'package:scan_sense/ui/profile/profile_screen.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter/cupertino.dart';
+import 'package:scan_sense/ui/about us/about_us.dart';
 
 class SettingScreen extends StatefulWidget {
   static const String routeName = '/setting-screen';
@@ -70,7 +71,7 @@ class _SettingScreenState extends State<SettingScreen> {
             margin: EdgeInsets.only(bottom: 20),
             child: ElevatedButton.icon(
               onPressed: () =>
-                  Navigation.toNamed(routeName: ProfileScreen.routeName),
+                  Navigation.toNamed(routeName: AboutUsScreen.routeName),
               icon: Icon(Icons.info_outline, color: Colors.white),
               label: Text(
                 "Tentang Kami",
