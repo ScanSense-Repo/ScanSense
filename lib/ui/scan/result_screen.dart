@@ -111,7 +111,7 @@ class _ResultScreenState extends State<ResultScreen> {
                       children: [
                         InkWell(
                           onTap: () => Navigation.back(),
-                          child: Icon(Icons.arrow_back_rounded),
+                          child: const Icon(Icons.arrow_back_rounded),
                         ),
                         Text(
                           "Verifikasi KTP",
