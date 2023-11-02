@@ -24,16 +24,17 @@ Tampilan 2:
 | --- | ----------------- | ----- | ---------------------- |
 | 1   | Splash Screen     | -     | Lukas Valentino        |
 | 2   | On Boarding       | -     | Lukas Valentino        |
-| 3   | Login             | -     | Alfan Olivan           |
-| 4   | Register          | -     | Alfan Olivan           |
-| 5   | Profil            | -     | Adinda Wahyu L.        |
-| 6   | Homepage          | -     | M. Driya Ananta        |
-| 7   | History           | -     | M. Driya Ananta        |
-| 8   | Detail History    | -     | Wiradarma Nurmagika B. |
-| 9   | OCR Screen        | -     | Wiradarma Nurmagika B. |
-| 10  | Verication Result | -     | Wiradarma Nurmagika B. |
-| 11  | OCR Result        | -     | M. Driya Ananta        |
-| 12  | Setting           | -     | Lukas Valentino        |
+| 3   | Setting           | -     | Lukas Valentino        |
+| 4   | Login             | -     | Alfan Olivan           |
+| 5   | Register          | -     | Alfan Olivan           |
+| 6   | Profil            | -     | Adinda Wahyu L.        |
+| 7   | About Us          | -     | Adinda Wahyu L.        |
+| 8   | Homepage          | -     | M. Driya Ananta        |
+| 9   | History           | -     | M. Driya Ananta        |
+| 10  | OCR Result        | -     | M. Driya Ananta        |
+| 11  | Detail History    | -     | Wiradarma Nurmagika B. |
+| 12  | OCR Screen        | -     | Wiradarma Nurmagika B. |
+| 13  | Verication Result | -     | Wiradarma Nurmagika B. |
 
 # Link Figma
 
@@ -65,31 +66,40 @@ SCREENSHOT SCREEN :
 
    ![Halaman Register](https://cdn.discordapp.com/attachments/1125078229133295648/1168125387981721611/WhatsApp_Image_2023-10-29_at_15.45.24.jpeg?ex=6550a08b&is=653e2b8b&hm=7701e4599f8855b6f9e1cb07c61b7ea5d06d66da274dea646e6d20600bed6518&)
 
-7. Profile Screen
-
-   ![Halaman Profil](https://cdn.discordapp.com/attachments/1125078229133295648/1168125386253676574/WhatsApp_Image_2023-10-29_at_15.45.23_1.jpeg?ex=6550a08a&is=653e2b8a&hm=ab483144977864a302f27bc7cd5e1e090e427ee05a296c56e4018a0e94cd479f&)
-
-8. Homepage
+7. Homepage
 
    ![Halaman Homepage](https://cdn.discordapp.com/attachments/1125078229133295648/1168125386664706160/WhatsApp_Image_2023-10-29_at_15.45.23_2.jpeg?ex=6550a08a&is=653e2b8a&hm=d1c277f66eef4ccdde8fd8388dbe7d02cbe4844f6acea0dac79e585d68718883&)
 
-9. History
+8. Setting Screen
+
+   ![Halaman Profil]()
+
+9. Profile Screen
+
+   ![Halaman Profil](https://cdn.discordapp.com/attachments/1125078229133295648/1168125386253676574/WhatsApp_Image_2023-10-29_at_15.45.23_1.jpeg?ex=6550a08a&is=653e2b8a&hm=ab483144977864a302f27bc7cd5e1e090e427ee05a296c56e4018a0e94cd479f&)
+
+10. About Us Screen
+
+   ![Halaman Profil]()
+
+
+11. History
 
    ![Halaman History](https://cdn.discordapp.com/attachments/1125078229133295648/1168142639204401264/WhatsApp_Image_2023-10-29_at_17.49.07.jpeg?ex=6550b09c&is=653e3b9c&hm=02ccd0b681229bb9f9cc580c2abb7818b905c0c98236be089996ddb6267f1c86&)
 
-10. Detail History
+12. Detail History
 
     ![Halaman Detail History](https://cdn.discordapp.com/attachments/1125078229133295648/1168130684477526146/WhatsApp_Image_2023-10-29_at_17.09.54.jpeg?ex=6550a579&is=653e3079&hm=6dd51cff9b2816709481f8a2bc7bdf9dea2f65fe0e12358c835c890a32779355&)
 
-11. OCR Screen
+13. OCR Screen
 
     ![OCR Screen](https://cdn.discordapp.com/attachments/1125078229133295648/1168125386962505828/WhatsApp_Image_2023-10-29_at_15.45.23.jpeg?ex=6550a08a&is=653e2b8a&hm=05352876e4c708d84b51fe99b4ec47efa157d260c9a3e10b11e9403422c054b5&)
 
-12. Verification Result
+14. Verification Result
 
     ![Halaman Hasil Verifikasi](https://cdn.discordapp.com/attachments/1125078229133295648/1168125389005140090/WhatsApp_Image_2023-10-29_at_15.45.22_1.jpeg?ex=6550a08b&is=653e2b8b&hm=f68c46ee7fa5194b027c834e8c5d669e264f3fe1c439c0a03871a5eb90403f08&)
 
-13. OCR Result
+15. OCR Result
 
     ![Halaman Hasil OCR](https://cdn.discordapp.com/attachments/1125078229133295648/1168125389298729020/WhatsApp_Image_2023-10-29_at_15.45.22.jpeg?ex=6550a08b&is=653e2b8b&hm=ae64e4ec44f8ecebdaf68e3c1aec30b3ecef29cffeb3e1f5102994a1092d5458&)
 
