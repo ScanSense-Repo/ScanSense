@@ -6,6 +6,7 @@ import 'package:scan_sense/ui/profile/profile_screen.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:scan_sense/ui/about us/about_us.dart';
+import 'package:scan_sense/widgets/logout-pop.dart';
 
 class SettingScreen extends StatefulWidget {
   static const String routeName = '/setting-screen';
@@ -95,15 +96,28 @@ class _SettingScreenState extends State<SettingScreen> {
               ),
             ),
           ),
-          const SizedBox(
-            height: 16,
-          ),
+          const SizedBox(height: 16),
           Container(
             width: 350,
             height: 60,
             margin: const EdgeInsets.only(bottom: 20),
             child: OutlinedButton.icon(
-              onPressed: () => SystemNavigator.pop(),
+              onPressed: () {
+                // Tampilkan popup logout
+                showDialog(
+                  context: context,
+                  builder: (context) => LogoutPopup(
+                    onYes: () {
+                      // Lakukan logout
+                      SystemNavigator.pop();
+                    },
+                    onNo: () {
+                      // Batalkan logout
+                      Navigator.of(context).pop();
+                    },
+                  ),
+                );
+              },
               icon: const Icon(Icons.logout, color: primaryColor),
               label: Text(
                 "Log out",
