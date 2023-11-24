@@ -6,7 +6,7 @@ import 'package:scan_sense/common/styles.dart';
 import 'package:scan_sense/ui/onboarding/onboarding_screen.dart';
 
 class SplashScreen extends StatefulWidget {
-  static const String routeName = '/splash-screen';
+  static const String routeName = '/';
 
   const SplashScreen({super.key});
 

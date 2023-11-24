@@ -4,8 +4,8 @@ import 'package:persistent_bottom_nav_bar/persistent_tab_view.dart';
 import 'package:scan_sense/common/navigation.dart';
 import 'package:scan_sense/common/styles.dart';
 import 'package:scan_sense/ui/home/home_screen.dart';
-import 'package:scan_sense/ui/scan/scan_screen.dart';
 import 'package:scan_sense/ui/setting/setting_screen.dart';
+import 'package:scan_sense/ui/test/test_screen.dart';
 
 class LayoutScreen extends StatefulWidget {
   static const String routeName = '/layout-screen';
@@ -21,7 +21,7 @@ class _LayoutScreenState extends State<LayoutScreen> {
       PersistentTabController(initialIndex: 0);
 
   List<Widget> _buildScreens() {
-    return [HomeScreen(), SizedBox(), SettingScreen()];
+    return [const HomeScreen(), const SizedBox(), const SettingScreen()];
   }
 
   List<PersistentBottomNavBarItem> _navBarsItems() {
@@ -38,7 +38,7 @@ class _LayoutScreenState extends State<LayoutScreen> {
           color: whiteColor,
         ),
         onPressed: (context) =>
-            Navigation.toNamed(routeName: ScanScreen.routeName),
+            Navigation.toNamed(routeName: TestScreen.routeName),
         activeColorPrimary: CupertinoColors.activeBlue,
         inactiveColorPrimary: CupertinoColors.systemGrey,
       ),

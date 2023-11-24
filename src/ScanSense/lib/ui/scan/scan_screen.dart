@@ -3,9 +3,7 @@ import 'dart:typed_data';
 import 'package:camera/camera.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:scan_sense/common/navigation.dart';
 import 'package:scan_sense/common/styles.dart';
-import 'package:scan_sense/ui/scan/result_screen.dart';
 
 class ScanScreen extends StatefulWidget {
   static const String routeName = '/scan-screen';
@@ -19,6 +17,17 @@ class ScanScreen extends StatefulWidget {
 class _ScanScreenState extends State<ScanScreen> {
   CameraController? controller;
   List<CameraDescription>? cameras;
+
+  void capture() {
+    controller!.takePicture().then((XFile? file) {
+      if (file != null) {
+        print(file.path);
+        setState(() {
+          // _image = File(file.path);
+        });
+      }
+    });
+  }
 
   @override
   void initState() {
@@ -141,8 +150,7 @@ class _ScanScreenState extends State<ScanScreen> {
                       height: 16,
                     ),
                     ElevatedButton(
-                      onPressed: () =>
-                          Navigation.toNamed(routeName: ResultScreen.routeName),
+                      onPressed: () => capture(),
                       style: ElevatedButton.styleFrom(
                         padding: const EdgeInsets.symmetric(vertical: 20),
                         shape: RoundedRectangleBorder(
@@ -165,8 +173,7 @@ class _ScanScreenState extends State<ScanScreen> {
                       height: 8,
                     ),
                     ElevatedButton(
-                      onPressed: () =>
-                          Navigation.toNamed(routeName: ResultScreen.routeName),
+                      onPressed: () => capture(),
                       style: ElevatedButton.styleFrom(
                         padding: const EdgeInsets.symmetric(vertical: 20),
                         shape: RoundedRectangleBorder(

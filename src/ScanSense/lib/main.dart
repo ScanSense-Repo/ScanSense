@@ -1,4 +1,5 @@
 import 'package:camera/camera.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:scan_sense/common/navigation.dart';
 import 'package:scan_sense/ui/about%20us/about_us.dart';
@@ -13,16 +14,33 @@ import 'package:scan_sense/ui/scan/result_screen.dart';
 import 'package:scan_sense/ui/scan/scan_screen.dart';
 import 'package:scan_sense/ui/setting/setting_screen.dart';
 import 'package:scan_sense/ui/splash/splash_screen.dart';
+import 'package:scan_sense/ui/test/test_screen.dart';
 import 'package:scan_sense/utils/helper.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
   cameras = await availableCameras();
-  runApp(const MyApp());
+  runApp(MyApp());
 }
 
 class MyApp extends StatelessWidget {
-  const MyApp({super.key});
+  MyApp({super.key});
+
+  var routes = {
+    SplashScreen.routeName: (context) => const SplashScreen(),
+    HomeScreen.routeName: (context) => const HomeScreen(),
+    HistoryScreen.routeName: (context) => const HistoryScreen(),
+    ScanScreen.routeName: (context) => const ScanScreen(),
+    ResultScreen.routeName: (context) => const ResultScreen(),
+    OnboardingScreen.routeName: (context) => const OnboardingScreen(),
+    LoginScreen.routeName: (context) => const LoginScreen(),
+    RegisterScreen.routeName: (context) => const RegisterScreen(),
+    LayoutScreen.routeName: (context) => const LayoutScreen(),
+    SettingScreen.routeName: (context) => const SettingScreen(),
+    ProfileScreen.routeName: (context) => const ProfileScreen(),
+    AboutUsScreen.routeName: (context) => const AboutUsScreen(),
+    TestScreen.routeName: (context) => const TestScreen(),
+  };
 
   // This widget is the root of your application.
   @override
@@ -34,19 +52,9 @@ class MyApp extends StatelessWidget {
         useMaterial3: true,
       ),
       initialRoute: SplashScreen.routeName,
-      routes: {
-        SplashScreen.routeName: (context) => SplashScreen(),
-        HomeScreen.routeName: (context) => HomeScreen(),
-        HistoryScreen.routeName: (context) => HistoryScreen(),
-        ScanScreen.routeName: (context) => ScanScreen(),
-        ResultScreen.routeName: (context) => ResultScreen(),
-        OnboardingScreen.routeName: (context) => OnboardingScreen(),
-        LoginScreen.routeName: (context) => LoginScreen(),
-        RegisterScreen.routeName: (context) => RegisterScreen(),
-        LayoutScreen.routeName: (context) => LayoutScreen(),
-        SettingScreen.routeName: (context) => SettingScreen(),
-        ProfileScreen.routeName: (context) => ProfileScreen(),
-        AboutUsScreen.routeName: (context) => AboutUsScreen(),
+      onGenerateRoute: (settings) {
+        return CupertinoPageRoute(
+            builder: (context) => routes[settings.name]!(context));
       },
       navigatorKey: navigatorKey,
     );
