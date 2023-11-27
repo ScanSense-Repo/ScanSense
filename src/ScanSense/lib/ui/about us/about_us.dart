@@ -15,7 +15,10 @@ class _AboutUsScreenState extends State<AboutUsScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: backgroundColor,
       appBar: AppBar(
+        backgroundColor: backgroundColor,
+        surfaceTintColor: backgroundColor,
         title: Align(
           alignment: Alignment.centerRight,
           child: Text(
@@ -25,7 +28,8 @@ class _AboutUsScreenState extends State<AboutUsScreen> {
           ),
         ),
       ),
-      body: Column(
+      body: ListView(
+        physics: const BouncingScrollPhysics(),
         children: [
           // Logo
           Container(

@@ -1,9 +1,17 @@
+import 'dart:async';
+import 'dart:io';
 import 'dart:typed_data';
 
-import 'package:camera/camera.dart';
+import 'package:edge_detection/edge_detection.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:image/image.dart' as img;
+import 'package:path/path.dart';
+import 'package:path_provider/path_provider.dart';
+import 'package:permission_handler/permission_handler.dart';
+import 'package:scan_sense/common/navigation.dart';
 import 'package:scan_sense/common/styles.dart';
+import 'package:scan_sense/ui/scan/result_screen.dart';
 
 class ScanScreen extends StatefulWidget {
   static const String routeName = '/scan-screen';
@@ -15,70 +23,96 @@ class ScanScreen extends StatefulWidget {
 }
 
 class _ScanScreenState extends State<ScanScreen> {
-  CameraController? controller;
-  List<CameraDescription>? cameras;
-
-  void capture() {
-    controller!.takePicture().then((XFile? file) {
-      if (file != null) {
-        print(file.path);
-        setState(() {
-          // _image = File(file.path);
-        });
-      }
-    });
-  }
+  String? _imagePath;
+  img.Image? _image;
 
   @override
   void initState() {
     super.initState();
-    availableCameras().then((availableCameras) {
-      cameras = availableCameras;
-      if (cameras!.isNotEmpty) {
-        controller = CameraController(cameras![0], ResolutionPreset.max);
-        controller!.initialize().then((_) {
-          if (!mounted) {
-            return;
-          }
-          setState(() {});
-        }).catchError((Object e) {
-          if (e is CameraException) {
-            switch (e.code) {
-              case 'CameraAccessDenied':
-                // Handle access errors here.
-                break;
-              default:
-                // Handle other errors here.
-                break;
-            }
-          }
-        });
+  }
+
+  Future<void> getImageFromCamera() async {
+    bool isCameraGranted = await Permission.camera.request().isGranted;
+    if (!isCameraGranted) {
+      isCameraGranted =
+          await Permission.camera.request() == PermissionStatus.granted;
+    }
+
+    if (!isCameraGranted) {
+      // Have not permission to camera
+      return;
+    }
+
+    // Generate filepath for saving
+    String imagePath = join((await getApplicationSupportDirectory()).path,
+        "${(DateTime.now().millisecondsSinceEpoch / 1000).round()}.jpeg");
+
+    bool success = false;
+
+    try {
+      //Make sure to await the call to detectEdge.
+      success = await EdgeDetection.detectEdge(
+        imagePath,
+        canUseGallery: true,
+        androidScanTitle: 'Scanning', // use custom localizations for android
+        androidCropTitle: 'Crop',
+        androidCropBlackWhiteTitle: 'Black White',
+        androidCropReset: 'Reset',
+      );
+      print("success: $success");
+    } catch (e) {
+      print(e);
+    }
+
+    // If the widget was removed from the tree while the asynchronous platform
+    // message was in flight, we want to discard the reply rather than calling
+    // setState to update our non-existent appearance.
+    if (!mounted) return;
+
+    setState(() {
+      if (success) {
+        _imagePath = imagePath;
+        _image = img
+            .grayscale(img.decodeImage(File(_imagePath!).readAsBytesSync())!);
+      }
+    });
+  }
+
+  Future<void> getImageFromGallery() async {
+    // Generate filepath for saving
+    String imagePath = join((await getApplicationSupportDirectory()).path,
+        "${(DateTime.now().millisecondsSinceEpoch / 1000).round()}.jpeg");
+
+    bool success = false;
+    try {
+      //Make sure to await the call to detectEdgeFromGallery.
+      success = await EdgeDetection.detectEdgeFromGallery(
+        imagePath,
+        androidCropTitle: 'Crop', // use custom localizations for android
+        androidCropBlackWhiteTitle: 'Black White',
+        androidCropReset: 'Reset',
+      );
+      print("success: $success");
+    } catch (e) {
+      print(e);
+    }
+
+    // If the widget was removed from the tree while the asynchronous platform
+    // message was in flight, we want to discard the reply rather than calling
+    // setState to update our non-existent appearance.
+    if (!mounted) return;
+
+    setState(() {
+      if (success) {
+        _imagePath = imagePath;
+        _image = img
+            .grayscale(img.decodeImage(File(_imagePath!).readAsBytesSync())!);
       }
     });
   }
 
   @override
-  void dispose() {
-    controller?.dispose();
-    super.dispose();
-  }
-
-  @override
   Widget build(BuildContext context) {
-    if (controller == null || !controller!.value.isInitialized) {
-      return const Scaffold(
-        backgroundColor: backgroundColor,
-        body: Center(
-            child: CircularProgressIndicator(
-          color: primaryColor,
-        )),
-      );
-    }
-
-    final size = MediaQuery.of(context).size;
-    var scale = size.aspectRatio * controller!.value.aspectRatio;
-    if (scale < 1) scale = 1 / scale;
-
     return Scaffold(
       backgroundColor: backgroundColor,
       body: CustomScrollView(
@@ -106,7 +140,7 @@ class _ScanScreenState extends State<ScanScreen> {
                 child: Column(
                   children: [
                     Text(
-                      "Arahkan kamera ke KTP yang ingin di verifikasi. Usahakan gambar terlihat jelas !!",
+                      "Ambil gambar KTP Anda dengan benar agar dapat diverifikasi oleh sistem kami.",
                       style: GoogleFonts.poppins(
                         fontSize: 13,
                         color: grayColor,
@@ -114,43 +148,86 @@ class _ScanScreenState extends State<ScanScreen> {
                       textAlign: TextAlign.center,
                     ),
                     const SizedBox(
-                      height: 16,
+                      height: 48,
                     ),
                     ClipRRect(
                       borderRadius: BorderRadius.circular(12),
-                      child: AspectRatio(
-                        aspectRatio:
-                            3 / 4.5, // Set the desired aspect ratio, e.g., 16/9
-                        child: Transform.scale(
-                          scale: controller!.value.aspectRatio,
-                          child: Center(
-                            child: CameraPreview(
-                              controller!,
-                              child: Padding(
-                                padding:
-                                    const EdgeInsets.symmetric(horizontal: 24),
-                                child: Center(
-                                  child: Container(
-                                    height: 120,
-                                    width: 180,
-                                    decoration: BoxDecoration(
-                                      border: Border.all(
-                                          color: Colors.white70, width: 1),
-                                      borderRadius: BorderRadius.circular(8),
-                                    ),
-                                  ),
+                      child: SizedBox(
+                        height: 200,
+                        width: MediaQuery.of(context).size.width,
+                        child: _imagePath == null
+                            ? Image.asset(
+                                'assets/illustrations/ktp.png',
+                                fit: BoxFit.cover,
+                              )
+                            : Image.memory(
+                                Uint8List.fromList(
+                                  img.encodePng(_image!),
                                 ),
+                                fit: BoxFit.cover,
                               ),
-                            ),
-                          ),
-                        ),
                       ),
                     ),
                     const SizedBox(
                       height: 16,
                     ),
+                    Row(
+                      children: [
+                        Expanded(
+                          child: ElevatedButton(
+                            onPressed: getImageFromCamera,
+                            style: ElevatedButton.styleFrom(
+                              padding: const EdgeInsets.symmetric(vertical: 20),
+                              shape: RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(8),
+                                side: const BorderSide(
+                                    color: primaryColor, width: 1),
+                              ),
+                              elevation: 0,
+                            ),
+                            child: Text(
+                              "Kamera",
+                              style: GoogleFonts.poppins(
+                                fontSize: 14,
+                                fontWeight: FontWeight.w600,
+                                color: primaryColor,
+                              ),
+                            ),
+                          ),
+                        ),
+                        const SizedBox(
+                          width: 16,
+                        ),
+                        Expanded(
+                          child: ElevatedButton(
+                            onPressed: getImageFromGallery,
+                            style: ElevatedButton.styleFrom(
+                              padding: const EdgeInsets.symmetric(vertical: 20),
+                              shape: RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(8),
+                                side: const BorderSide(
+                                    color: primaryColor, width: 1),
+                              ),
+                              elevation: 0,
+                            ),
+                            child: Text(
+                              "Unggah Gambar",
+                              style: GoogleFonts.poppins(
+                                fontSize: 14,
+                                fontWeight: FontWeight.w600,
+                                color: primaryColor,
+                              ),
+                            ),
+                          ),
+                        ),
+                      ],
+                    ),
+                    const SizedBox(
+                      height: 16,
+                    ),
                     ElevatedButton(
-                      onPressed: () => capture(),
+                      onPressed: () =>
+                          Navigation.toNamed(routeName: ResultScreen.routeName),
                       style: ElevatedButton.styleFrom(
                         padding: const EdgeInsets.symmetric(vertical: 20),
                         shape: RoundedRectangleBorder(
@@ -169,53 +246,12 @@ class _ScanScreenState extends State<ScanScreen> {
                         ),
                       ),
                     ),
-                    const SizedBox(
-                      height: 8,
-                    ),
-                    ElevatedButton(
-                      onPressed: () => capture(),
-                      style: ElevatedButton.styleFrom(
-                        padding: const EdgeInsets.symmetric(vertical: 20),
-                        shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(8),
-                          side: const BorderSide(color: primaryColor, width: 1),
-                        ),
-                        backgroundColor: backgroundColor,
-                        elevation: 0,
-                        fixedSize:
-                            Size.fromWidth(MediaQuery.of(context).size.width),
-                      ),
-                      child: Text(
-                        "Unggah Gambar",
-                        style: GoogleFonts.poppins(
-                          fontSize: 14,
-                          fontWeight: FontWeight.w600,
-                          color: primaryColor,
-                        ),
-                      ),
-                    ),
                   ],
                 ),
               ),
             ]),
           ),
         ],
-      ),
-    );
-  }
-}
-
-class MyImageView extends StatelessWidget {
-  const MyImageView({Key? key, required this.imageBytes}) : super(key: key);
-  final Uint8List imageBytes;
-
-  @override
-  Widget build(BuildContext context) {
-    return ClipRRect(
-      borderRadius: BorderRadius.circular(4.0),
-      child: SizedBox(
-        width: double.infinity,
-        child: Image.memory(imageBytes),
       ),
     );
   }
