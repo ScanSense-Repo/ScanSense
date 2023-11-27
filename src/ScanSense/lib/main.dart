@@ -1,7 +1,9 @@
 import 'package:camera/camera.dart';
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:scan_sense/common/navigation.dart';
+import 'package:scan_sense/firebase_options.dart';
 import 'package:scan_sense/ui/about%20us/about_us.dart';
 import 'package:scan_sense/ui/history/history_screen.dart';
 import 'package:scan_sense/ui/home/home_screen.dart';
@@ -20,13 +22,14 @@ import 'package:scan_sense/utils/helper.dart';
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
   cameras = await availableCameras();
+  await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
   runApp(MyApp());
 }
 
 class MyApp extends StatelessWidget {
-  MyApp({super.key});
+  MyApp({Key? key}) : super(key: key);
 
-  var routes = {
+  final Map<String, WidgetBuilder> routes = {
     SplashScreen.routeName: (context) => const SplashScreen(),
     HomeScreen.routeName: (context) => const HomeScreen(),
     HistoryScreen.routeName: (context) => const HistoryScreen(),
