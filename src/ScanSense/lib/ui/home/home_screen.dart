@@ -33,16 +33,15 @@ class _HomeScreenState extends State<HomeScreen> {
                     Navigation.toNamed(routeName: ProfileScreen.routeName);
                   },
                   child: ClipOval(
-                      child: Image.asset(
-                    'assets/illustrations/profile.png',
-                    width: 64,
-                    height: 64,
-                    fit: BoxFit.cover,
-                  )),
+                    child: Image.asset(
+                      'assets/illustrations/profile.png',
+                      width: 64,
+                      height: 64,
+                      fit: BoxFit.cover,
+                    ),
+                  ),
                 ),
-                const SizedBox(
-                  width: 16,
-                ),
+                const SizedBox(width: 16),
                 Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
@@ -60,8 +59,45 @@ class _HomeScreenState extends State<HomeScreen> {
                         fontSize: 13,
                         fontWeight: FontWeight.bold,
                       ),
-                    )
+                    ),
                   ],
+                ),
+                // Add new widget for notification
+                SizedBox(
+                  width: 48,
+                ),
+                IconButton(
+                  onPressed: () {
+                    // ...
+                  },
+                  icon: Stack(
+                    children: [
+                      Icon(
+                        Icons.notifications_none_outlined,
+                        size: 30,
+                        color: blackColor, // Set the size to 10
+                      ),
+                      Positioned(
+                        top: 0,
+                        right: 0,
+                        child: Container(
+                          padding: EdgeInsets.all(5),
+                          decoration: BoxDecoration(
+                            color: dangerColor,
+                            borderRadius: BorderRadius.circular(50),
+                          ),
+                          child: Text(
+                            "5",
+                            style: TextStyle(
+                              color: Colors.white,
+                              fontSize: 5,
+                              fontWeight: FontWeight.bold,
+                            ),
+                          ),
+                        ),
+                      ),
+                    ],
+                  ),
                 ),
               ],
             ),
