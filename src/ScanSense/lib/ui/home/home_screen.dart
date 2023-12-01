@@ -4,6 +4,7 @@ import 'package:scan_sense/common/navigation.dart';
 import 'package:scan_sense/common/styles.dart';
 import 'package:scan_sense/ui/history/history_screen.dart';
 import 'package:scan_sense/ui/profile/profile_screen.dart';
+import '../notification/notification-screen.dart';
 
 class HomeScreen extends StatefulWidget {
   static const String routeName = '/home-screen';
@@ -68,7 +69,7 @@ class _HomeScreenState extends State<HomeScreen> {
                 ),
                 IconButton(
                   onPressed: () {
-                    // ...
+                    Navigation.toNamed(routeName: NotificationScreen.routeName);
                   },
                   icon: Stack(
                     children: [
