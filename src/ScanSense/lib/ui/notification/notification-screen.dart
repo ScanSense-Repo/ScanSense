@@ -101,7 +101,8 @@ class _NotificationScreenState extends State<NotificationScreen> {
     required Function onPressed,
   }) {
     return Card(
-      margin: EdgeInsets.all(8.0),
+      margin: EdgeInsets.all(16.0), // Sesuaikan nilai margin sesuai kebutuhan
+      color: whiteColor, // Ubah warna latar belakang menjadi putih
       child: ListTile(
         leading: Icon(icon),
         title: Text(
