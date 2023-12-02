@@ -1,23 +1,28 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:scan_sense/common/navigation.dart';
 import 'package:scan_sense/common/styles.dart';
+import 'package:scan_sense/providers/auth/auth_provider.dart';
 import 'package:scan_sense/ui/history/history_screen.dart';
 import 'package:scan_sense/ui/profile/profile_screen.dart';
+
 import '../notification/notification-screen.dart';
 
-class HomeScreen extends StatefulWidget {
+class HomeScreen extends ConsumerStatefulWidget {
   static const String routeName = '/home-screen';
 
   const HomeScreen({super.key});
 
   @override
-  State<HomeScreen> createState() => _HomeScreenState();
+  ConsumerState<HomeScreen> createState() => _HomeScreenState();
 }
 
-class _HomeScreenState extends State<HomeScreen> {
+class _HomeScreenState extends ConsumerState<HomeScreen> {
   @override
   Widget build(BuildContext context) {
+    final auth = ref.watch(authProvider);
+
     return Scaffold(
       backgroundColor: backgroundColor,
       body: Padding(
@@ -43,28 +48,30 @@ class _HomeScreenState extends State<HomeScreen> {
                   ),
                 ),
                 const SizedBox(width: 16),
-                Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Text(
-                      "Selamat datang kembali",
-                      style: GoogleFonts.poppins(
-                        fontSize: 13,
-                        fontWeight: FontWeight.w400,
-                        color: grayColor,
+                Expanded(
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Text(
+                        "Selamat datang kembali",
+                        style: GoogleFonts.poppins(
+                          fontSize: 13,
+                          fontWeight: FontWeight.w400,
+                          color: grayColor,
+                        ),
                       ),
-                    ),
-                    Text(
-                      "Ronny",
-                      style: GoogleFonts.poppins(
-                        fontSize: 13,
-                        fontWeight: FontWeight.bold,
+                      Text(
+                        auth.auth?.user.name ?? "John Doe",
+                        style: GoogleFonts.poppins(
+                          fontSize: 13,
+                          fontWeight: FontWeight.bold,
+                        ),
                       ),
-                    ),
-                  ],
+                    ],
+                  ),
                 ),
                 // Add new widget for notification
-                SizedBox(
+                const SizedBox(
                   width: 48,
                 ),
                 IconButton(
@@ -73,7 +80,7 @@ class _HomeScreenState extends State<HomeScreen> {
                   },
                   icon: Stack(
                     children: [
-                      Icon(
+                      const Icon(
                         Icons.notifications_none_outlined,
                         size: 30,
                         color: blackColor, // Set the size to 10
@@ -82,12 +89,12 @@ class _HomeScreenState extends State<HomeScreen> {
                         top: 0,
                         right: 0,
                         child: Container(
-                          padding: EdgeInsets.all(5),
+                          padding: const EdgeInsets.all(5),
                           decoration: BoxDecoration(
                             color: dangerColor,
                             borderRadius: BorderRadius.circular(50),
                           ),
-                          child: Text(
+                          child: const Text(
                             "5",
                             style: TextStyle(
                               color: Colors.white,

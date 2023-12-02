@@ -20,7 +20,7 @@ Auth _$AuthFromJson(Map<String, dynamic> json) {
 
 /// @nodoc
 mixin _$Auth {
-  String get token => throw _privateConstructorUsedError;
+  String get uid => throw _privateConstructorUsedError;
   User get user => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
@@ -33,7 +33,7 @@ abstract class $AuthCopyWith<$Res> {
   factory $AuthCopyWith(Auth value, $Res Function(Auth) then) =
       _$AuthCopyWithImpl<$Res, Auth>;
   @useResult
-  $Res call({String token, User user});
+  $Res call({String uid, User user});
 
   $UserCopyWith<$Res> get user;
 }
@@ -51,13 +51,13 @@ class _$AuthCopyWithImpl<$Res, $Val extends Auth>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? token = null,
+    Object? uid = null,
     Object? user = null,
   }) {
     return _then(_value.copyWith(
-      token: null == token
-          ? _value.token
-          : token // ignore: cast_nullable_to_non_nullable
+      uid: null == uid
+          ? _value.uid
+          : uid // ignore: cast_nullable_to_non_nullable
               as String,
       user: null == user
           ? _value.user
@@ -82,7 +82,7 @@ abstract class _$$AuthImplCopyWith<$Res> implements $AuthCopyWith<$Res> {
       __$$AuthImplCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({String token, User user});
+  $Res call({String uid, User user});
 
   @override
   $UserCopyWith<$Res> get user;
@@ -98,13 +98,13 @@ class __$$AuthImplCopyWithImpl<$Res>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? token = null,
+    Object? uid = null,
     Object? user = null,
   }) {
     return _then(_$AuthImpl(
-      token: null == token
-          ? _value.token
-          : token // ignore: cast_nullable_to_non_nullable
+      uid: null == uid
+          ? _value.uid
+          : uid // ignore: cast_nullable_to_non_nullable
               as String,
       user: null == user
           ? _value.user
@@ -117,19 +117,19 @@ class __$$AuthImplCopyWithImpl<$Res>
 /// @nodoc
 @JsonSerializable()
 class _$AuthImpl implements _Auth {
-  _$AuthImpl({required this.token, required this.user});
+  _$AuthImpl({required this.uid, required this.user});
 
   factory _$AuthImpl.fromJson(Map<String, dynamic> json) =>
       _$$AuthImplFromJson(json);
 
   @override
-  final String token;
+  final String uid;
   @override
   final User user;
 
   @override
   String toString() {
-    return 'Auth(token: $token, user: $user)';
+    return 'Auth(uid: $uid, user: $user)';
   }
 
   @override
@@ -137,13 +137,13 @@ class _$AuthImpl implements _Auth {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$AuthImpl &&
-            (identical(other.token, token) || other.token == token) &&
+            (identical(other.uid, uid) || other.uid == uid) &&
             (identical(other.user, user) || other.user == user));
   }
 
   @JsonKey(ignore: true)
   @override
-  int get hashCode => Object.hash(runtimeType, token, user);
+  int get hashCode => Object.hash(runtimeType, uid, user);
 
   @JsonKey(ignore: true)
   @override
@@ -160,13 +160,13 @@ class _$AuthImpl implements _Auth {
 }
 
 abstract class _Auth implements Auth {
-  factory _Auth({required final String token, required final User user}) =
+  factory _Auth({required final String uid, required final User user}) =
       _$AuthImpl;
 
   factory _Auth.fromJson(Map<String, dynamic> json) = _$AuthImpl.fromJson;
 
   @override
-  String get token;
+  String get uid;
   @override
   User get user;
   @override

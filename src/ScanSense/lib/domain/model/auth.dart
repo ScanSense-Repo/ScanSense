@@ -7,7 +7,7 @@ part 'auth.g.dart';
 @freezed
 class Auth with _$Auth {
   factory Auth({
-    required String token,
+    required String uid,
     required User user,
   }) = _Auth;
 

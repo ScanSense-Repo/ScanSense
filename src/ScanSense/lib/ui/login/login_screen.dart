@@ -1,26 +1,31 @@
+import 'package:animated_snack_bar/animated_snack_bar.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:scan_sense/common/navigation.dart';
 import 'package:scan_sense/common/styles.dart';
+import 'package:scan_sense/providers/auth/auth_provider.dart';
 import 'package:scan_sense/ui/layout/layout_screen.dart';
 import 'package:scan_sense/ui/register/register_screen.dart';
 import 'package:scan_sense/widgets/custom_input.dart';
 
-class LoginScreen extends StatefulWidget {
+class LoginScreen extends ConsumerStatefulWidget {
   static const String routeName = '/login-screen';
 
   const LoginScreen({super.key});
 
   @override
-  State<LoginScreen> createState() => _LoginScreenState();
+  ConsumerState<LoginScreen> createState() => _LoginScreenState();
 }
 
-class _LoginScreenState extends State<LoginScreen> {
+class _LoginScreenState extends ConsumerState<LoginScreen> {
   TextEditingController cUsername = TextEditingController();
   TextEditingController cPassword = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
+    final auth = ref.watch(authProvider);
+
     return Scaffold(
       resizeToAvoidBottomInset: false,
       backgroundColor: backgroundColor,
@@ -77,8 +82,32 @@ class _LoginScreenState extends State<LoginScreen> {
                 children: [
                   Expanded(
                     child: ElevatedButton(
-                      onPressed: () => Navigation.replaceNamed(
-                          routeName: LayoutScreen.routeName),
+                      onPressed: () async {
+                        if (auth.isLoading) return;
+
+                        final login =
+                            await auth.login(cUsername.text, cPassword.text);
+
+                        if (login) {
+                          if (mounted) {
+                            AnimatedSnackBar.material(
+                              "Selamat Datang",
+                              type: AnimatedSnackBarType.success,
+                              duration: const Duration(seconds: 2),
+                            ).show(context);
+                            Navigation.toNamed(
+                                routeName: LayoutScreen.routeName);
+                          }
+                        } else {
+                          if (mounted) {
+                            AnimatedSnackBar.material(
+                              auth.failure!.message,
+                              type: AnimatedSnackBarType.error,
+                              duration: const Duration(seconds: 2),
+                            ).show(context);
+                          }
+                        }
+                      },
                       style: ElevatedButton.styleFrom(
                         padding: const EdgeInsets.symmetric(vertical: 20),
                         shape: RoundedRectangleBorder(

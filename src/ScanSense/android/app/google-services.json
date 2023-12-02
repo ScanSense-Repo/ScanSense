@@ -1,13 +1,13 @@
 {
   "project_info": {
-    "project_number": "572499325891",
-    "project_id": "scan-sense",
-    "storage_bucket": "scan-sense.appspot.com"
+    "project_number": "742125653370",
+    "project_id": "scan-sense-d7ad9",
+    "storage_bucket": "scan-sense-d7ad9.appspot.com"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:572499325891:android:713075c6d17cfda871c376",
+        "mobilesdk_app_id": "1:742125653370:android:df3013ce5873439f319ac3",
         "android_client_info": {
           "package_name": "com.example.scan_sense"
         }
@@ -15,7 +15,7 @@
       "oauth_client": [],
       "api_key": [
         {
-          "current_key": "AIzaSyAslMVuIfJrltTc_wDX7Fz7nuLk_256zdU"
+          "current_key": "AIzaSyDBoRPsAg2apxOW0oZ2FCExgRqfYfJxjaw"
         }
       ],
       "services": {

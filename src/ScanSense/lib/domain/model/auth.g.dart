@@ -7,12 +7,12 @@ part of 'auth.dart';
 // **************************************************************************
 
 _$AuthImpl _$$AuthImplFromJson(Map<String, dynamic> json) => _$AuthImpl(
-      token: json['token'] as String,
+      uid: json['uid'] as String,
       user: User.fromJson(json['user'] as Map<String, dynamic>),
     );
 
 Map<String, dynamic> _$$AuthImplToJson(_$AuthImpl instance) =>
     <String, dynamic>{
-      'token': instance.token,
+      'uid': instance.uid,
       'user': instance.user,
     };
