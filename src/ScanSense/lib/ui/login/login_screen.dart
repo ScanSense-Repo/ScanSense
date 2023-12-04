@@ -29,11 +29,11 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
     return Scaffold(
       resizeToAvoidBottomInset: false,
       backgroundColor: backgroundColor,
-      body: SafeArea(
+      body: Center(
         child: Padding(
           padding: const EdgeInsets.all(24.0),
           child: Column(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            mainAxisAlignment: MainAxisAlignment.center,
             children: [
               Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
@@ -78,82 +78,86 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
                   ),
                 ],
               ),
-              Row(
+              const SizedBox(height: 24),
+              Column(
                 children: [
-                  Expanded(
-                    child: ElevatedButton(
-                      onPressed: () async {
-                        if (auth.isLoading) return;
+                  ElevatedButton(
+                    onPressed: () async {
+                      if (auth.isLoading) return;
 
-                        final login =
-                            await auth.login(cUsername.text, cPassword.text);
-                        if (login) {
-                          if (mounted) {
-                            AnimatedSnackBar.material(
-                              "Selamat Datang",
-                              type: AnimatedSnackBarType.success,
-                              duration: const Duration(seconds: 2),
-                            ).show(context);
-                            Navigation.toNamed(
-                                routeName: LayoutScreen.routeName);
-                          }
-                        } else {
-                          // Show a pop-up if login fails
-                          if (mounted) {
-                            AnimatedSnackBar.material(
-                              "Username dan Password tidak sesuai, coba kembali",
-                              type: AnimatedSnackBarType.error,
-                              duration: const Duration(seconds: 2),
-                            ).show(context);
-                          }
+                      final login =
+                          await auth.login(cUsername.text, cPassword.text);
+
+                      if (login) {
+                        if (mounted) {
+                          AnimatedSnackBar.material(
+                            "Selamat Datang",
+                            type: AnimatedSnackBarType.success,
+                            duration: const Duration(seconds: 2),
+                          ).show(context);
+                          Navigation.toNamed(routeName: LayoutScreen.routeName);
                         }
-                      },
-                      style: ElevatedButton.styleFrom(
-                        padding: const EdgeInsets.symmetric(vertical: 20),
-                        shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(8),
-                        ),
-                        backgroundColor: primaryColor,
+                      } else {
+                        if (mounted) {
+                          AnimatedSnackBar.material(
+                            auth.failure!.message,
+                            type: AnimatedSnackBarType.error,
+                            duration: const Duration(seconds: 2),
+                          ).show(context);
+                        }
+                      }
+                    },
+                    style: ElevatedButton.styleFrom(
+                      padding: const EdgeInsets.symmetric(vertical: 20),
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(8),
                       ),
-                      child: Text(
-                        "Masuk",
-                        style: GoogleFonts.poppins(
-                          fontSize: 14,
-                          fontWeight: FontWeight.w600,
-                          color: whiteColor,
+                      backgroundColor: primaryColor,
+                    ),
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        Text(
+                          "Masuk",
+                          style: GoogleFonts.poppins(
+                            fontSize: 14,
+                            fontWeight: FontWeight.w600,
+                            color: whiteColor,
+                          ),
                         ),
-                      ),
+                      ],
                     ),
                   ),
-                  const SizedBox(
-                    width: 18,
-                  ),
-                  Expanded(
-                    child: ElevatedButton(
-                      onPressed: () {
-                        Navigation.toNamed(routeName: RegisterScreen.routeName);
-                      },
-                      style: ElevatedButton.styleFrom(
-                        padding: const EdgeInsets.symmetric(vertical: 20),
-                        shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(8),
-                          side: const BorderSide(color: primaryColor, width: 1),
-                        ),
-                        backgroundColor: backgroundColor,
-                        elevation: 0,
+                  const SizedBox(height: 18),
+                  ElevatedButton(
+                    onPressed: () {
+                      Navigation.toNamed(routeName: RegisterScreen.routeName);
+                    },
+                    style: ElevatedButton.styleFrom(
+                      padding: const EdgeInsets.symmetric(vertical: 20),
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(8),
+                        side: const BorderSide(color: primaryColor, width: 1),
                       ),
-                      child: Text(
-                        "Daftar",
-                        style: GoogleFonts.poppins(
-                          fontSize: 14,
-                          fontWeight: FontWeight.w600,
-                          color: primaryColor,
+                      backgroundColor: backgroundColor,
+                      elevation: 0,
+                    ),
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        Text(
+                          "Daftar",
+                          style: GoogleFonts.poppins(
+                            fontSize: 14,
+                            fontWeight: FontWeight.w600,
+                            color: primaryColor,
+                          ),
                         ),
-                      ),
+                      ],
                     ),
                   ),
                 ],
-              )
+              ),
             ],
           ),
         ),
