@@ -93,10 +93,25 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
                       onPressed: () async {
                         if (auth.isLoading) return;
 
-                        final login =
-                            await auth.login(cUsername.text, cPassword.text);
+                        final username = cUsername.text;
+                        final password = cPassword.text;
+
+                        if (username.isEmpty || password.isEmpty) {
+                          // Jika username atau password kosong
+                          if (mounted) {
+                            AnimatedSnackBar.material(
+                              "Silahkan masukkan username dan password",
+                              type: AnimatedSnackBarType.warning,
+                              duration: const Duration(seconds: 2),
+                            ).show(context);
+                          }
+                          return;
+                        }
+
+                        final login = await auth.login(username, password);
 
                         if (login) {
+                          // Jika login berhasil
                           if (mounted) {
                             AnimatedSnackBar.material(
                               "Selamat Datang",
@@ -107,10 +122,11 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
                                 routeName: LayoutScreen.routeName);
                           }
                         } else {
-                          if (auth.failure != null) {
+                          // Jika login gagal
+                          if (mounted) {
                             AnimatedSnackBar.material(
-                              auth.failure!.message,
-                              type: AnimatedSnackBarType.error,
+                              "Username dan Password tidak sesuai, Silahkan mencoba kembali",
+                              type: AnimatedSnackBarType.warning,
                               duration: const Duration(seconds: 2),
                             ).show(context);
                           }
