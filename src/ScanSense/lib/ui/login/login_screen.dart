@@ -87,7 +87,6 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
 
                         final login =
                             await auth.login(cUsername.text, cPassword.text);
-
                         if (login) {
                           if (mounted) {
                             AnimatedSnackBar.material(
@@ -99,9 +98,10 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
                                 routeName: LayoutScreen.routeName);
                           }
                         } else {
+                          // Show a pop-up if login fails
                           if (mounted) {
                             AnimatedSnackBar.material(
-                              auth.failure!.message,
+                              "Username dan Password tidak sesuai, coba ulangi kembali",
                               type: AnimatedSnackBarType.error,
                               duration: const Duration(seconds: 2),
                             ).show(context);
