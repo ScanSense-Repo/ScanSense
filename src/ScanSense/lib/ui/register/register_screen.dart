@@ -47,7 +47,7 @@ class _RegisterScreenState extends ConsumerState<RegisterScreen> {
                         child: const Icon(Icons.arrow_back_rounded),
                       ),
                       Text(
-                        "Halaman Daftar",
+                        "Daftar",
                         style: GoogleFonts.poppins(
                             fontSize: 18,
                             fontWeight: FontWeight.w600,
