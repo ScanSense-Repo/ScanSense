@@ -28,7 +28,7 @@ class _ForgotPasswordScreenState extends State<ForgotPasswordScreen> {
               'Masukkan alamat email Anda untuk mereset kata sandi',
               style: GoogleFonts.poppins(fontSize: 14, color: grayColor),
             ),
-            const SizedBox(height: 24),
+            const SizedBox(height: 10),
             CustomInput(
               controller: emailController,
               hint: 'Email',
