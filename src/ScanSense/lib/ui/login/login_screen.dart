@@ -85,8 +85,20 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
                     onPressed: () async {
                       if (auth.isLoading) return;
 
-                      final login =
-                          await auth.login(cUsername.text, cPassword.text);
+                      final username = cUsername.text;
+                      final password = cPassword.text;
+
+                      if (username.isEmpty || password.isEmpty) {
+                        // Show Snackbar if username or password is empty
+                        AnimatedSnackBar.material(
+                          "Silahkan masukkan username dan password terlebih dahulu",
+                          type: AnimatedSnackBarType.warning,
+                          duration: const Duration(seconds: 2),
+                        ).show(context);
+                        return;
+                      }
+
+                      final login = await auth.login(username, password);
 
                       if (login) {
                         if (mounted) {
