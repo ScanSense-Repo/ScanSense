@@ -123,7 +123,7 @@ class _RegisterScreenState extends ConsumerState<RegisterScreen> {
                           if (mounted) {
                             AnimatedSnackBar.material(
                               "Silahkan isi terlebih dahulu",
-                              type: AnimatedSnackBarType.error,
+                              type: AnimatedSnackBarType.warning,
                               duration: const Duration(seconds: 2),
                             ).show(context);
                           }
