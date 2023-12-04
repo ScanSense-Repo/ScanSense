@@ -1,12 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:scan_sense/common/navigation.dart';
 import 'package:scan_sense/common/styles.dart';
-import 'package:scan_sense/ui/profile/profile_screen.dart';
-import 'package:flutter/services.dart';
-import 'package:flutter/cupertino.dart';
-import 'package:scan_sense/ui/about us/about_us.dart';
-import 'package:scan_sense/widgets/logout-pop.dart';
 
 class NotificationScreen extends StatefulWidget {
   static const String routeName = '/notifikasi-screen';

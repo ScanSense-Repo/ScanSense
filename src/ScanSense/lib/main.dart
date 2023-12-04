@@ -10,7 +10,7 @@ import 'package:scan_sense/ui/history/history_screen.dart';
 import 'package:scan_sense/ui/home/home_screen.dart';
 import 'package:scan_sense/ui/layout/layout_screen.dart';
 import 'package:scan_sense/ui/login/login_screen.dart';
-import 'package:scan_sense/ui/notification/notification-screen.dart';
+import 'package:scan_sense/ui/notification/notification_screen.dart';
 import 'package:scan_sense/ui/onboarding/onboarding_screen.dart';
 import 'package:scan_sense/ui/profile/profile_screen.dart';
 import 'package:scan_sense/ui/register/register_screen.dart';
@@ -52,7 +52,7 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Flutter Demo',
+      title: 'Scan Sense',
       theme: ThemeData(
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
         useMaterial3: true,
