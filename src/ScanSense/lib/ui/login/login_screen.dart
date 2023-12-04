@@ -8,6 +8,7 @@ import 'package:scan_sense/providers/auth/auth_provider.dart';
 import 'package:scan_sense/ui/layout/layout_screen.dart';
 import 'package:scan_sense/ui/register/register_screen.dart';
 import 'package:scan_sense/widgets/custom_input.dart';
+import 'package:scan_sense/ui/password/forgot_password.dart';
 
 class LoginScreen extends ConsumerStatefulWidget {
   static const String routeName = '/login-screen';
@@ -70,11 +71,18 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
                   ),
                   Align(
                     alignment: Alignment.centerRight,
-                    child: Text(
-                      "Lupa kata sandi?",
-                      style: GoogleFonts.poppins(
-                          color: primaryColor, fontSize: 13),
-                    ),
+                    child: GestureDetector(
+                        onTap: () {
+                          Navigator.of(context)
+                              .pushNamed(ForgotPasswordScreen.routeName);
+                        },
+                        child: Text(
+                          "Lupa kata sandi?",
+                          style: GoogleFonts.poppins(
+                              color: primaryColor,
+                              fontSize: 13,
+                              decoration: TextDecoration.underline),
+                        )),
                   ),
                 ],
               ),
@@ -99,7 +107,7 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
                                 routeName: LayoutScreen.routeName);
                           }
                         } else {
-                          if (mounted) {
+                          if (auth.failure != null) {
                             AnimatedSnackBar.material(
                               auth.failure!.message,
                               type: AnimatedSnackBarType.error,
