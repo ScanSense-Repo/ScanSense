@@ -101,7 +101,7 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
                           // Show a pop-up if login fails
                           if (mounted) {
                             AnimatedSnackBar.material(
-                              "Username dan Password tidak sesuai, coba ulangi kembali",
+                              "Username dan Password tidak sesuai, coba kembali",
                               type: AnimatedSnackBarType.error,
                               duration: const Duration(seconds: 2),
                             ).show(context);
