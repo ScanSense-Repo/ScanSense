@@ -9,6 +9,7 @@ import 'package:scan_sense/ui/about us/about_us.dart';
 import 'package:scan_sense/ui/login/login_screen.dart';
 import 'package:scan_sense/ui/profile/profile_screen.dart';
 import 'package:scan_sense/widgets/logout-pop.dart';
+import 'package:animated_snack_bar/animated_snack_bar.dart';
 
 class SettingScreen extends ConsumerStatefulWidget {
   static const String routeName = '/setting-screen';
@@ -20,11 +21,14 @@ class SettingScreen extends ConsumerStatefulWidget {
 }
 
 class _SettingScreenState extends ConsumerState<SettingScreen> {
+  final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
+
   @override
   Widget build(BuildContext context) {
     final auth = ref.watch(authProvider);
 
     return Scaffold(
+      key: _scaffoldKey,
       appBar: AppBar(
         title: Align(
           alignment: Alignment.centerRight,
@@ -106,7 +110,7 @@ class _SettingScreenState extends ConsumerState<SettingScreen> {
             height: 60,
             margin: const EdgeInsets.only(bottom: 20),
             child: OutlinedButton.icon(
-              onPressed: () {
+              onPressed: () async {
                 // Tampilkan popup logout
                 showDialog(
                   context: context,
@@ -114,7 +118,21 @@ class _SettingScreenState extends ConsumerState<SettingScreen> {
                     onYes: () async {
                       // Lakukan logout
                       await auth.logout();
-                      Navigation.replaceNamed(routeName: LoginScreen.routeName);
+
+                      // Hapus semua rute dan pindah ke halaman login
+                      Navigator.pushNamedAndRemoveUntil(
+                        context,
+                        LoginScreen.routeName,
+                        (route) =>
+                            false, // Hapus semua rute kecuali halaman login
+                      );
+
+                      // Tampilkan notifikasi berhasil logout
+                      AnimatedSnackBar.material(
+                        "Anda berhasil logout.",
+                        type: AnimatedSnackBarType.error,
+                        duration: const Duration(seconds: 2),
+                      ).show(context);
                     },
                     onNo: () {
                       // Batalkan logout
