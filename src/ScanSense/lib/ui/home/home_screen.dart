@@ -7,7 +7,7 @@ import 'package:scan_sense/providers/auth/auth_provider.dart';
 import 'package:scan_sense/ui/history/history_screen.dart';
 import 'package:scan_sense/ui/profile/profile_screen.dart';
 
-import '../notification/notification-screen.dart';
+import '../notification/notification_screen.dart';
 
 class HomeScreen extends ConsumerStatefulWidget {
   static const String routeName = '/home-screen';

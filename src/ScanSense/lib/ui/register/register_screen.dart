@@ -47,7 +47,7 @@ class _RegisterScreenState extends ConsumerState<RegisterScreen> {
                         child: const Icon(Icons.arrow_back_rounded),
                       ),
                       Text(
-                        "Halaman Daftar",
+                        "Daftar",
                         style: GoogleFonts.poppins(
                             fontSize: 18,
                             fontWeight: FontWeight.w600,
@@ -122,8 +122,8 @@ class _RegisterScreenState extends ConsumerState<RegisterScreen> {
                         } else {
                           if (mounted) {
                             AnimatedSnackBar.material(
-                              auth.failure!.message,
-                              type: AnimatedSnackBarType.error,
+                              "Silahkan isi terlebih dahulu",
+                              type: AnimatedSnackBarType.warning,
                               duration: const Duration(seconds: 2),
                             ).show(context);
                           }

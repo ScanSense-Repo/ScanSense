@@ -8,6 +8,7 @@ import 'package:scan_sense/providers/auth/auth_provider.dart';
 import 'package:scan_sense/ui/layout/layout_screen.dart';
 import 'package:scan_sense/ui/register/register_screen.dart';
 import 'package:scan_sense/widgets/custom_input.dart';
+import 'package:scan_sense/ui/password/forgot_password.dart';
 
 class LoginScreen extends ConsumerStatefulWidget {
   static const String routeName = '/login-screen';
@@ -70,11 +71,18 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
                   ),
                   Align(
                     alignment: Alignment.centerRight,
-                    child: Text(
-                      "Lupa kata sandi?",
-                      style: GoogleFonts.poppins(
-                          color: primaryColor, fontSize: 13),
-                    ),
+                    child: GestureDetector(
+                        onTap: () {
+                          Navigator.of(context)
+                              .pushNamed(ForgotPasswordScreen.routeName);
+                        },
+                        child: Text(
+                          "Lupa kata sandi?",
+                          style: GoogleFonts.poppins(
+                              color: primaryColor,
+                              fontSize: 13,
+                              decoration: TextDecoration.underline),
+                        )),
                   ),
                 ],
               ),
@@ -85,10 +93,25 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
                       onPressed: () async {
                         if (auth.isLoading) return;
 
-                        final login =
-                            await auth.login(cUsername.text, cPassword.text);
+                        final username = cUsername.text;
+                        final password = cPassword.text;
+
+                        if (username.isEmpty || password.isEmpty) {
+                          // Jika username atau password kosong
+                          if (mounted) {
+                            AnimatedSnackBar.material(
+                              "Silahkan masukkan username dan password",
+                              type: AnimatedSnackBarType.warning,
+                              duration: const Duration(seconds: 2),
+                            ).show(context);
+                          }
+                          return;
+                        }
+
+                        final login = await auth.login(username, password);
 
                         if (login) {
+                          // Jika login berhasil
                           if (mounted) {
                             AnimatedSnackBar.material(
                               "Selamat Datang",
@@ -99,10 +122,11 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
                                 routeName: LayoutScreen.routeName);
                           }
                         } else {
+                          // Jika login gagal
                           if (mounted) {
                             AnimatedSnackBar.material(
-                              auth.failure!.message,
-                              type: AnimatedSnackBarType.error,
+                              "Username dan Password tidak sesuai, Silahkan mencoba kembali",
+                              type: AnimatedSnackBarType.warning,
                               duration: const Duration(seconds: 2),
                             ).show(context);
                           }

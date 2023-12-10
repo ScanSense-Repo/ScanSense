@@ -21,17 +21,16 @@ class _ProfileScreenState extends ConsumerState<ProfileScreen> {
 
   @override
   void initState() {
-    cEmail.text = "ronny@gmail.com";
-    cNama.text = "Ronny";
-    cTelp.text = "0835627326372";
-    // TODO: implement initState
+    final auth = ref.read(authProvider);
+    cEmail.text = auth.auth?.user.email ?? "";
+    cNama.text = auth.auth?.user.name ?? "";
+    cTelp.text = auth.auth?.user.phoneNumber ?? "";
+
     super.initState();
   }
 
   @override
   Widget build(BuildContext context) {
-    final auth = ref.watch(authProvider);
-
     return Scaffold(
       appBar: AppBar(
         title: Align(
@@ -92,7 +91,7 @@ class _ProfileScreenState extends ConsumerState<ProfileScreen> {
               hint: "No Telepon",
             ),
             const SizedBox(
-              height: 60,
+              height: 200,
             ),
             Container(
               width: 350,
