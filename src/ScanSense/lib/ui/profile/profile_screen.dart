@@ -1,3 +1,4 @@
+import 'package:animated_snack_bar/animated_snack_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -50,12 +51,13 @@ class _ProfileScreenState extends ConsumerState<ProfileScreen> {
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 ClipOval(
-                    child: Image.asset(
-                  'assets/illustrations/profile.png',
-                  width: 140,
-                  height: 140,
-                  fit: BoxFit.cover,
-                )),
+                  child: Image.asset(
+                    'assets/illustrations/profile.png',
+                    width: 140,
+                    height: 140,
+                    fit: BoxFit.cover,
+                  ),
+                ),
               ],
             ),
             const SizedBox(
@@ -91,33 +93,51 @@ class _ProfileScreenState extends ConsumerState<ProfileScreen> {
               hint: "No Telepon",
             ),
             const SizedBox(
-              height: 200,
+              height:
+                  20, // Atur ketinggian sedikit agar tombol tidak terlalu dekat dengan input
             ),
-            Container(
-              width: 350,
-              height: 60,
-              margin: const EdgeInsets.only(bottom: 20),
-              child: ElevatedButton.icon(
-                onPressed: () {
-                  // Simpan perubahan profil pengguna
-                },
-                icon: const Icon(Icons.save, color: Colors.white),
-                label: Text(
-                  "Simpan",
-                  style: GoogleFonts.poppins(
-                    fontSize: 14,
-                    fontWeight: FontWeight.w600,
-                    color: Colors.white,
-                  ),
+            ElevatedButton.icon(
+              onPressed: () async {
+                // Simpan perubahan profil pengguna
+                final success = await ref.read(authProvider).editProfile(
+                      name: cNama.text,
+                      email: cEmail.text,
+                      phoneNumber: cTelp.text,
+                    );
+
+                if (success) {
+                  AnimatedSnackBar.material(
+                    "Profil berhasil diperbarui!",
+                    type: AnimatedSnackBarType.success,
+                    duration: const Duration(seconds: 2),
+                  ).show(context);
+
+                  setState(() {});
+                } else {
+                  // Gagal menyimpan perubahan profil, tampilkan pesan kesalahan
+                  AnimatedSnackBar.material(
+                    "Gagal menyimpan perubahan profil!",
+                    type: AnimatedSnackBarType.error,
+                    duration: const Duration(seconds: 2),
+                  ).show(context);
+                }
+              },
+              icon: const Icon(Icons.save, color: Colors.white),
+              label: Text(
+                "Simpan",
+                style: GoogleFonts.poppins(
+                  fontSize: 14,
+                  fontWeight: FontWeight.w600,
+                  color: Colors.white,
                 ),
-                style: ElevatedButton.styleFrom(
-                  padding: const EdgeInsets.symmetric(vertical: 20),
-                  shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(8),
-                  ),
-                  backgroundColor: primaryColor,
-                  fixedSize: Size.fromWidth(MediaQuery.of(context).size.width),
+              ),
+              style: ElevatedButton.styleFrom(
+                padding: const EdgeInsets.symmetric(vertical: 20),
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(8),
                 ),
+                backgroundColor: primaryColor,
+                fixedSize: Size.fromWidth(MediaQuery.of(context).size.width),
               ),
             ),
           ],

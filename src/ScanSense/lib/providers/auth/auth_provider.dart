@@ -18,6 +18,39 @@ class AuthNotifier extends ChangeNotifier {
 
   AuthNotifier(this._authRepository);
 
+  Future<bool> editProfile(
+      {required String name,
+      required String email,
+      required String phoneNumber}) async {
+    _failure = null;
+    _isLoading = true;
+    notifyListeners();
+
+    try {
+      final response = await _authRepository.editProfile(
+        name: name,
+        email: email,
+        phoneNumber: phoneNumber,
+      );
+
+      return response.fold((failure) {
+        _failure = failure;
+        _isLoading = false;
+        notifyListeners();
+        return false;
+      }, (userProfile) {
+        _isLoading = false;
+        notifyListeners();
+        return true;
+      });
+    } catch (e) {
+      _failure = Failure('Gagal menyimpan perubahan profil: $e');
+      _isLoading = false;
+      notifyListeners();
+      return false;
+    }
+  }
+
   Future<bool> login(String email, String password) async {
     _failure = null;
     _isLoading = true;
