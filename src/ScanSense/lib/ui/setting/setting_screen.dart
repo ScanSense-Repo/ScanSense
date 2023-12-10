@@ -35,7 +35,7 @@ class _SettingScreenState extends ConsumerState<SettingScreen> {
           ),
         ),
       ),
-      body: Column(
+      body: ListView(
         children: [
           const SizedBox(
             height: 16,
