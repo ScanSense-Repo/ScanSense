@@ -40,7 +40,6 @@ class _SettingScreenState extends ConsumerState<SettingScreen> {
         ),
       ),
       body: ListView(
-        padding: const EdgeInsets.symmetric(horizontal: 20),
         children: [
           const SizedBox(
             height: 16,
