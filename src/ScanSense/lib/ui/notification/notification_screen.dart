@@ -95,19 +95,61 @@ class _NotificationScreenState extends State<NotificationScreen> {
     required Function onPressed,
   }) {
     return Card(
-      margin: EdgeInsets.all(16.0), // Sesuaikan nilai margin sesuai kebutuhan
-      color: whiteColor, // Ubah warna latar belakang menjadi putih
-      child: ListTile(
-        leading: Icon(icon),
-        title: Text(
-          title,
-          style: TextStyle(fontWeight: FontWeight.bold),
-        ),
-        subtitle: Text(description),
-        trailing: Text(timestamp),
+      elevation: 4,
+      margin: EdgeInsets.symmetric(horizontal: 16.0, vertical: 8.0),
+      shape: RoundedRectangleBorder(
+        borderRadius: BorderRadius.circular(12.0),
+      ),
+      color: Colors.white, // Menetapkan warna putih sebagai latar belakang
+      child: InkWell(
         onTap: () {
           onPressed();
         },
+        borderRadius: BorderRadius.circular(12.0),
+        child: Padding(
+          padding: const EdgeInsets.all(16.0),
+          child: Row(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Icon(
+                icon,
+                size: 36.0,
+                color: primaryColor,
+              ),
+              SizedBox(width: 16.0),
+              Expanded(
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text(
+                      title,
+                      style: GoogleFonts.poppins(
+                        fontWeight: FontWeight.bold,
+                        fontSize: 16.0,
+                      ),
+                    ),
+                    SizedBox(height: 8.0),
+                    Text(
+                      description,
+                      style: TextStyle(
+                        fontSize: 14.0,
+                        color: Colors.grey,
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+              SizedBox(width: 8.0),
+              Text(
+                timestamp,
+                style: TextStyle(
+                  fontSize: 12.0,
+                  color: Colors.grey,
+                ),
+              ),
+            ],
+          ),
+        ),
       ),
     );
   }
