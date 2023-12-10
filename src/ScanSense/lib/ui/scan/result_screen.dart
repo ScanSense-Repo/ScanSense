@@ -1,21 +1,27 @@
+import 'dart:typed_data';
+
+import 'package:animated_snack_bar/animated_snack_bar.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:giffy_dialog/giffy_dialog.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:image/image.dart' as img;
 import 'package:scan_sense/common/navigation.dart';
 import 'package:scan_sense/common/styles.dart';
+import 'package:scan_sense/providers/scan/scan_provider.dart';
 import 'package:scan_sense/ui/layout/layout_screen.dart';
 import 'package:scan_sense/widgets/custom_input.dart';
 
-class ResultScreen extends StatefulWidget {
+class ResultScreen extends ConsumerStatefulWidget {
   static const String routeName = '/result-screen';
 
   const ResultScreen({super.key});
 
   @override
-  State<ResultScreen> createState() => _ResultScreenState();
+  ConsumerState<ResultScreen> createState() => _ResultScreenState();
 }
 
-class _ResultScreenState extends State<ResultScreen> {
+class _ResultScreenState extends ConsumerState<ResultScreen> {
   TextEditingController cNik = TextEditingController();
   TextEditingController cNama = TextEditingController();
   TextEditingController cTtl = TextEditingController();
@@ -31,6 +37,30 @@ class _ResultScreenState extends State<ResultScreen> {
     cAlamat.text = "JL. MERDEKA NO 43";
     // TODO: implement initState
     super.initState();
+  }
+
+  void verifyKtp() async {
+    final scan = ref.read(scanProvider.notifier);
+    final result = await scan.verify();
+    if (result) {
+      if (mounted) {
+        AnimatedSnackBar.material(
+          "Berhasil verifikasi KTP",
+          type: AnimatedSnackBarType.success,
+          duration: const Duration(seconds: 2),
+        ).show(context);
+      }
+    } else {
+      if (mounted) {
+        AnimatedSnackBar.material(
+          "Gagal verifikasi KTP",
+          type: AnimatedSnackBarType.warning,
+          duration: const Duration(seconds: 2),
+        ).show(context);
+      }
+    }
+
+    Navigation.replaceUntilNamed(routeName: LayoutScreen.routeName);
   }
 
   void showResultDialog() {
@@ -93,6 +123,8 @@ class _ResultScreenState extends State<ResultScreen> {
 
   @override
   Widget build(BuildContext context) {
+    final scan = ref.watch(scanProvider);
+
     return Scaffold(
       resizeToAvoidBottomInset: false,
       backgroundColor: backgroundColor,
@@ -125,9 +157,23 @@ class _ResultScreenState extends State<ResultScreen> {
                     const SizedBox(
                       height: 24,
                     ),
-                    Image.asset(
-                      'assets/images/ktp.png',
-                      width: MediaQuery.of(context).size.width,
+                    ClipRRect(
+                      borderRadius: BorderRadius.circular(12),
+                      child: SizedBox(
+                        height: 200,
+                        width: MediaQuery.of(context).size.width,
+                        child: scan.imagePath == null
+                            ? Image.asset(
+                                'assets/illustrations/ktp.png',
+                                fit: BoxFit.cover,
+                              )
+                            : Image.memory(
+                                Uint8List.fromList(
+                                  img.encodePng(scan.image!),
+                                ),
+                                fit: BoxFit.cover,
+                              ),
+                      ),
                     ),
                     const SizedBox(
                       height: 24,
@@ -171,7 +217,7 @@ class _ResultScreenState extends State<ResultScreen> {
                 children: [
                   Expanded(
                     child: ElevatedButton(
-                      onPressed: () => showResultDialog(),
+                      onPressed: () => verifyKtp(),
                       style: ElevatedButton.styleFrom(
                         padding: const EdgeInsets.symmetric(vertical: 20),
                         shape: RoundedRectangleBorder(
@@ -179,13 +225,35 @@ class _ResultScreenState extends State<ResultScreen> {
                         ),
                         backgroundColor: primaryColor,
                       ),
-                      child: Text(
-                        "Submit",
-                        style: GoogleFonts.poppins(
-                          fontSize: 14,
-                          fontWeight: FontWeight.w600,
-                          color: whiteColor,
-                        ),
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          Visibility(
+                            visible: scan.isLoading,
+                            child: const SizedBox(
+                              height: 18,
+                              width: 18,
+                              child: CircularProgressIndicator(
+                                color: whiteColor,
+                                strokeWidth: 2,
+                              ),
+                            ),
+                          ),
+                          Visibility(
+                            visible: scan.isLoading,
+                            child: const SizedBox(
+                              width: 8,
+                            ),
+                          ),
+                          Text(
+                            "Submit",
+                            style: GoogleFonts.poppins(
+                              fontSize: 14,
+                              fontWeight: FontWeight.w600,
+                              color: whiteColor,
+                            ),
+                          ),
+                        ],
                       ),
                     ),
                   ),

@@ -6,9 +6,9 @@ import 'package:scan_sense/common/navigation.dart';
 import 'package:scan_sense/common/styles.dart';
 import 'package:scan_sense/providers/auth/auth_provider.dart';
 import 'package:scan_sense/ui/layout/layout_screen.dart';
+import 'package:scan_sense/ui/password/forgot_password.dart';
 import 'package:scan_sense/ui/register/register_screen.dart';
 import 'package:scan_sense/widgets/custom_input.dart';
-import 'package:scan_sense/ui/password/forgot_password.dart';
 
 class LoginScreen extends ConsumerStatefulWidget {
   static const String routeName = '/login-screen';
