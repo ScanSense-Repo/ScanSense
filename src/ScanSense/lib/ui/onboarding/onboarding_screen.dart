@@ -23,15 +23,21 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
       body:
           "Aplikasi ini sebagai solusi andal dan cepat dalam pengenalan KTP dalam waktu nyata",
       image: Center(
-        child: Image.asset('assets/illustrations/Other 15.png'),
+        child: Padding(
+          padding: const EdgeInsets.only(top: 70.0), // Atur sesuai kebutuhan
+          child: Image.asset('assets/illustrations/Other 15.png'),
+        ),
       ),
     ),
     PageViewModel(
-      title: "Penggunaan mudah",
+      title: "Penggunaan Mudah",
       body:
           "Sebagai solusi yang mudah digunakan dan cocok untuk semua pengguna, bahkan yang tidak berpengalaman sekalipun.",
       image: Center(
-        child: Image.asset('assets/illustrations/Other 08.png'),
+        child: Padding(
+          padding: const EdgeInsets.only(top: 70.0), // Atur sesuai kebutuhan
+          child: Image.asset('assets/illustrations/Other 08.png'),
+        ),
       ),
     ),
     PageViewModel(
@@ -39,7 +45,10 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
       body:
           "Menonjolkan komitmen aplikasi untuk menjaga data pengguna tetap aman dan terlindungi.",
       image: Center(
-        child: Image.asset('assets/illustrations/Other 18.png'),
+        child: Padding(
+          padding: const EdgeInsets.only(top: 70.0), // Atur sesuai kebutuhan
+          child: Image.asset('assets/illustrations/Other 18.png'),
+        ),
       ),
     ),
   ];

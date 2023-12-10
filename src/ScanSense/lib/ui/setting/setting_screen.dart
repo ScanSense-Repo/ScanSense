@@ -51,116 +51,122 @@ class _SettingScreenState extends ConsumerState<SettingScreen> {
           ),
 
           // Button
-          Container(
-            width: 350,
-            height: 60,
-            margin: const EdgeInsets.only(bottom: 20),
-            child: ElevatedButton.icon(
-              onPressed: () =>
-                  Navigation.toNamed(routeName: ProfileScreen.routeName),
-              icon: const Icon(CupertinoIcons.pencil_outline,
-                  color: Colors.white),
-              label: Text(
-                "Ubah Profil",
-                style: GoogleFonts.poppins(
-                  fontSize: 14,
-                  fontWeight: FontWeight.w600,
-                  color: Colors.white,
+          Padding(
+            padding: const EdgeInsets.symmetric(vertical: 10),
+            child: Container(
+              width: double.infinity,
+              height: 60,
+              child: ElevatedButton.icon(
+                onPressed: () =>
+                    Navigation.toNamed(routeName: ProfileScreen.routeName),
+                icon: const Icon(CupertinoIcons.pencil_outline,
+                    color: Colors.white),
+                label: Text(
+                  "Ubah Profil",
+                  style: GoogleFonts.poppins(
+                    fontSize: 14,
+                    fontWeight: FontWeight.w600,
+                    color: Colors.white,
+                  ),
                 ),
-              ),
-              style: ElevatedButton.styleFrom(
-                padding: const EdgeInsets.symmetric(vertical: 20),
-                shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(8),
+                style: ElevatedButton.styleFrom(
+                  padding: const EdgeInsets.symmetric(vertical: 20),
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(8),
+                  ),
+                  backgroundColor: primaryColor,
                 ),
-                backgroundColor: primaryColor,
-                fixedSize: Size.fromWidth(MediaQuery.of(context).size.width),
               ),
             ),
           ),
-          Container(
-            width: 350,
-            height: 60,
-            margin: const EdgeInsets.only(bottom: 20),
-            child: ElevatedButton.icon(
-              onPressed: () =>
-                  Navigation.toNamed(routeName: AboutUsScreen.routeName),
-              icon: const Icon(Icons.info_outline, color: Colors.white),
-              label: Text(
-                "Tentang Kami",
-                style: GoogleFonts.poppins(
-                  fontSize: 14,
-                  fontWeight: FontWeight.w600,
-                  color: Colors.white,
+          Padding(
+            padding: const EdgeInsets.symmetric(vertical: 10),
+            child: Container(
+              width: double.infinity,
+              height: 60,
+              child: ElevatedButton.icon(
+                onPressed: () =>
+                    Navigation.toNamed(routeName: AboutUsScreen.routeName),
+                icon: const Icon(Icons.info_outline, color: Colors.white),
+                label: Text(
+                  "Tentang Kami",
+                  style: GoogleFonts.poppins(
+                    fontSize: 14,
+                    fontWeight: FontWeight.w600,
+                    color: Colors.white,
+                  ),
                 ),
-              ),
-              style: ElevatedButton.styleFrom(
-                padding: const EdgeInsets.symmetric(vertical: 20),
-                shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(8),
+                style: ElevatedButton.styleFrom(
+                  padding: const EdgeInsets.symmetric(vertical: 20),
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(8),
+                  ),
+                  backgroundColor: primaryColor,
                 ),
-                backgroundColor: primaryColor,
-                fixedSize: Size.fromWidth(MediaQuery.of(context).size.width),
               ),
             ),
           ),
           const SizedBox(height: 16),
-          Container(
-            width: 350,
-            height: 60,
-            margin: const EdgeInsets.only(bottom: 20),
-            child: OutlinedButton.icon(
-              onPressed: () async {
-                // Tampilkan popup logout
-                showDialog(
-                  context: context,
-                  builder: (context) => LogoutPopup(
-                    onYes: () async {
-                      // Lakukan logout
-                      await auth.logout();
+          Padding(
+            padding: const EdgeInsets.symmetric(vertical: 10),
+            child: Container(
+              width: double.infinity,
+              height: 60,
+              child: OutlinedButton.icon(
+                onPressed: () async {
+                  // Tampilkan popup logout
+                  showDialog(
+                    context: context,
+                    builder: (context) => LogoutPopup(
+                      onYes: () async {
+                        // Lakukan logout
+                        await auth.logout();
 
-                      // Hapus semua rute dan pindah ke halaman login
-                      Navigator.pushNamedAndRemoveUntil(
-                        context,
-                        LoginScreen.routeName,
-                        (route) =>
-                            false, // Hapus semua rute kecuali halaman login
-                      );
+                        // Hapus semua rute dan pindah ke halaman login
+                        Navigator.pushNamedAndRemoveUntil(
+                          context,
+                          LoginScreen.routeName,
+                          (route) =>
+                              false, // Hapus semua rute kecuali halaman login
+                        );
 
-                      // Tampilkan notifikasi berhasil logout
-                      AnimatedSnackBar.material(
-                        "Anda berhasil logout.",
-                        type: AnimatedSnackBarType.error,
-                        duration: const Duration(seconds: 2),
-                      ).show(context);
-                    },
-                    onNo: () {
-                      // Batalkan logout
-                      Navigator.of(context).pop();
-                    },
+                        // Tampilkan notifikasi berhasil logout
+                        AnimatedSnackBar.material(
+                          "Anda berhasil logout.",
+                          type: AnimatedSnackBarType.error,
+                          duration: const Duration(seconds: 2),
+                        ).show(context);
+                      },
+                      onNo: () {
+                        // Batalkan logout
+                        Navigator.of(context).pop();
+                      },
+                    ),
+                  );
+                },
+                icon: const Icon(Icons.logout, color: primaryColor),
+                label: Text(
+                  "Log out",
+                  style: GoogleFonts.poppins(
+                    fontSize: 14,
+                    fontWeight: FontWeight.w600,
+                    color: primaryColor,
                   ),
-                );
-              },
-              icon: const Icon(Icons.logout, color: primaryColor),
-              label: Text(
-                "Log out",
-                style: GoogleFonts.poppins(
-                  fontSize: 14,
-                  fontWeight: FontWeight.w600,
-                  color: primaryColor,
                 ),
-              ),
-              style: OutlinedButton.styleFrom(
-                padding: const EdgeInsets.symmetric(vertical: 20),
-                shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(8),
+                style: OutlinedButton.styleFrom(
+                  padding: const EdgeInsets.symmetric(vertical: 20),
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(8),
+                  ),
+                  backgroundColor: whiteColor,
+                  side: const BorderSide(color: primaryColor, width: 2),
                 ),
-                backgroundColor: whiteColor,
-                fixedSize: Size.fromWidth(MediaQuery.of(context).size.width),
-                side: const BorderSide(color: primaryColor, width: 2),
               ),
             ),
-          )
+          ),
+          SizedBox(
+            height: 30,
+          ),
         ],
       ),
     );

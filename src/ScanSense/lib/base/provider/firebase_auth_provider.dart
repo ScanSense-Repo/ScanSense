@@ -9,4 +9,5 @@ FirebaseAuth firebaseAuth(Ref ref) {
   final firebaseAuth = FirebaseAuth.instance;
 
   return firebaseAuth;
+
 }
