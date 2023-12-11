@@ -5,7 +5,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:giffy_dialog/giffy_dialog.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:image/image.dart' as img;
 import 'package:scan_sense/common/navigation.dart';
 import 'package:scan_sense/common/styles.dart';
 import 'package:scan_sense/providers/scan/scan_provider.dart';
@@ -39,7 +38,7 @@ class _ResultScreenState extends ConsumerState<ResultScreen> {
     super.initState();
   }
 
-  void verifyKtp() async {
+  Future<void> verifyKtp() async {
     final scan = ref.read(scanProvider.notifier);
     final result = await scan.verify();
     if (result) {
@@ -168,9 +167,7 @@ class _ResultScreenState extends ConsumerState<ResultScreen> {
                                 fit: BoxFit.cover,
                               )
                             : Image.memory(
-                                Uint8List.fromList(
-                                  img.encodePng(scan.image!),
-                                ),
+                                Uint8List.fromList(scan.imageUint!),
                                 fit: BoxFit.cover,
                               ),
                       ),
@@ -217,7 +214,9 @@ class _ResultScreenState extends ConsumerState<ResultScreen> {
                 children: [
                   Expanded(
                     child: ElevatedButton(
-                      onPressed: () => verifyKtp(),
+                      onPressed: () async {
+                        await verifyKtp();
+                      },
                       style: ElevatedButton.styleFrom(
                         padding: const EdgeInsets.symmetric(vertical: 20),
                         shape: RoundedRectangleBorder(

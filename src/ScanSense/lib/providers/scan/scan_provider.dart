@@ -1,4 +1,5 @@
 import 'dart:io';
+import 'dart:typed_data';
 
 import 'package:edge_detection/edge_detection.dart';
 import 'package:flutter/material.dart';
@@ -16,6 +17,9 @@ class ScanNotifier extends ChangeNotifier {
 
   img.Image? _image;
   img.Image? get image => _image;
+
+  Uint8List? _imageUint;
+  Uint8List? get imageUint => _imageUint;
 
   File? _imageFile;
   File? get imageFile => _imageFile;
@@ -95,8 +99,20 @@ class ScanNotifier extends ChangeNotifier {
 
     if (success) {
       _imagePath = imagePath;
-      _image =
-          img.grayscale(img.decodeImage(File(_imagePath!).readAsBytesSync())!);
+      final imgBytes = await File(_imagePath!).readAsBytes();
+      final cmd = img.Command()
+        ..decodeImage(imgBytes)
+        ..grayscale();
+
+      await cmd.executeThread();
+      _image = cmd.outputImage;
+
+      final cmdEncode = img.Command()
+        ..image(_image!)
+        ..encodePng();
+      await cmdEncode.executeThread();
+      _imageUint = cmdEncode.outputBytes;
+
       _imageFile = File(_imagePath!);
 
       notifyListeners();
@@ -129,8 +145,20 @@ class ScanNotifier extends ChangeNotifier {
 
     if (success) {
       _imagePath = imagePath;
-      _image =
-          img.grayscale(img.decodeImage(File(_imagePath!).readAsBytesSync())!);
+      final imgBytes = await File(_imagePath!).readAsBytes();
+      final cmd = img.Command()
+        ..decodeImage(imgBytes)
+        ..grayscale();
+
+      await cmd.executeThread();
+      _image = cmd.outputImage;
+
+      final cmdEncode = img.Command()
+        ..image(_image!)
+        ..encodePng();
+      await cmdEncode.executeThread();
+      _imageUint = cmdEncode.outputBytes;
+
       _imageFile = File(_imagePath!);
 
       notifyListeners();
