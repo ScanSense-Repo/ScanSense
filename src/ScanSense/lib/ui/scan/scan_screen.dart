@@ -3,7 +3,6 @@ import 'dart:typed_data';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:image/image.dart' as img;
 import 'package:scan_sense/common/navigation.dart';
 import 'package:scan_sense/common/styles.dart';
 import 'package:scan_sense/providers/scan/scan_provider.dart';
@@ -65,14 +64,14 @@ class _ScanScreenState extends ConsumerState<ScanScreen> {
                       child: SizedBox(
                         height: 200,
                         width: MediaQuery.of(context).size.width,
-                        child: scan.imagePath == null
+                        child: scan.image == null
                             ? Image.asset(
                                 'assets/illustrations/ktp.png',
                                 fit: BoxFit.cover,
                               )
                             : Image.memory(
                                 Uint8List.fromList(
-                                  img.encodePng(scan.image!),
+                                  scan.imageUint!,
                                 ),
                                 fit: BoxFit.cover,
                               ),
