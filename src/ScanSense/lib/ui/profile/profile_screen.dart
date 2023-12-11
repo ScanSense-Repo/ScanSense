@@ -32,6 +32,8 @@ class _ProfileScreenState extends ConsumerState<ProfileScreen> {
 
   @override
   Widget build(BuildContext context) {
+    final auth = ref.watch(authProvider);
+
     return Scaffold(
       appBar: AppBar(
         title: Align(
@@ -96,50 +98,57 @@ class _ProfileScreenState extends ConsumerState<ProfileScreen> {
               height:
                   20, // Atur ketinggian sedikit agar tombol tidak terlalu dekat dengan input
             ),
-            ElevatedButton.icon(
-              onPressed: () async {
-                // Simpan perubahan profil pengguna
-                final success = await ref.read(authProvider).editProfile(
-                      name: cNama.text,
-                      email: cEmail.text,
-                      phoneNumber: cTelp.text,
-                    );
+            auth.isLoading
+                ? const Center(
+                    child: CircularProgressIndicator(
+                      color: primaryColor,
+                    ),
+                  )
+                : ElevatedButton.icon(
+                    onPressed: () async {
+                      // Simpan perubahan profil pengguna
+                      final success = await ref.read(authProvider).editProfile(
+                            name: cNama.text,
+                            email: cEmail.text,
+                            phoneNumber: cTelp.text,
+                          );
 
-                if (success) {
-                  AnimatedSnackBar.material(
-                    "Profil berhasil diperbarui!",
-                    type: AnimatedSnackBarType.success,
-                    duration: const Duration(seconds: 2),
-                  ).show(context);
+                      if (success) {
+                        AnimatedSnackBar.material(
+                          "Profil berhasil diperbarui!",
+                          type: AnimatedSnackBarType.success,
+                          duration: const Duration(seconds: 2),
+                        ).show(context);
 
-                  setState(() {});
-                } else {
-                  // Gagal menyimpan perubahan profil, tampilkan pesan kesalahan
-                  AnimatedSnackBar.material(
-                    "Gagal menyimpan perubahan profil!",
-                    type: AnimatedSnackBarType.error,
-                    duration: const Duration(seconds: 2),
-                  ).show(context);
-                }
-              },
-              icon: const Icon(Icons.save, color: Colors.white),
-              label: Text(
-                "Simpan",
-                style: GoogleFonts.poppins(
-                  fontSize: 14,
-                  fontWeight: FontWeight.w600,
-                  color: Colors.white,
-                ),
-              ),
-              style: ElevatedButton.styleFrom(
-                padding: const EdgeInsets.symmetric(vertical: 20),
-                shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(8),
-                ),
-                backgroundColor: primaryColor,
-                fixedSize: Size.fromWidth(MediaQuery.of(context).size.width),
-              ),
-            ),
+                        setState(() {});
+                      } else {
+                        // Gagal menyimpan perubahan profil, tampilkan pesan kesalahan
+                        AnimatedSnackBar.material(
+                          "Gagal menyimpan perubahan profil!",
+                          type: AnimatedSnackBarType.error,
+                          duration: const Duration(seconds: 2),
+                        ).show(context);
+                      }
+                    },
+                    icon: const Icon(Icons.save, color: Colors.white),
+                    label: Text(
+                      "Simpan",
+                      style: GoogleFonts.poppins(
+                        fontSize: 14,
+                        fontWeight: FontWeight.w600,
+                        color: Colors.white,
+                      ),
+                    ),
+                    style: ElevatedButton.styleFrom(
+                      padding: const EdgeInsets.symmetric(vertical: 20),
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(8),
+                      ),
+                      backgroundColor: primaryColor,
+                      fixedSize:
+                          Size.fromWidth(MediaQuery.of(context).size.width),
+                    ),
+                  ),
           ],
         ),
       ),

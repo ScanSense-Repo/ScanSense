@@ -86,98 +86,109 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
                   ),
                 ],
               ),
-              Row(
-                children: [
-                  Expanded(
-                    child: ElevatedButton(
-                      onPressed: () async {
-                        if (auth.isLoading) return;
-
-                        final username = cUsername.text;
-                        final password = cPassword.text;
-
-                        if (username.isEmpty || password.isEmpty) {
-                          // Jika username atau password kosong
-                          if (mounted) {
-                            AnimatedSnackBar.material(
-                              "Silahkan masukkan username dan password",
-                              type: AnimatedSnackBarType.warning,
-                              duration: const Duration(seconds: 2),
-                            ).show(context);
-                          }
-                          return;
-                        }
-
-                        final login = await auth.login(username, password);
-
-                        if (login) {
-                          // Jika login berhasil
-                          if (mounted) {
-                            AnimatedSnackBar.material(
-                              "Selamat Datang",
-                              type: AnimatedSnackBarType.success,
-                              duration: const Duration(seconds: 2),
-                            ).show(context);
-                            Navigation.toNamed(
-                                routeName: LayoutScreen.routeName);
-                          }
-                        } else {
-                          // Jika login gagal
-                          if (mounted) {
-                            AnimatedSnackBar.material(
-                              "Username dan Password tidak sesuai, Silahkan mencoba kembali",
-                              type: AnimatedSnackBarType.warning,
-                              duration: const Duration(seconds: 2),
-                            ).show(context);
-                          }
-                        }
-                      },
-                      style: ElevatedButton.styleFrom(
-                        padding: const EdgeInsets.symmetric(vertical: 20),
-                        shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(8),
-                        ),
-                        backgroundColor: primaryColor,
+              auth.isLoading
+                  ? const Center(
+                      child: CircularProgressIndicator(
+                        color: primaryColor,
                       ),
-                      child: Text(
-                        "Masuk",
-                        style: GoogleFonts.poppins(
-                          fontSize: 14,
-                          fontWeight: FontWeight.w600,
-                          color: whiteColor,
+                    )
+                  : Row(
+                      children: [
+                        Expanded(
+                          child: ElevatedButton(
+                            onPressed: () async {
+                              if (auth.isLoading) return;
+
+                              final username = cUsername.text;
+                              final password = cPassword.text;
+
+                              if (username.isEmpty || password.isEmpty) {
+                                // Jika username atau password kosong
+                                if (mounted) {
+                                  AnimatedSnackBar.material(
+                                    "Silahkan masukkan username dan password",
+                                    type: AnimatedSnackBarType.warning,
+                                    duration: const Duration(seconds: 2),
+                                  ).show(context);
+                                }
+                                return;
+                              }
+
+                              auth.setLoading(true);
+                              final login =
+                                  await auth.login(username, password);
+                              auth.setLoading(false);
+
+                              if (login) {
+                                // Jika login berhasil
+                                if (mounted) {
+                                  AnimatedSnackBar.material(
+                                    "Selamat Datang",
+                                    type: AnimatedSnackBarType.success,
+                                    duration: const Duration(seconds: 2),
+                                  ).show(context);
+                                  Navigation.toNamed(
+                                      routeName: LayoutScreen.routeName);
+                                }
+                              } else {
+                                // Jika login gagal
+                                if (mounted) {
+                                  AnimatedSnackBar.material(
+                                    "Username dan Password tidak sesuai, Silahkan mencoba kembali",
+                                    type: AnimatedSnackBarType.warning,
+                                    duration: const Duration(seconds: 2),
+                                  ).show(context);
+                                }
+                              }
+                            },
+                            style: ElevatedButton.styleFrom(
+                              padding: const EdgeInsets.symmetric(vertical: 20),
+                              shape: RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(8),
+                              ),
+                              backgroundColor: primaryColor,
+                            ),
+                            child: Text(
+                              "Masuk",
+                              style: GoogleFonts.poppins(
+                                fontSize: 14,
+                                fontWeight: FontWeight.w600,
+                                color: whiteColor,
+                              ),
+                            ),
+                          ),
                         ),
-                      ),
-                    ),
-                  ),
-                  const SizedBox(
-                    width: 18,
-                  ),
-                  Expanded(
-                    child: ElevatedButton(
-                      onPressed: () {
-                        Navigation.toNamed(routeName: RegisterScreen.routeName);
-                      },
-                      style: ElevatedButton.styleFrom(
-                        padding: const EdgeInsets.symmetric(vertical: 20),
-                        shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(8),
-                          side: const BorderSide(color: primaryColor, width: 1),
+                        const SizedBox(
+                          width: 18,
                         ),
-                        backgroundColor: backgroundColor,
-                        elevation: 0,
-                      ),
-                      child: Text(
-                        "Daftar",
-                        style: GoogleFonts.poppins(
-                          fontSize: 14,
-                          fontWeight: FontWeight.w600,
-                          color: primaryColor,
+                        Expanded(
+                          child: ElevatedButton(
+                            onPressed: () {
+                              Navigation.toNamed(
+                                  routeName: RegisterScreen.routeName);
+                            },
+                            style: ElevatedButton.styleFrom(
+                              padding: const EdgeInsets.symmetric(vertical: 20),
+                              shape: RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(8),
+                                side: const BorderSide(
+                                    color: primaryColor, width: 1),
+                              ),
+                              backgroundColor: backgroundColor,
+                              elevation: 0,
+                            ),
+                            child: Text(
+                              "Daftar",
+                              style: GoogleFonts.poppins(
+                                fontSize: 14,
+                                fontWeight: FontWeight.w600,
+                                color: primaryColor,
+                              ),
+                            ),
+                          ),
                         ),
-                      ),
-                    ),
-                  ),
-                ],
-              )
+                      ],
+                    )
             ],
           ),
         ),

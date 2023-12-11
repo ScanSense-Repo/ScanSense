@@ -18,6 +18,11 @@ class AuthNotifier extends ChangeNotifier {
 
   AuthNotifier(this._authRepository);
 
+  void setLoading(bool isLoading) {
+    _isLoading = isLoading;
+    notifyListeners();
+  }
+
   Future<bool> editProfile(
       {required String name,
       required String email,
@@ -32,6 +37,8 @@ class AuthNotifier extends ChangeNotifier {
         email: email,
         phoneNumber: phoneNumber,
       );
+
+      _isLoading = false;
 
       return response.fold((failure) {
         _failure = failure;
@@ -55,11 +62,16 @@ class AuthNotifier extends ChangeNotifier {
     _failure = null;
     _isLoading = true;
     notifyListeners();
+
+    final response = await _authRepository.login(email, password);
+
+    _isLoading = false;
+
     Future.delayed(const Duration(seconds: 3), () {
       _isLoading = false;
       notifyListeners();
     });
-    final response = await _authRepository.login(email, password);
+    // final response = await _authRepository.login(email, password);
 
     return _validateResponse(response);
   }
