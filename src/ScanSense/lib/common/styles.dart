@@ -9,3 +9,4 @@ const inputBackground = Color(0xFFE4E4E4);
 const successLightColor = Color(0xFFCCFFD2);
 const dangerLightColor = Color(0xFFF6DCC5);
 const dangerColor = Color(0xFFCF1F0D);
+const successColor = Color(0xFF2ECC71);
