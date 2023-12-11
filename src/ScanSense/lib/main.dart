@@ -3,7 +3,6 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:path/path.dart';
 import 'package:scan_sense/common/navigation.dart';
 import 'package:scan_sense/firebase_options.dart';
 import 'package:scan_sense/ui/about%20us/about_us.dart';
@@ -22,7 +21,6 @@ import 'package:scan_sense/ui/setting/setting_screen.dart';
 import 'package:scan_sense/ui/splash/splash_screen.dart';
 import 'package:scan_sense/ui/test/test_screen.dart';
 import 'package:scan_sense/utils/helper.dart';
-import 'package:scan_sense/ui/password/forgot_password.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
