@@ -127,7 +127,7 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
                                     type: AnimatedSnackBarType.success,
                                     duration: const Duration(seconds: 2),
                                   ).show(context);
-                                  Navigation.toNamed(
+                                  Navigation.toReplacementNamed(
                                       routeName: LayoutScreen.routeName);
                                 }
                               } else {
