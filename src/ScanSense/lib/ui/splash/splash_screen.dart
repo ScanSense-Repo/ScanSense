@@ -1,24 +1,35 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:scan_sense/base/provider/firebase_auth_provider.dart';
 import 'package:scan_sense/common/navigation.dart';
 import 'package:scan_sense/common/styles.dart';
+import 'package:scan_sense/ui/layout/layout_screen.dart';
 import 'package:scan_sense/ui/onboarding/onboarding_screen.dart';
 
-class SplashScreen extends StatefulWidget {
+class SplashScreen extends ConsumerStatefulWidget {
   static const String routeName = '/';
 
   const SplashScreen({super.key});
 
   @override
-  State<SplashScreen> createState() => _SplashScreenState();
+  ConsumerState<SplashScreen> createState() => _SplashScreenState();
 }
 
-class _SplashScreenState extends State<SplashScreen> {
+class _SplashScreenState extends ConsumerState<SplashScreen> {
   @override
   void initState() {
+    final auth = ref.read(firebaseAuthProvider);
     Future.delayed(const Duration(seconds: 3), () {
-      Navigation.replaceNamed(routeName: OnboardingScreen.routeName);
+      auth.userChanges().listen((user) {
+        if (user != null) {
+          Navigation.replaceNamed(routeName: LayoutScreen.routeName);
+        } else {
+          Navigation.replaceNamed(routeName: OnboardingScreen.routeName);
+        }
+      });
+      // Navigation.replaceNamed(routeName: OnboardingScreen.routeName);
     });
     super.initState();
   }
