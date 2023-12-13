@@ -2,6 +2,7 @@ import 'package:either_dart/either.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:scan_sense/base/failures/failure.dart';
+import 'package:scan_sense/domain/model/UserProfile.dart';
 import 'package:scan_sense/domain/model/auth.dart';
 import 'package:scan_sense/domain/repositories/auth_repository.dart';
 

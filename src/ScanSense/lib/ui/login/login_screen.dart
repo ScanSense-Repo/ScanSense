@@ -22,6 +22,7 @@ class LoginScreen extends ConsumerStatefulWidget {
 class _LoginScreenState extends ConsumerState<LoginScreen> {
   TextEditingController cUsername = TextEditingController();
   TextEditingController cPassword = TextEditingController();
+  TextEditingController cEmail = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
