@@ -30,6 +30,9 @@ class _ProfileScreenState extends ConsumerState<ProfileScreen> {
 
   GlobalKey<_ProfileScreenState> get profileKey => _profileKey;
 
+  // Tambah variabel untuk menyimpan path gambar
+  String imagePath = 'assets/illustrations/profile.png';
+
   @override
   void initState() {
     final auth = ref.read(authProvider);
@@ -66,22 +69,8 @@ class _ProfileScreenState extends ConsumerState<ProfileScreen> {
         padding: const EdgeInsets.symmetric(horizontal: 24),
         child: ListView(
           children: [
-            Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                ClipOval(
-                  child: Image.asset(
-                    'assets/illustrations/profile.png',
-                    width: 140,
-                    height: 140,
-                    fit: BoxFit.cover,
-                  ),
-                ),
-              ],
-            ),
-            const SizedBox(
-              height: 16,
-            ),
+            _buildProfilePicture(), // Panggil fungsi _buildProfilePicture
+            const SizedBox(height: 16),
             Text(
               "Ubah Foto Profil",
               style: GoogleFonts.poppins(
@@ -90,30 +79,23 @@ class _ProfileScreenState extends ConsumerState<ProfileScreen> {
                   color: primaryColor),
               textAlign: TextAlign.center,
             ),
-            const SizedBox(
-              height: 24,
-            ),
+            const SizedBox(height: 24),
             CustomInput(
               controller: cNama,
               hint: "7312042510720002",
             ),
-            const SizedBox(
-              height: 16,
-            ),
+            const SizedBox(height: 16),
             CustomInput(
               controller: cEmail,
               hint: "E-mail",
             ),
-            const SizedBox(
-              height: 16,
-            ),
+            const SizedBox(height: 16),
             CustomInput(
               controller: cTelp,
               hint: "No Telepon",
             ),
             const SizedBox(
-              height:
-                  20, // Atur ketinggian sedikit agar tombol tidak terlalu dekat dengan input
+              height: 20,
             ),
             auth.isLoading
                 ? const Center(
@@ -173,5 +155,67 @@ class _ProfileScreenState extends ConsumerState<ProfileScreen> {
         ),
       ),
     );
+  }
+
+  // Pindahkan fungsi _buildProfilePicture ke sini
+  Widget _buildProfilePicture() {
+    return Stack(
+      alignment: Alignment.bottomRight,
+      children: [
+        GestureDetector(
+          onTap: () {
+            _pickImage();
+          },
+          child: Container(
+            width: 90,
+            height: 90,
+            decoration: BoxDecoration(
+              shape: BoxShape.circle,
+              image: DecorationImage(
+                image: NetworkImage(imagePath),
+                fit: BoxFit.fill,
+              ),
+              boxShadow: [
+                BoxShadow(
+                  color: Color(0x3F000000),
+                  blurRadius: 6,
+                  offset: Offset(0, 0),
+                  spreadRadius: 0,
+                )
+              ],
+            ),
+          ),
+        ),
+        Positioned(
+          bottom: 8.0,
+          right: 8.0,
+          child: GestureDetector(
+            onTap: () {
+              _pickImage();
+            },
+            child: Container(
+              width: 24,
+              height: 24,
+              decoration: BoxDecoration(
+                shape: BoxShape.circle,
+                color: Colors.white,
+              ),
+              child: Center(
+                child: Icon(
+                  Icons.camera_alt,
+                  color: Colors.black,
+                ),
+              ),
+            ),
+          ),
+        ),
+      ],
+    );
+  }
+
+  // Tambah fungsi _pickImage untuk memilih gambar
+  void _pickImage() {
+    // Implementasi pemilihan gambar
+    // Misalnya menggunakan package image_picker
   }
 }

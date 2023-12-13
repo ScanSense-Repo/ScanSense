@@ -1,6 +1,5 @@
 import 'dart:typed_data';
 
-import 'package:animated_snack_bar/animated_snack_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:giffy_dialog/giffy_dialog.dart';
@@ -29,8 +28,8 @@ class _ResultScreenState extends ConsumerState<ResultScreen> {
 
   @override
   void initState() {
-    cNik.text = "7312042510720002";
-    cNama.text = "ABDURRAUF, S.Pd, M.Pd";
+    cNik.text = "3507322912020002";
+    cNama.text = "wiradarma nurmagika bagaskara";
     cTtl.text = "CELLENGENGE, 25-10-1972";
     cGender.text = "LAKI-LAKI";
     cAlamat.text = "JL. MERDEKA NO 43";
@@ -40,29 +39,100 @@ class _ResultScreenState extends ConsumerState<ResultScreen> {
 
   Future<void> verifyKtp() async {
     final scan = ref.read(scanProvider.notifier);
-    final result = await scan.verify();
-    if (result) {
-      if (mounted) {
-        AnimatedSnackBar.material(
-          "Berhasil verifikasi KTP",
-          type: AnimatedSnackBarType.success,
-          duration: const Duration(seconds: 2),
-        ).show(context);
-      }
+
+    final verify = await scan.verify(
+      name: cNama.text,
+      nik: cNik.text,
+    );
+
+    await scan.saveResult(name: cNama.text, nik: cNik.text, isValid: verify);
+    if (verify) {
+      showSuccessDialog();
     } else {
-      if (mounted) {
-        AnimatedSnackBar.material(
-          "Gagal verifikasi KTP",
-          type: AnimatedSnackBarType.warning,
-          duration: const Duration(seconds: 2),
-        ).show(context);
-      }
+      showFailedDialog();
     }
 
-    Navigation.replaceUntilNamed(routeName: LayoutScreen.routeName);
+    // final result = await scan.saveResult(name: cNama.text, nik: cNik.text);
+    // if (result) {
+    //   if (mounted) {
+    //     AnimatedSnackBar.material(
+    //       "Berhasil verifikasi KTP",
+    //       type: AnimatedSnackBarType.success,
+    //       duration: const Duration(seconds: 2),
+    //     ).show(context);
+    //   }
+    // } else {
+    //   if (mounted) {
+    //     AnimatedSnackBar.material(
+    //       "Gagal verifikasi KTP",
+    //       type: AnimatedSnackBarType.warning,
+    //       duration: const Duration(seconds: 2),
+    //     ).show(context);
+    //   }
+    // }
+
+    // Navigation.replaceUntilNamed(routeName: LayoutScreen.routeName);
   }
 
-  void showResultDialog() {
+  void showSuccessDialog() {
+    showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        return GiffyDialog.image(
+          Image.asset(
+            "assets/illustrations/result.png",
+            height: 200,
+          ),
+          backgroundColor: whiteColor,
+          surfaceTintColor: whiteColor,
+          title: Text(
+            'KTP Valid',
+            style: GoogleFonts.poppins(
+                color: successColor, fontWeight: FontWeight.bold),
+            textAlign: TextAlign.center,
+          ),
+          content: Column(
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              Text(
+                'KTP anda telah terverifikasi',
+                style: GoogleFonts.poppins(
+                  color: successColor,
+                ),
+                textAlign: TextAlign.center,
+              ),
+              const SizedBox(
+                height: 16,
+              ),
+              Row(
+                children: [
+                  Expanded(
+                    child: ElevatedButton(
+                      onPressed: () => Navigation.replaceUntilNamed(
+                          routeName: LayoutScreen.routeName),
+                      style: ElevatedButton.styleFrom(
+                        padding: const EdgeInsets.symmetric(vertical: 20),
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(8),
+                        ),
+                        backgroundColor: primaryColor,
+                      ),
+                      child: Text(
+                        "Kembali Ke Beranda",
+                        style: GoogleFonts.poppins(color: whiteColor),
+                      ),
+                    ),
+                  ),
+                ],
+              ),
+            ],
+          ),
+        );
+      },
+    );
+  }
+
+  void showFailedDialog() {
     showDialog(
       context: context,
       builder: (BuildContext context) {

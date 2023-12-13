@@ -34,7 +34,7 @@ class ScanNotifier extends ChangeNotifier {
 
   ScanNotifier(this._verifyRepository);
 
-  Future<bool> verify() async {
+  Future<bool> verify({required String name, required String nik}) async {
     _failure = null;
     _isLoading = true;
     notifyListeners();
@@ -43,7 +43,36 @@ class ScanNotifier extends ChangeNotifier {
       return false;
     }
 
-    final response = await _verifyRepository.verify(_imageFile!);
+    final response = await _verifyRepository.verify(name, nik);
+
+    return response.fold((failure) {
+      _failure = failure;
+      _isLoading = false;
+      notifyListeners();
+
+      return false;
+    }, (right) {
+      _isLoading = false;
+      notifyListeners();
+
+      return right;
+    });
+  }
+
+  Future<bool> saveResult(
+      {required String name,
+      required String nik,
+      required bool isValid}) async {
+    _failure = null;
+    _isLoading = true;
+    notifyListeners();
+
+    if (_imageFile == null) {
+      return false;
+    }
+
+    final response =
+        await _verifyRepository.saveResult(_imageFile!, name, nik, isValid);
 
     return response.fold((failure) {
       _failure = failure;
