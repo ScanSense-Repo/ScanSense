@@ -11,6 +11,7 @@ import 'package:scan_sense/ui/profile/profile_screen.dart';
 import 'package:scan_sense/widgets/logout-pop.dart';
 import 'package:animated_snack_bar/animated_snack_bar.dart';
 
+
 class SettingScreen extends ConsumerStatefulWidget {
   static const String routeName = '/setting-screen';
 

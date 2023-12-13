@@ -6,6 +6,9 @@ import 'package:scan_sense/common/styles.dart';
 import 'package:scan_sense/providers/auth/auth_provider.dart';
 import 'package:scan_sense/widgets/custom_input.dart';
 
+final GlobalKey<NavigatorState> navigatorKunci = GlobalKey<NavigatorState>();
+final GlobalKey<_ProfileScreenState> _profileKey = GlobalKey();
+
 class ProfileScreen extends ConsumerStatefulWidget {
   static const String routeName = '/profile-screen';
 
@@ -19,6 +22,13 @@ class _ProfileScreenState extends ConsumerState<ProfileScreen> {
   TextEditingController cNama = TextEditingController();
   TextEditingController cEmail = TextEditingController();
   TextEditingController cTelp = TextEditingController();
+  final GlobalKey<_ProfileScreenState> _profileKey = GlobalKey();
+
+  String namaValue = "";
+  String emailValue = "";
+  String telpValue = "";
+
+  GlobalKey<_ProfileScreenState> get profileKey => _profileKey;
 
   @override
   void initState() {
@@ -28,6 +38,13 @@ class _ProfileScreenState extends ConsumerState<ProfileScreen> {
     cTelp.text = auth.auth?.user.phoneNumber ?? "";
 
     super.initState();
+  }
+
+  void updateTextControllers() {
+    final auth = ref.read(authProvider);
+    cEmail.text = auth.auth?.user.email ?? "";
+    cNama.text = auth.auth?.user.name ?? "";
+    cTelp.text = auth.auth?.user.phoneNumber ?? "";
   }
 
   @override
@@ -114,13 +131,16 @@ class _ProfileScreenState extends ConsumerState<ProfileScreen> {
                           );
 
                       if (success) {
+                        // updateTextControllers();
+                        // _profileKey.currentState?.updateTextControllers();
+                        // // rebuild the widget
+                        // setState(() {});
+                        //
                         AnimatedSnackBar.material(
                           "Profil berhasil diperbarui!",
                           type: AnimatedSnackBarType.success,
                           duration: const Duration(seconds: 2),
                         ).show(context);
-
-                        setState(() {});
                       } else {
                         // Gagal menyimpan perubahan profil, tampilkan pesan kesalahan
                         AnimatedSnackBar.material(
