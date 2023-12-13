@@ -23,6 +23,10 @@ class _ProfileScreenState extends ConsumerState<ProfileScreen> {
   // Tambah variabel untuk menyimpan path gambar
   String imagePath = 'assets/illustrations/profile.png';
 
+  void updateTextControllers(){
+    
+  }
+
   @override
   void initState() {
     final auth = ref.read(authProvider);
@@ -96,6 +100,7 @@ class _ProfileScreenState extends ConsumerState<ProfileScreen> {
                           );
 
                       if (success) {
+                        updateTextControllers();
                         AnimatedSnackBar.material(
                           "Profil berhasil diperbarui!",
                           type: AnimatedSnackBarType.success,

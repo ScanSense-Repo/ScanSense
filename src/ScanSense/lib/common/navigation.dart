@@ -18,9 +18,5 @@ class Navigation {
         arguments: arguments);
   }
 
-  static void toReplacementNamed({required String routeName}) {
-    Navigator.pushReplacementNamed(navigatorKey.currentContext!, routeName);
-  }
-
   static back() => navigatorKey.currentState?.pop();
 }
