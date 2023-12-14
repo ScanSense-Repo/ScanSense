@@ -13,6 +13,11 @@ class CareerScreen extends ConsumerStatefulWidget {
 }
 
 class _CareerScreenState extends ConsumerState<CareerScreen> {
+  bool isButtonAPressed = false;
+  bool isButtonBPressed = false;
+  bool isButtonCPressed = false;
+  bool isButtonDPressed = false;
+
   final PageController _pageController = PageController();
   int _currentPage = 0;
 
@@ -508,18 +513,23 @@ class _CareerScreenState extends ConsumerState<CareerScreen> {
             children: [
               ElevatedButton(
                 onPressed: () {
-                  // Tambahkan logika yang diinginkan saat tombol "A" ditekan
+                  setState(() {
+                    // Toggle nilai boolean saat tombol ditekan
+                    isButtonAPressed = !isButtonAPressed;
+                  });
                 },
                 style: ElevatedButton.styleFrom(
                   shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(10.0),
                   ),
                   side: BorderSide(color: Colors.blue),
+                  // Ubah warna latar belakang dan teks berdasarkan status tombol
+                  primary: isButtonAPressed ? primaryColor : Colors.white,
                 ),
                 child: Text(
                   'A',
                   style: TextStyle(
-                    color: primaryColor,
+                    color: isButtonAPressed ? Colors.white : primaryColor,
                     fontSize: 16.0,
                   ),
                 ),
@@ -540,18 +550,23 @@ class _CareerScreenState extends ConsumerState<CareerScreen> {
             children: [
               ElevatedButton(
                 onPressed: () {
-                  // Tambahkan logika yang diinginkan saat tombol "B" ditekan
+                  setState(() {
+                    // Toggle nilai boolean saat tombol ditekan
+                    isButtonBPressed = !isButtonBPressed;
+                  });
                 },
                 style: ElevatedButton.styleFrom(
                   shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(10.0),
                   ),
                   side: BorderSide(color: Colors.blue),
+                  // Ubah warna latar belakang dan teks berdasarkan status tombol
+                  primary: isButtonBPressed ? primaryColor : Colors.white,
                 ),
                 child: Text(
                   'B',
                   style: TextStyle(
-                    color: primaryColor,
+                    color: isButtonBPressed ? Colors.white : primaryColor,
                     fontSize: 16.0,
                   ),
                 ),
