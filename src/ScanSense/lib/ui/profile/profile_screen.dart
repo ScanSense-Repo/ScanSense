@@ -24,25 +24,26 @@ class _ProfileScreenState extends ConsumerState<ProfileScreen> {
   TextEditingController cTelp = TextEditingController();
   final GlobalKey<_ProfileScreenState> _profileKey = GlobalKey();
 
-  String namaValue = "";
-  String emailValue = "";
-  String telpValue = "";
-
   GlobalKey<_ProfileScreenState> get profileKey => _profileKey;
 
   // Tambah variabel untuk menyimpan path gambar
   String imagePath = 'assets/illustrations/profile.png';
 
-  void updateTextControllers() {}
-
   @override
   void initState() {
-    final auth = ref.read(authProvider);
-    cEmail.text = auth.auth?.user.email ?? "";
-    cNama.text = auth.auth?.user.name ?? "";
-    cTelp.text = auth.auth?.user.phoneNumber ?? "";
-
+    WidgetsBinding.instance?.addPostFrameCallback((_) {
+      _updateTextControllers();
+    });
     super.initState();
+  }
+
+  void _updateTextControllers() {
+    final auth = ref.read(authProvider);
+    setState(() {
+      cEmail.text = auth.auth?.user.email ?? "";
+      cNama.text = auth.auth?.user.name ?? "";
+      cTelp.text = auth.auth?.user.phoneNumber ?? "";
+    });
   }
 
   @override
@@ -108,6 +109,7 @@ class _ProfileScreenState extends ConsumerState<ProfileScreen> {
                           );
 
                       if (success) {
+                        _updateTextControllers();
                         AnimatedSnackBar.material(
                           "Profil berhasil diperbarui!",
                           type: AnimatedSnackBarType.success,
