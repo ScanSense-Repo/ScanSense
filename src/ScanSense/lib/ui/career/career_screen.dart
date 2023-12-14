@@ -13,6 +13,11 @@ class CareerScreen extends ConsumerStatefulWidget {
 }
 
 class _CareerScreenState extends ConsumerState<CareerScreen> {
+  bool _optionASelected = false;
+  bool _optionBSelected = false;
+  bool _optionCSelected = false;
+  bool _optionDSelected = false;
+
   final PageController _pageController = PageController();
   int _currentPage = 0;
 
@@ -300,26 +305,42 @@ class _CareerScreenState extends ConsumerState<CareerScreen> {
         CheckboxListTile(
           title: Text("Option A"),
           controlAffinity: ListTileControlAffinity.leading,
-          value: false,
-          onChanged: (value) {},
+          value: _optionASelected,
+          onChanged: (value) {
+            setState(() {
+              _optionASelected = value ?? false;
+            });
+          },
         ),
         CheckboxListTile(
           title: Text("Option B"),
           controlAffinity: ListTileControlAffinity.leading,
-          value: false,
-          onChanged: (value) {},
+          value: _optionBSelected,
+          onChanged: (value) {
+            setState(() {
+              _optionBSelected = value ?? false;
+            });
+          },
         ),
         CheckboxListTile(
           title: Text("Option C"),
           controlAffinity: ListTileControlAffinity.leading,
-          value: false,
-          onChanged: (value) {},
+          value: _optionCSelected,
+          onChanged: (value) {
+            setState(() {
+              _optionCSelected = value ?? false;
+            });
+          },
         ),
         CheckboxListTile(
           title: Text("Option D"),
           controlAffinity: ListTileControlAffinity.leading,
-          value: false,
-          onChanged: (value) {},
+          value: _optionDSelected,
+          onChanged: (value) {
+            setState(() {
+              _optionDSelected = value ?? false;
+            });
+          },
         ),
       ],
     );
