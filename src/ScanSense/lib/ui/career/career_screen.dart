@@ -40,16 +40,19 @@ class _CareerScreenState extends ConsumerState<CareerScreen> {
           });
         },
         children: [
-          _buildPage(
-            "Selamat Datang",
-            "Karir Politeknik Negeri Malang",
-            'assets/illustrations/career_image.png',
-            additionalText1: GoogleFonts.poppins(
-              fontSize: 16,
-              fontWeight: FontWeight.w500,
+          Padding(
+            padding: EdgeInsets.all(16),
+            child: _buildPage(
+              "Selamat Datang",
+              "Karir Politeknik Negeri Malang",
+              'assets/illustrations/career_image.png',
+              additionalText1: GoogleFonts.poppins(
+                fontSize: 16,
+                fontWeight: FontWeight.w500,
+              ),
+              content1:
+                  "Selamat datang di peluang karir kami! Kami tertarik untuk mengenalmu lebih baik.",
             ),
-            content1:
-                "Selamat datang di peluang karir kami! Kami tertarik untuk mengenalmu lebih baik.",
           ),
           _buildPage(
             "Pilih Pekerjaan Impian",
@@ -62,15 +65,202 @@ class _CareerScreenState extends ConsumerState<CareerScreen> {
               fontWeight: FontWeight.bold,
             ),
           ),
-          _buildPage(
-            "Pertanyaan 1",
-            "Bagikan pengalaman kerjamu yang penuh warna. Tandai kotak yang sesuai dan beri kami wawasan tentang perjalanan profesionalmu.",
-            '',
+          Padding(
+            padding: EdgeInsets.all(16),
+            child: Column(
+              children: [
+                Text(
+                  "Pertanyaan 1",
+                  style: GoogleFonts.poppins(
+                    fontSize: 22,
+                    fontWeight: FontWeight.bold,
+                  ),
+                ),
+                const SizedBox(height: 40), // Sesuaikan nilai sesuai kebutuhan
+                Text(
+                  "Bagikan pengalaman kerjamu yang penuh warna. Tandai kotak yang sesuai dan beri kami wawasan tentang perjalanan profesionalmu.",
+                  style: GoogleFonts.poppins(
+                    fontSize: 20,
+                    fontWeight: FontWeight.w500,
+                  ),
+                ),
+                const SizedBox(height: 40),
+                Text(
+                  "Pilihlah Jawaban Dibawah Ini",
+                  style: GoogleFonts.poppins(
+                    fontSize: 16,
+                  ),
+                  textAlign: TextAlign.left,
+                ),
 
-            content3: _buildQuestionContent(), // Widget for question content
-            titleStyle3: GoogleFonts.poppins(
-              fontSize: 22,
-              fontWeight: FontWeight.bold,
+                const SizedBox(height: 40), // Sesuaikan nilai sesuai kebutuhan
+                _buildQuestionContent(),
+              ],
+            ),
+          ),
+          Padding(
+            padding: EdgeInsets.all(16),
+            child: Column(
+              children: [
+                Text(
+                  "Pertanyaan 2",
+                  style: GoogleFonts.poppins(
+                    fontSize: 22,
+                    fontWeight: FontWeight.bold,
+                  ),
+                ),
+                const SizedBox(height: 40), // Sesuaikan nilai sesuai kebutuhan
+                Text(
+                  "Selanjutnya, mari kenali keahlianmu dengan memberikan nilai pada setiap skill yang kamu miliki.",
+                  style: GoogleFonts.poppins(
+                    fontSize: 20,
+                    fontWeight: FontWeight.w500,
+                  ),
+                ),
+                const SizedBox(height: 40),
+                Text(
+                  "Pilihlah Jawaban Dibawah Ini",
+                  style: GoogleFonts.poppins(
+                    fontSize: 16,
+                  ),
+                  textAlign: TextAlign.left,
+                ),
+
+                const SizedBox(height: 40), // Sesuaikan nilai sesuai kebutuhan
+                _buildQuestionContent2(),
+              ],
+            ),
+          ),
+          Padding(
+            padding: EdgeInsets.all(16),
+            child: Column(
+              children: [
+                Text(
+                  "Pertanyaan 3",
+                  style: GoogleFonts.poppins(
+                    fontSize: 22,
+                    fontWeight: FontWeight.bold,
+                  ),
+                ),
+                const SizedBox(height: 40), // Sesuaikan nilai sesuai kebutuhan
+                Text(
+                  "Waktunya memilih lokasi impian! Pilih kotak yang mencerminkan tempat dimana semangatmu akan berkembang.",
+                  style: GoogleFonts.poppins(
+                    fontSize: 20,
+                    fontWeight: FontWeight.w500,
+                  ),
+                ),
+                const SizedBox(height: 40),
+                Text(
+                  "Pilihlah Jawaban Dibawah Ini",
+                  style: GoogleFonts.poppins(
+                    fontSize: 16,
+                  ),
+                  textAlign: TextAlign.left,
+                ),
+
+                const SizedBox(height: 40), // Sesuaikan nilai sesuai kebutuhan
+                _buildQuestionContent3(),
+              ],
+            ),
+          ),
+          Padding(
+            padding: EdgeInsets.all(16),
+            child: Column(
+              children: [
+                Text(
+                  "Pertanyaan 4",
+                  style: GoogleFonts.poppins(
+                    fontSize: 22,
+                    fontWeight: FontWeight.bold,
+                  ),
+                ),
+                const SizedBox(height: 40), // Sesuaikan nilai sesuai kebutuhan
+                Text(
+                  "Pernah aktif di organisasi? Ceritakan pengalaman organisasimu yang inspiratif. Centang kotak yang sesuai dan beri kita wawasan lebih lanjut.",
+                  style: GoogleFonts.poppins(
+                    fontSize: 20,
+                    fontWeight: FontWeight.w500,
+                  ),
+                ),
+                const SizedBox(height: 40),
+                Text(
+                  "Pilihlah Jawaban Dibawah Ini",
+                  style: GoogleFonts.poppins(
+                    fontSize: 16,
+                  ),
+                  textAlign: TextAlign.left,
+                ),
+
+                const SizedBox(height: 40), // Sesuaikan nilai sesuai kebutuhan
+                _buildQuestionContent4(),
+              ],
+            ),
+          ),
+          Padding(
+            padding: EdgeInsets.all(16),
+            child: Column(
+              children: [
+                Text(
+                  "Pertanyaan 5",
+                  style: GoogleFonts.poppins(
+                    fontSize: 22,
+                    fontWeight: FontWeight.bold,
+                  ),
+                ),
+                const SizedBox(height: 40), // Sesuaikan nilai sesuai kebutuhan
+                Text(
+                  "Bagian umur, memberikan kita gambaran tentang semangat muda yang kamu bawa. Pilih kotak yang sesuai dan tetap semangat!",
+                  style: GoogleFonts.poppins(
+                    fontSize: 20,
+                    fontWeight: FontWeight.w500,
+                  ),
+                ),
+                const SizedBox(height: 40),
+                Text(
+                  "Pilihlah Jawaban Dibawah Ini",
+                  style: GoogleFonts.poppins(
+                    fontSize: 16,
+                  ),
+                  textAlign: TextAlign.left,
+                ),
+
+                const SizedBox(height: 40), // Sesuaikan nilai sesuai kebutuhan
+                _buildQuestionContent5(),
+              ],
+            ),
+          ),
+          Padding(
+            padding: EdgeInsets.all(16),
+            child: Column(
+              children: [
+                Text(
+                  "Pertanyaan 6",
+                  style: GoogleFonts.poppins(
+                    fontSize: 22,
+                    fontWeight: FontWeight.bold,
+                  ),
+                ),
+                const SizedBox(height: 40), // Sesuaikan nilai sesuai kebutuhan
+                Text(
+                  "Terakhir, tetapi tak kalah penting, beri kami gambaran tentang pencapaian akademismu. Pilih kotak yang mencerminkan IPKmu. ",
+                  style: GoogleFonts.poppins(
+                    fontSize: 20,
+                    fontWeight: FontWeight.w500,
+                  ),
+                ),
+                const SizedBox(height: 40),
+                Text(
+                  "Pilihlah Jawaban Dibawah Ini",
+                  style: GoogleFonts.poppins(
+                    fontSize: 16,
+                  ),
+                  textAlign: TextAlign.left,
+                ),
+
+                const SizedBox(height: 40), // Sesuaikan nilai sesuai kebutuhan
+                _buildQuestionContent6(),
+              ],
             ),
           ),
         ],
@@ -87,8 +277,24 @@ class _CareerScreenState extends ConsumerState<CareerScreen> {
     String additionalText2 = "",
     String content2 = "",
     TextStyle? titleStyle2,
+    String additionalText3 = "",
     Widget? content3,
     TextStyle? titleStyle3,
+    String additionalText4 = "",
+    Widget? content4,
+    TextStyle? titleStyle4,
+    String additionalText5 = "",
+    Widget? content5,
+    TextStyle? titleStyle5,
+    String additionalText6 = "",
+    Widget? content6,
+    TextStyle? titleStyle6,
+    String additionalText7 = "",
+    Widget? content7,
+    TextStyle? titleStyle7,
+    String additionalText8 = "",
+    Widget? content8,
+    TextStyle? titleStyle8,
   }) {
     TextStyle currentAdditionalText;
     String currentContent;
@@ -294,34 +500,818 @@ class _CareerScreenState extends ConsumerState<CareerScreen> {
   }
 
   Widget _buildQuestionContent() {
-    return Column(
-      mainAxisAlignment: MainAxisAlignment.center,
-      children: [
-        CheckboxListTile(
-          title: Text("Option A"),
-          controlAffinity: ListTileControlAffinity.leading,
-          value: false,
-          onChanged: (value) {},
-        ),
-        CheckboxListTile(
-          title: Text("Option B"),
-          controlAffinity: ListTileControlAffinity.leading,
-          value: false,
-          onChanged: (value) {},
-        ),
-        CheckboxListTile(
-          title: Text("Option C"),
-          controlAffinity: ListTileControlAffinity.leading,
-          value: false,
-          onChanged: (value) {},
-        ),
-        CheckboxListTile(
-          title: Text("Option D"),
-          controlAffinity: ListTileControlAffinity.leading,
-          value: false,
-          onChanged: (value) {},
-        ),
-      ],
+    return Padding(
+      padding: const EdgeInsets.all(8),
+      child: Column(
+        children: [
+          Row(
+            children: [
+              ElevatedButton(
+                onPressed: () {
+                  // Tambahkan logika yang diinginkan saat tombol "A" ditekan
+                },
+                style: ElevatedButton.styleFrom(
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(10.0),
+                  ),
+                  side: BorderSide(color: Colors.blue),
+                ),
+                child: Text(
+                  'A',
+                  style: TextStyle(
+                    color: primaryColor,
+                    fontSize: 16.0,
+                  ),
+                ),
+              ),
+              const SizedBox(width: 15),
+              Text(
+                '1 tahun',
+                style: TextStyle(
+                  color: Colors.black,
+                  fontSize: 16.0,
+                ),
+              ),
+            ],
+          ),
+          SizedBox(height: 8), // Jarak antara baris
+          // Lakukan hal yang sama untuk tombol "B", "C", dan "D"
+          Row(
+            children: [
+              ElevatedButton(
+                onPressed: () {
+                  // Tambahkan logika yang diinginkan saat tombol "B" ditekan
+                },
+                style: ElevatedButton.styleFrom(
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(10.0),
+                  ),
+                  side: BorderSide(color: Colors.blue),
+                ),
+                child: Text(
+                  'B',
+                  style: TextStyle(
+                    color: primaryColor,
+                    fontSize: 16.0,
+                  ),
+                ),
+              ),
+              const SizedBox(width: 15),
+              Text(
+                '3 tahun', // Teks untuk "B"
+                style: TextStyle(
+                  color: Colors.black,
+                  fontSize: 16.0,
+                ),
+              ),
+            ],
+          ),
+          SizedBox(height: 8),
+          // Lakukan hal yang sama untuk tombol "C"
+          Row(
+            children: [
+              ElevatedButton(
+                onPressed: () {
+                  // Tambahkan logika yang diinginkan saat tombol "C" ditekan
+                },
+                style: ElevatedButton.styleFrom(
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(10.0),
+                  ),
+                  side: BorderSide(color: Colors.blue),
+                ),
+                child: Text(
+                  'C',
+                  style: TextStyle(
+                    color: primaryColor,
+                    fontSize: 16.0,
+                  ),
+                ),
+              ),
+              const SizedBox(width: 15),
+              Text(
+                '5 tahun', // Teks untuk "C"
+                style: TextStyle(
+                  color: Colors.black,
+                  fontSize: 16.0,
+                ),
+              ),
+            ],
+          ),
+          SizedBox(height: 8),
+          // Lakukan hal yang sama untuk tombol "D"
+          Row(
+            children: [
+              ElevatedButton(
+                onPressed: () {
+                  // Tambahkan logika yang diinginkan saat tombol "D" ditekan
+                },
+                style: ElevatedButton.styleFrom(
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(10.0),
+                  ),
+                  side: BorderSide(color: Colors.blue),
+                ),
+                child: Text(
+                  'D',
+                  style: TextStyle(
+                    color: primaryColor,
+                    fontSize: 16.0,
+                  ),
+                ),
+              ),
+              const SizedBox(width: 15),
+              Text(
+                '7 tahun', // Teks untuk "D"
+                style: TextStyle(
+                  color: Colors.black,
+                  fontSize: 16.0,
+                ),
+              ),
+            ],
+          ),
+        ],
+      ),
+    );
+  }
+
+  Widget _buildQuestionContent2() {
+    return Padding(
+      padding: const EdgeInsets.all(8),
+      child: Column(
+        children: [
+          Row(
+            children: [
+              ElevatedButton(
+                onPressed: () {
+                  // Tambahkan logika yang diinginkan saat tombol "A" ditekan
+                },
+                style: ElevatedButton.styleFrom(
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(10.0),
+                  ),
+                  side: BorderSide(color: Colors.blue),
+                ),
+                child: Text(
+                  'A',
+                  style: TextStyle(
+                    color: primaryColor,
+                    fontSize: 16.0,
+                  ),
+                ),
+              ),
+              const SizedBox(width: 15),
+              Text(
+                '> 3',
+                style: TextStyle(
+                  color: Colors.black,
+                  fontSize: 16.0,
+                ),
+              ),
+            ],
+          ),
+          SizedBox(height: 8), // Jarak antara baris
+          // Lakukan hal yang sama untuk tombol "B", "C", dan "D"
+          Row(
+            children: [
+              ElevatedButton(
+                onPressed: () {
+                  // Tambahkan logika yang diinginkan saat tombol "B" ditekan
+                },
+                style: ElevatedButton.styleFrom(
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(10.0),
+                  ),
+                  side: BorderSide(color: Colors.blue),
+                ),
+                child: Text(
+                  'B',
+                  style: TextStyle(
+                    color: primaryColor,
+                    fontSize: 16.0,
+                  ),
+                ),
+              ),
+              const SizedBox(width: 15),
+              Text(
+                '3-5', // Teks untuk "B"
+                style: TextStyle(
+                  color: Colors.black,
+                  fontSize: 16.0,
+                ),
+              ),
+            ],
+          ),
+          SizedBox(height: 8),
+          // Lakukan hal yang sama untuk tombol "C"
+          Row(
+            children: [
+              ElevatedButton(
+                onPressed: () {
+                  // Tambahkan logika yang diinginkan saat tombol "C" ditekan
+                },
+                style: ElevatedButton.styleFrom(
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(10.0),
+                  ),
+                  side: BorderSide(color: Colors.blue),
+                ),
+                child: Text(
+                  'C',
+                  style: TextStyle(
+                    color: primaryColor,
+                    fontSize: 16.0,
+                  ),
+                ),
+              ),
+              const SizedBox(width: 15),
+              Text(
+                '6-8', // Teks untuk "C"
+                style: TextStyle(
+                  color: Colors.black,
+                  fontSize: 16.0,
+                ),
+              ),
+            ],
+          ),
+          SizedBox(height: 8),
+          // Lakukan hal yang sama untuk tombol "D"
+          Row(
+            children: [
+              ElevatedButton(
+                onPressed: () {
+                  // Tambahkan logika yang diinginkan saat tombol "D" ditekan
+                },
+                style: ElevatedButton.styleFrom(
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(10.0),
+                  ),
+                  side: BorderSide(color: Colors.blue),
+                ),
+                child: Text(
+                  'D',
+                  style: TextStyle(
+                    color: primaryColor,
+                    fontSize: 16.0,
+                  ),
+                ),
+              ),
+              const SizedBox(width: 15),
+              Text(
+                '< 8', // Teks untuk "D"
+                style: TextStyle(
+                  color: Colors.black,
+                  fontSize: 16.0,
+                ),
+              ),
+            ],
+          ),
+        ],
+      ),
+    );
+  }
+
+  Widget _buildQuestionContent3() {
+    return Padding(
+      padding: const EdgeInsets.all(8),
+      child: Column(
+        children: [
+          Row(
+            children: [
+              ElevatedButton(
+                onPressed: () {
+                  // Tambahkan logika yang diinginkan saat tombol "A" ditekan
+                },
+                style: ElevatedButton.styleFrom(
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(10.0),
+                  ),
+                  side: BorderSide(color: Colors.blue),
+                ),
+                child: Text(
+                  'A',
+                  style: TextStyle(
+                    color: primaryColor,
+                    fontSize: 16.0,
+                  ),
+                ),
+              ),
+              const SizedBox(width: 15),
+              Text(
+                'Surabaya',
+                style: TextStyle(
+                  color: Colors.black,
+                  fontSize: 16.0,
+                ),
+              ),
+            ],
+          ),
+          SizedBox(height: 8), // Jarak antara baris
+          // Lakukan hal yang sama untuk tombol "B", "C", dan "D"
+          Row(
+            children: [
+              ElevatedButton(
+                onPressed: () {
+                  // Tambahkan logika yang diinginkan saat tombol "B" ditekan
+                },
+                style: ElevatedButton.styleFrom(
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(10.0),
+                  ),
+                  side: BorderSide(color: Colors.blue),
+                ),
+                child: Text(
+                  'B',
+                  style: TextStyle(
+                    color: primaryColor,
+                    fontSize: 16.0,
+                  ),
+                ),
+              ),
+              const SizedBox(width: 15),
+              Text(
+                'Banyuwangi', // Teks untuk "B"
+                style: TextStyle(
+                  color: Colors.black,
+                  fontSize: 16.0,
+                ),
+              ),
+            ],
+          ),
+          SizedBox(height: 8),
+          // Lakukan hal yang sama untuk tombol "C"
+          Row(
+            children: [
+              ElevatedButton(
+                onPressed: () {
+                  // Tambahkan logika yang diinginkan saat tombol "C" ditekan
+                },
+                style: ElevatedButton.styleFrom(
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(10.0),
+                  ),
+                  side: BorderSide(color: Colors.blue),
+                ),
+                child: Text(
+                  'C',
+                  style: TextStyle(
+                    color: primaryColor,
+                    fontSize: 16.0,
+                  ),
+                ),
+              ),
+              const SizedBox(width: 15),
+              Text(
+                'Gresik', // Teks untuk "C"
+                style: TextStyle(
+                  color: Colors.black,
+                  fontSize: 16.0,
+                ),
+              ),
+            ],
+          ),
+          SizedBox(height: 8),
+          // Lakukan hal yang sama untuk tombol "D"
+          Row(
+            children: [
+              ElevatedButton(
+                onPressed: () {
+                  // Tambahkan logika yang diinginkan saat tombol "D" ditekan
+                },
+                style: ElevatedButton.styleFrom(
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(10.0),
+                  ),
+                  side: BorderSide(color: Colors.blue),
+                ),
+                child: Text(
+                  'D',
+                  style: TextStyle(
+                    color: primaryColor,
+                    fontSize: 16.0,
+                  ),
+                ),
+              ),
+              const SizedBox(width: 15),
+              Text(
+                'Malang', // Teks untuk "D"
+                style: TextStyle(
+                  color: Colors.black,
+                  fontSize: 16.0,
+                ),
+              ),
+            ],
+          ),
+        ],
+      ),
+    );
+  }
+
+  Widget _buildQuestionContent4() {
+    return Padding(
+      padding: const EdgeInsets.all(8),
+      child: Column(
+        children: [
+          Row(
+            children: [
+              ElevatedButton(
+                onPressed: () {
+                  // Tambahkan logika yang diinginkan saat tombol "A" ditekan
+                },
+                style: ElevatedButton.styleFrom(
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(10.0),
+                  ),
+                  side: BorderSide(color: Colors.blue),
+                ),
+                child: Text(
+                  'A',
+                  style: TextStyle(
+                    color: primaryColor,
+                    fontSize: 16.0,
+                  ),
+                ),
+              ),
+              const SizedBox(width: 15),
+              Text(
+                'Tidak pernah',
+                style: TextStyle(
+                  color: Colors.black,
+                  fontSize: 16.0,
+                ),
+              ),
+            ],
+          ),
+          SizedBox(height: 8), // Jarak antara baris
+          // Lakukan hal yang sama untuk tombol "B", "C", dan "D"
+          Row(
+            children: [
+              ElevatedButton(
+                onPressed: () {
+                  // Tambahkan logika yang diinginkan saat tombol "B" ditekan
+                },
+                style: ElevatedButton.styleFrom(
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(10.0),
+                  ),
+                  side: BorderSide(color: Colors.blue),
+                ),
+                child: Text(
+                  'B',
+                  style: TextStyle(
+                    color: primaryColor,
+                    fontSize: 16.0,
+                  ),
+                ),
+              ),
+              const SizedBox(width: 15),
+              Text(
+                'Pernah sebagai anggota', // Teks untuk "B"
+                style: TextStyle(
+                  color: Colors.black,
+                  fontSize: 16.0,
+                ),
+              ),
+            ],
+          ),
+          SizedBox(height: 8),
+          // Lakukan hal yang sama untuk tombol "C"
+          Row(
+            children: [
+              ElevatedButton(
+                onPressed: () {
+                  // Tambahkan logika yang diinginkan saat tombol "C" ditekan
+                },
+                style: ElevatedButton.styleFrom(
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(10.0),
+                  ),
+                  side: BorderSide(color: Colors.blue),
+                ),
+                child: Text(
+                  'C',
+                  style: TextStyle(
+                    color: primaryColor,
+                    fontSize: 16.0,
+                  ),
+                ),
+              ),
+              const SizedBox(width: 15),
+              Text(
+                'Pernah sebagai pengurus', // Teks untuk "C"
+                style: TextStyle(
+                  color: Colors.black,
+                  fontSize: 16.0,
+                ),
+              ),
+            ],
+          ),
+          SizedBox(height: 8),
+          // Lakukan hal yang sama untuk tombol "D"
+          Row(
+            children: [
+              ElevatedButton(
+                onPressed: () {
+                  // Tambahkan logika yang diinginkan saat tombol "D" ditekan
+                },
+                style: ElevatedButton.styleFrom(
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(10.0),
+                  ),
+                  side: BorderSide(color: Colors.blue),
+                ),
+                child: Text(
+                  'D',
+                  style: TextStyle(
+                    color: primaryColor,
+                    fontSize: 16.0,
+                  ),
+                ),
+              ),
+              const SizedBox(width: 15),
+              Text(
+                'Pernah sebagai ketua', // Teks untuk "D"
+                style: TextStyle(
+                  color: Colors.black,
+                  fontSize: 16.0,
+                ),
+              ),
+            ],
+          ),
+        ],
+      ),
+    );
+  }
+
+  Widget _buildQuestionContent5() {
+    return Padding(
+      padding: const EdgeInsets.all(8),
+      child: Column(
+        children: [
+          Row(
+            children: [
+              ElevatedButton(
+                onPressed: () {
+                  // Tambahkan logika yang diinginkan saat tombol "A" ditekan
+                },
+                style: ElevatedButton.styleFrom(
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(10.0),
+                  ),
+                  side: BorderSide(color: Colors.blue),
+                ),
+                child: Text(
+                  'A',
+                  style: TextStyle(
+                    color: primaryColor,
+                    fontSize: 16.0,
+                  ),
+                ),
+              ),
+              const SizedBox(width: 15),
+              Text(
+                '> 25 tahun',
+                style: TextStyle(
+                  color: Colors.black,
+                  fontSize: 16.0,
+                ),
+              ),
+            ],
+          ),
+          SizedBox(height: 8), // Jarak antara baris
+          // Lakukan hal yang sama untuk tombol "B", "C", dan "D"
+          Row(
+            children: [
+              ElevatedButton(
+                onPressed: () {
+                  // Tambahkan logika yang diinginkan saat tombol "B" ditekan
+                },
+                style: ElevatedButton.styleFrom(
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(10.0),
+                  ),
+                  side: BorderSide(color: Colors.blue),
+                ),
+                child: Text(
+                  'B',
+                  style: TextStyle(
+                    color: primaryColor,
+                    fontSize: 16.0,
+                  ),
+                ),
+              ),
+              const SizedBox(width: 15),
+              Text(
+                '25 - 30 tahun', // Teks untuk "B"
+                style: TextStyle(
+                  color: Colors.black,
+                  fontSize: 16.0,
+                ),
+              ),
+            ],
+          ),
+          SizedBox(height: 8),
+          // Lakukan hal yang sama untuk tombol "C"
+          Row(
+            children: [
+              ElevatedButton(
+                onPressed: () {
+                  // Tambahkan logika yang diinginkan saat tombol "C" ditekan
+                },
+                style: ElevatedButton.styleFrom(
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(10.0),
+                  ),
+                  side: BorderSide(color: Colors.blue),
+                ),
+                child: Text(
+                  'C',
+                  style: TextStyle(
+                    color: primaryColor,
+                    fontSize: 16.0,
+                  ),
+                ),
+              ),
+              const SizedBox(width: 15),
+              Text(
+                '31 - 35 tahun', // Teks untuk "C"
+                style: TextStyle(
+                  color: Colors.black,
+                  fontSize: 16.0,
+                ),
+              ),
+            ],
+          ),
+          SizedBox(height: 8),
+          // Lakukan hal yang sama untuk tombol "D"
+          Row(
+            children: [
+              ElevatedButton(
+                onPressed: () {
+                  // Tambahkan logika yang diinginkan saat tombol "D" ditekan
+                },
+                style: ElevatedButton.styleFrom(
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(10.0),
+                  ),
+                  side: BorderSide(color: Colors.blue),
+                ),
+                child: Text(
+                  'D',
+                  style: TextStyle(
+                    color: primaryColor,
+                    fontSize: 16.0,
+                  ),
+                ),
+              ),
+              const SizedBox(width: 15),
+              Text(
+                '< 35 tahun', // Teks untuk "D"
+                style: TextStyle(
+                  color: Colors.black,
+                  fontSize: 16.0,
+                ),
+              ),
+            ],
+          ),
+        ],
+      ),
+    );
+  }
+
+  Widget _buildQuestionContent6() {
+    return Padding(
+      padding: const EdgeInsets.all(8),
+      child: Column(
+        children: [
+          Row(
+            children: [
+              ElevatedButton(
+                onPressed: () {
+                  // Tambahkan logika yang diinginkan saat tombol "A" ditekan
+                },
+                style: ElevatedButton.styleFrom(
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(10.0),
+                  ),
+                  side: BorderSide(color: Colors.blue),
+                ),
+                child: Text(
+                  'A',
+                  style: TextStyle(
+                    color: primaryColor,
+                    fontSize: 16.0,
+                  ),
+                ),
+              ),
+              const SizedBox(width: 15),
+              Text(
+                '> 3.0',
+                style: TextStyle(
+                  color: Colors.black,
+                  fontSize: 16.0,
+                ),
+              ),
+            ],
+          ),
+          SizedBox(height: 8), // Jarak antara baris
+          // Lakukan hal yang sama untuk tombol "B", "C", dan "D"
+          Row(
+            children: [
+              ElevatedButton(
+                onPressed: () {
+                  // Tambahkan logika yang diinginkan saat tombol "B" ditekan
+                },
+                style: ElevatedButton.styleFrom(
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(10.0),
+                  ),
+                  side: BorderSide(color: Colors.blue),
+                ),
+                child: Text(
+                  'B',
+                  style: TextStyle(
+                    color: primaryColor,
+                    fontSize: 16.0,
+                  ),
+                ),
+              ),
+              const SizedBox(width: 15),
+              Text(
+                '3.0 - 3.5', // Teks untuk "B"
+                style: TextStyle(
+                  color: Colors.black,
+                  fontSize: 16.0,
+                ),
+              ),
+            ],
+          ),
+          SizedBox(height: 8),
+          // Lakukan hal yang sama untuk tombol "C"
+          Row(
+            children: [
+              ElevatedButton(
+                onPressed: () {
+                  // Tambahkan logika yang diinginkan saat tombol "C" ditekan
+                },
+                style: ElevatedButton.styleFrom(
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(10.0),
+                  ),
+                  side: BorderSide(color: Colors.blue),
+                ),
+                child: Text(
+                  'C',
+                  style: TextStyle(
+                    color: primaryColor,
+                    fontSize: 16.0,
+                  ),
+                ),
+              ),
+              const SizedBox(width: 15),
+              Text(
+                '3.6 - 3.8', // Teks untuk "C"
+                style: TextStyle(
+                  color: Colors.black,
+                  fontSize: 16.0,
+                ),
+              ),
+            ],
+          ),
+          SizedBox(height: 8),
+          // Lakukan hal yang sama untuk tombol "D"
+          Row(
+            children: [
+              ElevatedButton(
+                onPressed: () {
+                  // Tambahkan logika yang diinginkan saat tombol "D" ditekan
+                },
+                style: ElevatedButton.styleFrom(
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(10.0),
+                  ),
+                  side: BorderSide(color: Colors.blue),
+                ),
+                child: Text(
+                  'D',
+                  style: TextStyle(
+                    color: primaryColor,
+                    fontSize: 16.0,
+                  ),
+                ),
+              ),
+              const SizedBox(width: 15),
+              Text(
+                '< 3.8', // Teks untuk "D"
+                style: TextStyle(
+                  color: Colors.black,
+                  fontSize: 16.0,
+                ),
+              ),
+            ],
+          ),
+        ],
+      ),
     );
   }
 }
