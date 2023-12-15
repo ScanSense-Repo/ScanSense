@@ -7,6 +7,7 @@ import 'package:scan_sense/common/navigation.dart';
 import 'package:scan_sense/firebase_options.dart';
 import 'package:scan_sense/ui/about%20us/about_us.dart';
 import 'package:scan_sense/ui/career/career_screen.dart';
+import 'package:scan_sense/ui/career/karir_screen.dart';
 import 'package:scan_sense/ui/history/history_screen.dart';
 import 'package:scan_sense/ui/home/home_screen.dart';
 import 'package:scan_sense/ui/layout/layout_screen.dart';
@@ -45,6 +46,7 @@ class MyApp extends StatelessWidget {
     LayoutScreen.routeName: (context) => const LayoutScreen(),
     SettingScreen.routeName: (context) => const SettingScreen(),
     ProfileScreen.routeName: (context) => const ProfileScreen(),
+    KarirScreen.routeName: (context) => const KarirScreen(),
     CareerScreen.routeName: (context) => const CareerScreen(),
     AboutUsScreen.routeName: (context) => const AboutUsScreen(),
     TestScreen.routeName: (context) => const TestScreen(),
