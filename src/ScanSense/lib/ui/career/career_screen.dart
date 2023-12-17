@@ -4,6 +4,7 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:path/path.dart';
 import 'package:scan_sense/common/navigation.dart';
 import 'package:scan_sense/common/styles.dart';
+import 'package:scan_sense/ui/career/field_screen.dart';
 import 'package:scan_sense/ui/career/karir_screen.dart';
 
 class CareerScreen extends ConsumerStatefulWidget {
@@ -158,7 +159,7 @@ class _CareerScreenState extends ConsumerState<CareerScreen> {
                 elevation: 3, // Tambahkan nilai elevation sesuai keinginan Anda
               ),
               onPressed: () {
-                Navigation.toNamed(routeName: KarirScreen.routeName);
+                Navigation.toNamed(routeName: FieldScreen.routeName);
               },
               child: Text(
                 "Mulai",

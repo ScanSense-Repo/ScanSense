@@ -35,14 +35,181 @@ class _FieldScreenState extends State<FieldScreen> {
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
             Text(
-              "Hasil Perangkingan",
+              "Cek Hasil Perangkingan",
               style: GoogleFonts.poppins(
-                fontSize: 25,
+                fontSize: 22,
                 fontWeight: FontWeight.bold,
                 color: Colors.black,
               ),
             ),
-            SizedBox(height: 20), // Sesuaikan tinggi sesuai kebutuhan
+            SizedBox(height: 20),
+            Text(
+              "Pilihlah bidang dibawah ini",
+              style: TextStyle(
+                fontSize: 17,
+                color: Colors.black,
+                fontWeight: FontWeight.w400,
+              ),
+            ),
+            SizedBox(height: 50),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+              children: [
+                ElevatedButton(
+                  onPressed: () {
+                    // Add your onPressed logic for IT Programmer button
+                  },
+                  style: ElevatedButton.styleFrom(
+                    primary: primaryColor,
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(7.0),
+                    ),
+                  ),
+                  child: Container(
+                    width: 110,
+                    height: 62,
+                    alignment: Alignment.center,
+                    child: Text(
+                      "IT Programmer",
+                      style: TextStyle(
+                        color: Colors.white,
+                        fontWeight: FontWeight.bold,
+                      ),
+                    ),
+                  ),
+                ),
+                SizedBox(width: 10), // Add space between buttons
+                ElevatedButton(
+                  onPressed: () {
+                    // Add your onPressed logic for Product Manager button
+                  },
+                  style: ElevatedButton.styleFrom(
+                    primary: primaryColor,
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(7.0),
+                    ),
+                  ),
+                  child: Container(
+                    width: 130,
+                    height: 62,
+                    alignment: Alignment.center,
+                    child: Text(
+                      "Product Manager",
+                      style: TextStyle(
+                        color: Colors.white,
+                        fontWeight: FontWeight.bold,
+                      ),
+                    ),
+                  ),
+                ),
+              ],
+            ),
+            SizedBox(height: 20),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+              children: [
+                ElevatedButton(
+                  onPressed: () {
+                    // Add your onPressed logic for IT Programmer button
+                  },
+                  style: ElevatedButton.styleFrom(
+                    primary: primaryColor,
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(7.0),
+                    ),
+                  ),
+                  child: Container(
+                    width: 110,
+                    height: 62,
+                    alignment: Alignment.center,
+                    child: Text(
+                      "UI/UX Designer",
+                      style: TextStyle(
+                        color: Colors.white,
+                        fontWeight: FontWeight.bold,
+                      ),
+                    ),
+                  ),
+                ),
+                SizedBox(width: 10), // Add space between buttons
+                ElevatedButton(
+                  onPressed: () {
+                    // Add your onPressed logic for Product Manager button
+                  },
+                  style: ElevatedButton.styleFrom(
+                    primary: primaryColor,
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(7.0),
+                    ),
+                  ),
+                  child: Container(
+                    width: 130,
+                    height: 62,
+                    alignment: Alignment.center,
+                    child: Text(
+                      "Social Media",
+                      style: TextStyle(
+                        color: Colors.white,
+                        fontWeight: FontWeight.bold,
+                      ),
+                    ),
+                  ),
+                ),
+              ],
+            ),
+            SizedBox(height: 20),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+              children: [
+                ElevatedButton(
+                  onPressed: () {
+                    // Add your onPressed logic for IT Programmer button
+                  },
+                  style: ElevatedButton.styleFrom(
+                    primary: primaryColor,
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(5.0),
+                    ),
+                  ),
+                  child: Container(
+                    width: 110,
+                    height: 62,
+                    alignment: Alignment.center,
+                    child: Text(
+                      "Marketing",
+                      style: TextStyle(
+                        color: Colors.white,
+                        fontWeight: FontWeight.bold,
+                      ),
+                    ),
+                  ),
+                ),
+                SizedBox(width: 10), // Add space between buttons
+                ElevatedButton(
+                  onPressed: () {
+                    // Add your onPressed logic for Product Manager button
+                  },
+                  style: ElevatedButton.styleFrom(
+                    primary: primaryColor,
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(5.0),
+                    ),
+                  ),
+                  child: Container(
+                    width: 130,
+                    height: 62,
+                    alignment: Alignment.center,
+                    child: Text(
+                      "HRD",
+                      style: TextStyle(
+                        color: Colors.white,
+                        fontWeight: FontWeight.bold,
+                      ),
+                    ),
+                  ),
+                ),
+              ],
+            ),
           ],
         ),
       ),
