@@ -23,6 +23,7 @@ import 'package:scan_sense/ui/setting/setting_screen.dart';
 import 'package:scan_sense/ui/splash/splash_screen.dart';
 import 'package:scan_sense/ui/test/test_screen.dart';
 import 'package:scan_sense/utils/helper.dart';
+import 'package:scan_sense/ui/career/field_screen.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -52,6 +53,7 @@ class MyApp extends StatelessWidget {
     TestScreen.routeName: (context) => const TestScreen(),
     NotificationScreen.routeName: (context) => const NotificationScreen(),
     ForgotPasswordScreen.routeName: (context) => ForgotPasswordScreen(),
+    FieldScreen.routeName: (context) => FieldScreen(),
   };
 
   // This widget is the root of your application.

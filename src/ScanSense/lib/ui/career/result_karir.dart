@@ -48,7 +48,7 @@ class _ResultKarirScreenState extends State<ResultKarirScreen> {
             SizedBox(height: 20), // Sesuaikan tinggi sesuai kebutuhan
             // Kolom Pencarian
             Container(
-              height: 70,
+              height: 60, // Adjusted height
               margin: EdgeInsets.all(16),
               decoration: BoxDecoration(
                 color: Colors.white,
@@ -58,7 +58,7 @@ class _ResultKarirScreenState extends State<ResultKarirScreen> {
               child: Row(
                 children: [
                   Padding(
-                    padding: const EdgeInsets.all(15.0),
+                    padding: const EdgeInsets.all(12.0),
                     child: Icon(Icons.search, color: Colors.black, size: 40),
                   ),
                   Expanded(
@@ -75,6 +75,7 @@ class _ResultKarirScreenState extends State<ResultKarirScreen> {
                 ],
               ),
             ),
+
             SizedBox(height: 20),
             // Menambahkan Row dengan nomer, CircleAvatar, dan nama
             Padding(
