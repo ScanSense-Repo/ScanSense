@@ -3,6 +3,8 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:dropdown_button2/dropdown_button2.dart';
 import 'package:scan_sense/common/styles.dart';
+import 'package:scan_sense/ui/career/result_karir.dart';
+import 'package:scan_sense/ui/career/career_screen.dart';
 
 class KarirScreen extends StatefulWidget {
   static const String routeName = '/karir-screen';
@@ -120,8 +122,7 @@ class _KarirScreenState extends State<KarirScreen> {
               SizedBox(height: 30),
               ElevatedButton(
                 style: ElevatedButton.styleFrom(
-                  primary:
-                      primaryColor, // Ganti dengan warna latar belakang yang diinginkan
+                  primary: primaryColor,
                 ),
                 onPressed: () {
                   // Handle save button pressed
@@ -136,7 +137,15 @@ class _KarirScreenState extends State<KarirScreen> {
                           ),
                         ),
                         duration: const Duration(seconds: 2),
-                        backgroundColor: Color.fromARGB(255, 9, 193, 61), // Sesuaikan dengan warna yang diinginkan
+                        backgroundColor: Color.fromARGB(255, 9, 193, 61),
+                      ),
+                    );
+
+                    // Navigate to ResultKarirScreen
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => ResultKarirScreen(),
                       ),
                     );
                   }
@@ -146,8 +155,7 @@ class _KarirScreenState extends State<KarirScreen> {
                   style: GoogleFonts.poppins(
                     fontSize: 14,
                     fontWeight: FontWeight.w600,
-                    color:
-                        Colors.white, // Ganti dengan warna teks yang diinginkan
+                    color: Colors.white,
                   ),
                 ),
               ),
