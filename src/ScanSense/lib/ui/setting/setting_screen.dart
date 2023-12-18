@@ -8,6 +8,7 @@ import 'package:scan_sense/providers/auth/auth_provider.dart';
 import 'package:scan_sense/ui/about us/about_us.dart';
 import 'package:scan_sense/ui/login/login_screen.dart';
 import 'package:scan_sense/ui/profile/profile_screen.dart';
+import 'package:scan_sense/ui/career/career_screen.dart';
 import 'package:scan_sense/widgets/logout-pop.dart';
 import 'package:animated_snack_bar/animated_snack_bar.dart';
 
@@ -56,7 +57,19 @@ class _SettingScreenState extends ConsumerState<SettingScreen> {
             padding: const EdgeInsets.symmetric(vertical: 10),
             child: Container(
               width: double.infinity,
-              height: 60,
+              height: 70,
+              decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(8),
+                boxShadow: [
+                  BoxShadow(
+                    color: Colors.black.withOpacity(0.2), // Warna shadow
+                    spreadRadius: 1, // Menentukan seberapa jauh shadow menyebar
+                    blurRadius: 5, // Menentukan tingkat blur shadow
+                    offset: Offset(
+                        0, 3), // Mengatur posisi shadow (horizontal, vertical)
+                  ),
+                ],
+              ),
               child: ElevatedButton.icon(
                 onPressed: () =>
                     Navigation.toNamed(routeName: ProfileScreen.routeName),
@@ -80,11 +93,65 @@ class _SettingScreenState extends ConsumerState<SettingScreen> {
               ),
             ),
           ),
+
           Padding(
             padding: const EdgeInsets.symmetric(vertical: 10),
             child: Container(
               width: double.infinity,
-              height: 60,
+              height: 70,
+              decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(8),
+                boxShadow: [
+                  BoxShadow(
+                    color: Colors.black.withOpacity(0.2),
+                    spreadRadius: 1,
+                    blurRadius: 5,
+                    offset: Offset(0, 3),
+                  ),
+                ],
+              ),
+              child: ElevatedButton.icon(
+                onPressed: () {
+                  Navigation.toNamed(routeName: CareerScreen.routeName);
+                },
+                icon: const Icon(Icons.work_outline, color: Colors.white),
+                label: Text(
+                  "Karir",
+                  style: GoogleFonts.poppins(
+                    fontSize: 14,
+                    fontWeight: FontWeight.w600,
+                    color: Colors.white,
+                  ),
+                ),
+                style: ElevatedButton.styleFrom(
+                  padding: const EdgeInsets.symmetric(vertical: 20),
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(8),
+                  ),
+                  backgroundColor: primaryColor,
+                ),
+              ),
+            ),
+          ),
+
+          //const SizedBox(height: 10),
+          Padding(
+            padding: const EdgeInsets.symmetric(vertical: 10),
+            child: Container(
+              width: double.infinity,
+              height: 70,
+              decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(8),
+                boxShadow: [
+                  BoxShadow(
+                    color: Colors.black.withOpacity(0.2), // Warna shadow
+                    spreadRadius: 1, // Menentukan seberapa jauh shadow menyebar
+                    blurRadius: 5, // Menentukan tingkat blur shadow
+                    offset: Offset(
+                        0, 3), // Mengatur posisi shadow (horizontal, vertical)
+                  ),
+                ],
+              ),
               child: ElevatedButton.icon(
                 onPressed: () =>
                     Navigation.toNamed(routeName: AboutUsScreen.routeName),
@@ -107,12 +174,25 @@ class _SettingScreenState extends ConsumerState<SettingScreen> {
               ),
             ),
           ),
-          const SizedBox(height: 16),
+
+          //const SizedBox(height: 16),
           Padding(
             padding: const EdgeInsets.symmetric(vertical: 10),
             child: Container(
               width: double.infinity,
-              height: 60,
+              height: 70,
+              decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(8),
+                boxShadow: [
+                  BoxShadow(
+                    color: Colors.black.withOpacity(0.2), // Warna shadow
+                    spreadRadius: 1, // Menentukan seberapa jauh shadow menyebar
+                    blurRadius: 5, // Menentukan tingkat blur shadow
+                    offset: Offset(
+                        0, 1), // Mengatur posisi shadow (horizontal, vertical)
+                  ),
+                ],
+              ),
               child: OutlinedButton.icon(
                 onPressed: () async {
                   // Tampilkan popup logout

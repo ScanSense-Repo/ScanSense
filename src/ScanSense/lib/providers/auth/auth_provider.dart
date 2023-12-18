@@ -2,19 +2,26 @@ import 'package:either_dart/either.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:scan_sense/base/failures/failure.dart';
+import 'package:scan_sense/domain/model/UserProfile.dart';
 import 'package:scan_sense/domain/model/auth.dart';
 import 'package:scan_sense/domain/repositories/auth_repository.dart';
+import 'auth_service.dart';
+import 'package:scan_sense/domain/model/auth.dart' as auth_model;
+import 'package:scan_sense/providers/auth/auth_service.dart';
 
 class AuthNotifier extends ChangeNotifier {
   final AuthRepository _authRepository;
-
+  final authProvider = StreamProvider.autoDispose<auth_model.Auth>((ref) {
+    // alias used
+    return AuthService().authChanges();
+  });
   Failure? _failure;
   bool _isLoading = false;
-  Auth? _auth;
+  auth_model.Auth? _auth; // alias used
 
   Failure? get failure => _failure;
   bool get isLoading => _isLoading;
-  Auth? get auth => _auth;
+  auth_model.Auth? get auth => _auth; // alias used
 
   AuthNotifier(this._authRepository);
 
@@ -47,6 +54,13 @@ class AuthNotifier extends ChangeNotifier {
         return false;
       }, (userProfile) {
         _isLoading = false;
+        _auth = _auth?.copyWith(
+          user: _auth!.user.copyWith(
+            name: userProfile.name,
+            email: userProfile.email,
+            phoneNumber: userProfile.phoneNumber,
+          ),
+        );
         notifyListeners();
         return true;
       });

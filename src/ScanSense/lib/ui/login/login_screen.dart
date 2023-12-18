@@ -22,6 +22,7 @@ class LoginScreen extends ConsumerStatefulWidget {
 class _LoginScreenState extends ConsumerState<LoginScreen> {
   TextEditingController cUsername = TextEditingController();
   TextEditingController cPassword = TextEditingController();
+  TextEditingController cEmail = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
@@ -127,7 +128,7 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
                                     type: AnimatedSnackBarType.success,
                                     duration: const Duration(seconds: 2),
                                   ).show(context);
-                                  Navigation.toReplacementNamed(
+                                  Navigation.toNamed(
                                       routeName: LayoutScreen.routeName);
                                 }
                               } else {

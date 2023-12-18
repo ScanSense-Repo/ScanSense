@@ -13,3 +13,4 @@ class Auth with _$Auth {
 
   factory Auth.fromJson(Map<String, dynamic> json) => _$AuthFromJson(json);
 }
+

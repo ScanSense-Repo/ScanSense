@@ -19,34 +19,82 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
 
   List<PageViewModel> listPages = [
     PageViewModel(
-      title: "Kecepatan dan Akurasi",
-      body:
+      titleWidget: Text(
+        "Kecepatan dan Akurasi",
+        style: GoogleFonts.poppins(
+          fontSize: 20,
+          fontWeight: FontWeight.bold,
+          color: Colors.black,
+        ),
+      ),
+      bodyWidget: Padding(
+        padding: const EdgeInsets.only(left: 24, right: 24),
+        child: Text(
           "Aplikasi ini sebagai solusi andal dan cepat dalam pengenalan KTP dalam waktu nyata",
+          textAlign: TextAlign.center,
+          style: GoogleFonts.poppins(
+            fontSize: 15,
+            color: Colors.grey,
+          ),
+        ),
+      ),
       image: Center(
         child: Padding(
-          padding: const EdgeInsets.only(top: 70.0), // Atur sesuai kebutuhan
+          padding: const EdgeInsets.only(top: 70.0),
           child: Image.asset('assets/illustrations/Other 15.png'),
         ),
       ),
     ),
     PageViewModel(
-      title: "Penggunaan Mudah",
-      body:
+      titleWidget: Text(
+        "Penggunaan Mudah",
+        style: GoogleFonts.poppins(
+          fontSize: 20,
+          fontWeight: FontWeight.bold,
+          color: Colors.black,
+        ),
+      ),
+      bodyWidget: Padding(
+        padding: const EdgeInsets.only(left: 24, right: 24),
+        child: Text(
           "Sebagai solusi yang mudah digunakan dan cocok untuk semua pengguna, bahkan yang tidak berpengalaman sekalipun.",
+          textAlign: TextAlign.center,
+          style: GoogleFonts.poppins(
+            fontSize: 15,
+            color: Colors.grey,
+          ),
+        ),
+      ),
       image: Center(
         child: Padding(
-          padding: const EdgeInsets.only(top: 70.0), // Atur sesuai kebutuhan
+          padding: const EdgeInsets.only(top: 70.0),
           child: Image.asset('assets/illustrations/Other 08.png'),
         ),
       ),
     ),
     PageViewModel(
-      title: "Keamanan Data",
-      body:
+      titleWidget: Text(
+        "Keamanan Data",
+        style: GoogleFonts.poppins(
+          fontSize: 20,
+          fontWeight: FontWeight.bold,
+          color: Colors.black,
+        ),
+      ),
+      bodyWidget: Padding(
+        padding: const EdgeInsets.only(left: 24, right: 24),
+        child: Text(
           "Menonjolkan komitmen aplikasi untuk menjaga data pengguna tetap aman dan terlindungi.",
+          textAlign: TextAlign.center,
+          style: GoogleFonts.poppins(
+            fontSize: 15,
+            color: Colors.grey,
+          ),
+        ),
+      ),
       image: Center(
         child: Padding(
-          padding: const EdgeInsets.only(top: 70.0), // Atur sesuai kebutuhan
+          padding: const EdgeInsets.only(top: 70.0),
           child: Image.asset('assets/illustrations/Other 18.png'),
         ),
       ),

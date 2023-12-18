@@ -26,7 +26,7 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
     return Scaffold(
       backgroundColor: backgroundColor,
       body: Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 24),
+        padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 24),
         child: ListView(
           children: [
             const SizedBox(
@@ -110,7 +110,7 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
               ],
             ),
             const SizedBox(
-              height: 90,
+              height: 30,
             ),
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,

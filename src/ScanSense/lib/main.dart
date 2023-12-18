@@ -6,6 +6,8 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:scan_sense/common/navigation.dart';
 import 'package:scan_sense/firebase_options.dart';
 import 'package:scan_sense/ui/about%20us/about_us.dart';
+import 'package:scan_sense/ui/career/career_screen.dart';
+import 'package:scan_sense/ui/career/karir_screen.dart';
 import 'package:scan_sense/ui/history/history_screen.dart';
 import 'package:scan_sense/ui/home/home_screen.dart';
 import 'package:scan_sense/ui/layout/layout_screen.dart';
@@ -21,6 +23,7 @@ import 'package:scan_sense/ui/setting/setting_screen.dart';
 import 'package:scan_sense/ui/splash/splash_screen.dart';
 import 'package:scan_sense/ui/test/test_screen.dart';
 import 'package:scan_sense/utils/helper.dart';
+import 'package:scan_sense/ui/career/field_screen.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -44,10 +47,13 @@ class MyApp extends StatelessWidget {
     LayoutScreen.routeName: (context) => const LayoutScreen(),
     SettingScreen.routeName: (context) => const SettingScreen(),
     ProfileScreen.routeName: (context) => const ProfileScreen(),
+    KarirScreen.routeName: (context) => const KarirScreen(),
+    CareerScreen.routeName: (context) => const CareerScreen(),
     AboutUsScreen.routeName: (context) => const AboutUsScreen(),
     TestScreen.routeName: (context) => const TestScreen(),
     NotificationScreen.routeName: (context) => const NotificationScreen(),
     ForgotPasswordScreen.routeName: (context) => ForgotPasswordScreen(),
+    FieldScreen.routeName: (context) => FieldScreen(),
   };
 
   // This widget is the root of your application.
