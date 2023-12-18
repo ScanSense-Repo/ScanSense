@@ -4,6 +4,7 @@ import 'package:dropdown_button2/dropdown_button2.dart';
 import 'package:scan_sense/common/styles.dart';
 import 'package:scan_sense/ui/career/result_karir.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 
 class KarirScreen extends StatefulWidget {
   static const String routeName = '/karir-screen';
@@ -37,19 +38,26 @@ class _KarirScreenState extends State<KarirScreen> {
     });
   }
 
-  Future<void> sendDataToFirebase() async {
+  Future<void> sendDataToFirebase(User user) async {
     CollectionReference karirCollection =
-        FirebaseFirestore.instance.collection('karir');
+        FirebaseFirestore.instance.collection('users');
 
-    await karirCollection.add({
-      'Pengalaman Kerja': _pengalamankerjaController.text,
-      'Skill': _skillController.text,
-      'Lokasi': _lokasiController.text,
-      'Pengalaman Organisasi': _pengalamanorganisasiController.text,
-      'Umur': _umurController.text,
-      'IPK': _ipkController.text,
-      // tambahkan kolom lainnya sesuai kebutuhan
-    });
+    Map<String, dynamic> data = {
+      'email': user.email,
+      'id': user.uid,
+      'kriteria': {
+        'pengalaman_kerja': _pengalamankerjaController.text,
+        'skill_sertifikat': _skillController.text,
+        'lokasi_kerja': _lokasiController.text,
+        'pengalaman_organisasi': _pengalamanorganisasiController.text,
+        'umur': _umurController.text,
+        'ipk': _ipkController.text,
+      },
+      'name': _namaController.text, // Perubahan di sini
+      'phone_number': user.phoneNumber,
+    };
+
+    await karirCollection.add(data);
 
     // Tampilkan pesan sukses atau lakukan tindakan setelah data berhasil ditambahkan
     print('Data berhasil ditambahkan ke Firestore!');
@@ -151,8 +159,10 @@ class _KarirScreenState extends State<KarirScreen> {
                 onPressed: () async {
                   // Handle save button pressed
                   if (_formKey.currentState?.validate() ?? false) {
-                    await sendDataToFirebase();
-
+                    User? user = FirebaseAuth.instance.currentUser;
+                    if (user != null) {
+                      await sendDataToFirebase(user);
+                    }
                     ScaffoldMessenger.of(context).showSnackBar(
                       SnackBar(
                         content: Text(
