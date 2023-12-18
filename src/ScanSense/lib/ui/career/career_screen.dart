@@ -159,7 +159,7 @@ class _CareerScreenState extends ConsumerState<CareerScreen> {
                 elevation: 3, // Tambahkan nilai elevation sesuai keinginan Anda
               ),
               onPressed: () {
-                Navigation.toNamed(routeName: FieldScreen.routeName);
+                Navigation.toNamed(routeName: KarirScreen.routeName);
               },
               child: Text(
                 "Mulai",
