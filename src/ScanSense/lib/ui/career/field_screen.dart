@@ -210,6 +210,40 @@ class _FieldScreenState extends State<FieldScreen> {
                 ),
               ],
             ),
+            SizedBox(height: 270),
+            Container(
+              width: double.infinity,
+              child: TextButton(
+                onPressed: () {
+                  // Add your onPressed logic for the "Next" button
+                },
+                style: TextButton.styleFrom(
+                  backgroundColor: Colors.white,
+                  side: BorderSide(
+                    color: primaryColor,
+                    width: 2.0,
+                  ),
+                  minimumSize:
+                      Size(double.infinity, 62), // Set the height to 62
+                ),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Text(
+                      "Next",
+                      style: TextStyle(
+                        color: primaryColor,
+                        fontWeight: FontWeight.bold,
+                      ),
+                    ),
+                    Icon(
+                      Icons.arrow_forward,
+                      color: primaryColor,
+                    ),
+                  ],
+                ),
+              ),
+            ),
           ],
         ),
       ),
