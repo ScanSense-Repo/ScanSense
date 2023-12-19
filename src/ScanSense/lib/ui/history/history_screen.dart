@@ -85,7 +85,7 @@ class _HistoryScreenState extends State<HistoryScreen> {
           );
         }
 
-        // Filter based on isValid status
+        // // Filter based on isValid status
         if (filterStatus == FilterStatus.valid) {
           query = query.where('isValid', isEqualTo: true);
         } else if (filterStatus == FilterStatus.invalid) {

@@ -69,9 +69,7 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
         padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 24),
         child: ListView(
           children: [
-            const SizedBox(
-              height: 16,
-            ),
+            const SizedBox(height: 16),
             Row(
               children: [
                 GestureDetector(
@@ -111,14 +109,10 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
                   ),
                 ),
                 // Add new widget for notification
-                const SizedBox(
-                  width: 48,
-                ),
+                const SizedBox(width: 48),
               ],
             ),
-            const SizedBox(
-              height: 30,
-            ),
+            const SizedBox(height: 30),
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
@@ -144,99 +138,73 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
                 ),
               ],
             ),
-            const SizedBox(
-              height: 16,
-            ),
-            Column(
-              children: [
-                const SizedBox(
-                  height: 8,
-                ),
-                Column(
-                  children: [
-                    // Use FutureBuilder to handle asynchronous operations
-                    FutureBuilder(
-                      future: fetchData(),
-                      builder: (context, snapshot) {
-                        if (snapshot.connectionState ==
-                            ConnectionState.waiting) {
-                          return CircularProgressIndicator();
-                        } else if (snapshot.hasError) {
-                          // Handle errors
-                          return Text('Error: ${snapshot.error}');
-                        } else {
-                          return Column(
-                            children: querySnapshot.docs.map((data) {
-                              return Card(
-                                elevation: 3,
-                                shadowColor: inputBackground,
-                                color: whiteColor,
-                                surfaceTintColor: whiteColor,
-                                child: Padding(
-                                  padding: const EdgeInsets.all(16.0),
-                                  child: Row(
-                                    mainAxisAlignment:
-                                        MainAxisAlignment.spaceBetween,
-                                    children: [
-                                      Column(
-                                        crossAxisAlignment:
-                                            CrossAxisAlignment.start,
-                                        children: [
-                                          Text(
-                                            data['nik'] ?? "",
-                                            style: GoogleFonts.poppins(
-                                              fontSize: 12,
-                                              fontWeight: FontWeight.w600,
-                                            ),
-                                          ),
-                                          Text(
-                                            data['name'] ?? "",
-                                            style: GoogleFonts.poppins(
-                                              fontSize: 12,
-                                              fontWeight: FontWeight.w600,
-                                              color: grayColor,
-                                            ),
-                                          ),
-                                        ],
-                                      ),
-                                      Container(
-                                        width: 64,
-                                        height: 64,
-                                        decoration: BoxDecoration(
-                                          color: data['isValid'] == true
-                                              ? successLightColor
-                                              : dangerLightColor,
-                                          borderRadius:
-                                              BorderRadius.circular(8),
-                                        ),
-                                        child: Center(
-                                          child: Text(
-                                            data['isValid'] == true
-                                                ? "Valid"
-                                                : "Tidak Valid",
-                                            style: GoogleFonts.poppins(
-                                              color: data['isValid'] == true
-                                                  ? Colors.green
-                                                  : Colors.red,
-                                              fontWeight: FontWeight.w600,
-                                              fontSize: 12,
-                                            ),
-                                            textAlign: TextAlign.center,
-                                          ),
-                                        ),
-                                      ),
-                                    ],
-                                  ),
-                                ),
-                              );
-                            }).toList(),
-                          );
-                        }
-                      },
+            const SizedBox(height: 16),
+            // Use ListView.builder for dynamic card list
+            ListView.builder(
+              shrinkWrap: true,
+              physics: NeverScrollableScrollPhysics(),
+              itemCount: historyData.length,
+              itemBuilder: (context, index) {
+                final data = historyData[index];
+
+                return Card(
+                  elevation: 3,
+                  shadowColor: inputBackground,
+                  color: whiteColor,
+                  surfaceTintColor: whiteColor,
+                  child: Padding(
+                    padding: const EdgeInsets.all(16.0),
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Text(
+                              data['nik'] ?? "",
+                              style: GoogleFonts.poppins(
+                                fontSize: 12,
+                                fontWeight: FontWeight.w600,
+                              ),
+                            ),
+                            Text(
+                              data['name'] ?? "",
+                              style: GoogleFonts.poppins(
+                                fontSize: 12,
+                                fontWeight: FontWeight.w600,
+                                color: grayColor,
+                              ),
+                            ),
+                          ],
+                        ),
+                        Container(
+                          width: 64,
+                          height: 64,
+                          decoration: BoxDecoration(
+                            color: data['isValid'] == true
+                                ? successLightColor
+                                : dangerLightColor,
+                            borderRadius: BorderRadius.circular(8),
+                          ),
+                          child: Center(
+                            child: Text(
+                              data['isValid'] == true ? "Valid" : "Tidak Valid",
+                              style: GoogleFonts.poppins(
+                                color: data['isValid'] == true
+                                    ? Colors.green
+                                    : Colors.red,
+                                fontWeight: FontWeight.w600,
+                                fontSize: 12,
+                              ),
+                              textAlign: TextAlign.center,
+                            ),
+                          ),
+                        ),
+                      ],
                     ),
-                  ],
-                ),
-              ],
+                  ),
+                );
+              },
             ),
           ],
         ),
