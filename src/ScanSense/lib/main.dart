@@ -12,6 +12,7 @@ import 'package:scan_sense/ui/career/karir_screen.dart';
 import 'package:scan_sense/ui/company/company_home_screen.dart';
 import 'package:scan_sense/ui/company/detail_company_screen.dart';
 import 'package:scan_sense/ui/history/history_screen.dart';
+import 'package:scan_sense/ui/home/home_screen.dart';
 import 'package:scan_sense/ui/layout/layout_screen.dart';
 import 'package:scan_sense/ui/login/login_screen.dart';
 import 'package:scan_sense/ui/notification/notification_screen.dart';
@@ -39,7 +40,7 @@ class MyApp extends StatelessWidget {
 
   final Map<String, WidgetBuilder> routes = {
     SplashScreen.routeName: (context) => const SplashScreen(),
-    // HomeScreen.routeName: (context) => const HomeScreen(),
+    HomeScreen.routeName: (context) => const HomeScreen(),
     HistoryScreen.routeName: (context) => const HistoryScreen(),
     ScanScreen.routeName: (context) => const ScanScreen(),
     ResultScreen.routeName: (context) => const ResultScreen(),
