@@ -1,10 +1,10 @@
-import 'package:animated_snack_bar/animated_snack_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:dropdown_button2/dropdown_button2.dart';
 import 'package:scan_sense/common/styles.dart';
 import 'package:scan_sense/ui/career/result_karir.dart';
-import 'package:scan_sense/ui/career/career_screen.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 
 class KarirScreen extends StatefulWidget {
   static const String routeName = '/karir-screen';
@@ -21,8 +21,13 @@ class _KarirScreenState extends State<KarirScreen> {
   TextEditingController _nikController = TextEditingController();
   TextEditingController _alamatController = TextEditingController();
   TextEditingController _umurController = TextEditingController();
-  TextEditingController _pengalamanController = TextEditingController();
+  TextEditingController _pengalamankerjaController = TextEditingController();
+  TextEditingController _pengalamanorganisasiController =
+      TextEditingController();
   TextEditingController _ipkController = TextEditingController();
+  TextEditingController _skillController = TextEditingController();
+  TextEditingController _lokasiController = TextEditingController();
+  TextEditingController _jenisKelaminController = TextEditingController();
   DateTime selectedDate = DateTime.now();
 
   final _formKey = GlobalKey<FormState>();
@@ -31,6 +36,31 @@ class _KarirScreenState extends State<KarirScreen> {
     setState(() {
       selectedDate = pickedDate;
     });
+  }
+
+  Future<void> sendDataToFirebase(User user) async {
+    CollectionReference karirCollection =
+        FirebaseFirestore.instance.collection('users');
+
+    Map<String, dynamic> data = {
+      'email': user.email,
+      'id': user.uid,
+      'kriteria': {
+        'pengalaman_kerja': _pengalamankerjaController.text,
+        'skill_sertifikat': _skillController.text,
+        'lokasi_kerja': _lokasiController.text,
+        'pengalaman_organisasi': _pengalamanorganisasiController.text,
+        'umur': _umurController.text,
+        'ipk': _ipkController.text,
+      },
+      'name': _namaController.text, // Perubahan di sini
+      'phone_number': user.phoneNumber,
+    };
+
+    await karirCollection.add(data);
+
+    // Tampilkan pesan sukses atau lakukan tindakan setelah data berhasil ditambahkan
+    print('Data berhasil ditambahkan ke Firestore!');
   }
 
   @override
@@ -101,19 +131,21 @@ class _KarirScreenState extends State<KarirScreen> {
                         keyboardType: TextInputType.number),
                     _buildListTile("Nama", _namaController),
                     _buildListTileDate("Tanggal Lahir"),
-                    _buildListTileDropdown(
-                        "Jenis Kelamin", selectedValue, genderOptions),
+                    _buildListTileDropdown("Jenis Kelamin",
+                        _jenisKelaminController, genderOptions),
                     _buildListTile("Alamat", _alamatController),
                     _buildListTile("Umur", _umurController,
                         keyboardType: TextInputType.number),
+                    _buildListTileDropdown("Pengalaman Kerja",
+                        _pengalamankerjaController, experienceOptions),
                     _buildListTileDropdown(
-                        "Pengalaman Kerja", selectedValue, experienceOptions),
+                        "Skill", _skillController, skillOptions),
                     _buildListTileDropdown(
-                        "Skill", selectedValue, skillOptions),
+                        "Lokasi", _lokasiController, locationOptions),
                     _buildListTileDropdown(
-                        "Lokasi", selectedValue, locationOptions),
-                    _buildListTileDropdown("Pengalaman Organisasi",
-                        selectedValue, organizationExperienceOptions),
+                        "Pengalaman Organisasi",
+                        _pengalamanorganisasiController,
+                        organizationExperienceOptions),
                     _buildListTile("IPK", _ipkController,
                         keyboardType: TextInputType.number),
                   ],
@@ -124,13 +156,17 @@ class _KarirScreenState extends State<KarirScreen> {
                 style: ElevatedButton.styleFrom(
                   primary: primaryColor,
                 ),
-                onPressed: () {
+                onPressed: () async {
                   // Handle save button pressed
                   if (_formKey.currentState?.validate() ?? false) {
+                    User? user = FirebaseAuth.instance.currentUser;
+                    if (user != null) {
+                      await sendDataToFirebase(user);
+                    }
                     ScaffoldMessenger.of(context).showSnackBar(
                       SnackBar(
                         content: Text(
-                          "Data berhasil disimpan!",
+                          "Data berhasil disimpan dan terkirim ke Firestore!",
                           style: GoogleFonts.poppins(
                             fontSize: 14,
                             fontWeight: FontWeight.w500,
@@ -251,8 +287,8 @@ class _KarirScreenState extends State<KarirScreen> {
     );
   }
 
-  Widget _buildListTileDropdown(
-      String label, String selectedValue, List<String> dropdownOptions) {
+  Widget _buildListTileDropdown(String label, TextEditingController controller,
+      List<String> dropdownOptions) {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
@@ -295,12 +331,10 @@ class _KarirScreenState extends State<KarirScreen> {
             return null;
           },
           onChanged: (value) {
-            // Do something when the selected item is changed.
+            controller.text = value!;
           },
           onSaved: (value) {
-            setState(() {
-              selectedValue = value!;
-            });
+            // Jika perlu, lakukan sesuatu ketika nilai disimpan
           },
           buttonStyleData: const ButtonStyleData(
             padding: EdgeInsets.only(right: 8),
