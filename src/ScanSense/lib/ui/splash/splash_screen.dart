@@ -8,6 +8,7 @@ import 'package:scan_sense/common/navigation.dart';
 import 'package:scan_sense/common/styles.dart';
 import 'package:scan_sense/ui/company/company_home_screen.dart';
 import 'package:scan_sense/ui/layout/layout_screen.dart';
+import 'package:scan_sense/ui/onboarding/onboarding_screen.dart';
 
 class SplashScreen extends ConsumerStatefulWidget {
   static const String routeName = '/';
@@ -38,7 +39,7 @@ class _SplashScreenState extends ConsumerState<SplashScreen> {
           Navigation.replaceNamed(routeName: CompanyHomeScreen.routeName);
         }
       }
-      // Navigation.replaceNamed(routeName: OnboardingScreen.routeName);
+      Navigation.replaceNamed(routeName: OnboardingScreen.routeName);
     });
     super.initState();
   }

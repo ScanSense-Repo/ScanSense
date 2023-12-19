@@ -1,4 +1,3 @@
-import 'package:camera/camera.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -25,11 +24,10 @@ import 'package:scan_sense/ui/scan/scan_screen.dart';
 import 'package:scan_sense/ui/setting/setting_screen.dart';
 import 'package:scan_sense/ui/splash/splash_screen.dart';
 import 'package:scan_sense/ui/test/test_screen.dart';
-import 'package:scan_sense/utils/helper.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
-  cameras = await availableCameras();
+  // cameras = await availableCameras();
   await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
   await GetStorage.init();
   runApp(ProviderScope(child: MyApp()));
