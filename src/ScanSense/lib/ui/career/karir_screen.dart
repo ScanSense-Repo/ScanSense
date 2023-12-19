@@ -54,7 +54,7 @@ class _KarirScreenState extends State<KarirScreen> {
         'kriteria.pengalaman_organisasi': _pengalamanorganisasiController.text,
         'kriteria.umur': _umurController.text,
         'kriteria.ipk': _ipkController.text,
-        'name': _namaController.text,
+        'name': user.displayName,
         'phone_number': user.phoneNumber,
       });
 

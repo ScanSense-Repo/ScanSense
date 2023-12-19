@@ -54,7 +54,7 @@ class _CareerScreenState extends ConsumerState<CareerScreen> {
             child: _buildPage(
               "Selamat Datang",
               "Karir Politeknik Negeri Malang",
-              'assets/illustrations/career_image.png',
+              'assets/illustrations/career_image-rev.png',
               additionalText1: GoogleFonts.poppins(
                 fontSize: 16,
                 fontWeight: FontWeight.w500,
@@ -144,31 +144,27 @@ class _CareerScreenState extends ConsumerState<CareerScreen> {
           ),
         ),
         const SizedBox(height: 16),
-        Align(
-          alignment: Alignment.bottomCenter,
-          child: Padding(
-            padding: const EdgeInsets.only(bottom: 20.0),
-            child: ElevatedButton(
-              style: ElevatedButton.styleFrom(
-                padding:
-                    const EdgeInsets.symmetric(horizontal: 22, vertical: 14),
-                shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(8),
-                ),
-                backgroundColor: whiteColor,
-                elevation: 3, // Tambahkan nilai elevation sesuai keinginan Anda
+        SizedBox(
+          height: 60,
+          width: double.infinity,
+          child: TextButton(
+            style: TextButton.styleFrom(
+              padding: const EdgeInsets.symmetric(horizontal: 22, vertical: 14),
+              shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(8),
+                side: BorderSide(color: primaryColor),
               ),
-              onPressed: () {
-                Navigation.toNamed(routeName: KarirScreen.routeName);
-              },
-              child: Text(
-                "Mulai",
-                style: GoogleFonts.poppins(
-                  fontSize: 14,
-                  fontWeight: FontWeight.w600,
-                  color:
-                      primaryColor, // Ganti dengan warna teks yang diinginkan
-                ),
+              minimumSize: Size(double.infinity, 0),
+            ),
+            onPressed: () {
+              Navigation.toNamed(routeName: KarirScreen.routeName);
+            },
+            child: Text(
+              "Mulai",
+              style: GoogleFonts.poppins(
+                fontSize: 14,
+                fontWeight: FontWeight.w600,
+                color: primaryColor,
               ),
             ),
           ),
