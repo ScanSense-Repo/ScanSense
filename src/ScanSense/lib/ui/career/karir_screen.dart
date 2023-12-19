@@ -42,25 +42,46 @@ class _KarirScreenState extends State<KarirScreen> {
     CollectionReference karirCollection =
         FirebaseFirestore.instance.collection('users');
 
-    Map<String, dynamic> data = {
-      'email': user.email,
-      'id': user.uid,
-      'kriteria': {
-        'pengalaman_kerja': _pengalamankerjaController.text,
-        'skill_sertifikat': _skillController.text,
-        'lokasi_kerja': _lokasiController.text,
-        'pengalaman_organisasi': _pengalamanorganisasiController.text,
-        'umur': _umurController.text,
-        'ipk': _ipkController.text,
-      },
-      'name': _namaController.text, // Perubahan di sini
-      'phone_number': user.phoneNumber,
-    };
+    // Periksa apakah dokumen dengan ID pengguna sudah ada atau belum
+    DocumentSnapshot userDoc = await karirCollection.doc(user.uid).get();
 
-    await karirCollection.add(data);
+    if (userDoc.exists) {
+      // Dokumen sudah ada, lakukan pembaruan data
+      await karirCollection.doc(user.uid).update({
+        'kriteria.pengalaman_kerja': _pengalamankerjaController.text,
+        'kriteria.skill_sertifikat': _skillController.text,
+        'kriteria.lokasi_kerja': _lokasiController.text,
+        'kriteria.pengalaman_organisasi': _pengalamanorganisasiController.text,
+        'kriteria.umur': _umurController.text,
+        'kriteria.ipk': _ipkController.text,
+        'name': _namaController.text,
+        'phone_number': user.phoneNumber,
+      });
 
-    // Tampilkan pesan sukses atau lakukan tindakan setelah data berhasil ditambahkan
-    print('Data berhasil ditambahkan ke Firestore!');
+      // Tampilkan pesan sukses atau lakukan tindakan setelah data berhasil diperbarui
+      print('Data berhasil diperbarui di Firestore!');
+    } else {
+      // Dokumen belum ada, tambahkan dokumen baru
+      Map<String, dynamic> data = {
+        'email': user.email,
+        'id': user.uid,
+        'kriteria': {
+          'pengalaman_kerja': _pengalamankerjaController.text,
+          'skill_sertifikat': _skillController.text,
+          'lokasi_kerja': _lokasiController.text,
+          'pengalaman_organisasi': _pengalamanorganisasiController.text,
+          'umur': _umurController.text,
+          'ipk': _ipkController.text,
+        },
+        'name': _namaController.text,
+        'phone_number': user.phoneNumber,
+      };
+
+      await karirCollection.doc(user.uid).set(data);
+
+      // Tampilkan pesan sukses atau lakukan tindakan setelah data berhasil ditambahkan
+      print('Data berhasil ditambahkan ke Firestore!');
+    }
   }
 
   @override
