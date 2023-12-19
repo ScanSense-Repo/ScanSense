@@ -1,3 +1,6 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -17,6 +20,45 @@ class HomeScreen extends ConsumerStatefulWidget {
 }
 
 class _HomeScreenState extends ConsumerState<HomeScreen> {
+  List<Map<String, dynamic>> historyData = [];
+  late QuerySnapshot<Map<String, dynamic>> querySnapshot;
+
+  @override
+  void initState() {
+    super.initState();
+    fetchData(); // Fetch data when the widget is initialized
+  }
+
+  Future<void> fetchData() async {
+    try {
+      final User? currentUser = FirebaseAuth.instance.currentUser;
+
+      if (currentUser != null) {
+        querySnapshot = await FirebaseFirestore.instance
+            .collection('users')
+            .doc(currentUser.uid)
+            .collection('ktp')
+            .get();
+
+        // Extract data from the documents
+        historyData = querySnapshot.docs.map((doc) {
+          return {
+            'nik': doc['nik'],
+            'name': doc['nama'],
+            'createdAt': doc['createdAt'],
+            'isValid': doc['isValid'],
+            'ktpUrl': doc['ktpUrl'],
+          };
+        }).toList();
+
+        // Update the UI
+        setState(() {});
+      }
+    } catch (e) {
+      print('Error fetching data: $e');
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     final auth = ref.watch(authProvider);
@@ -38,7 +80,7 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
                   },
                   child: ClipOval(
                     child: Image.asset(
-                      'assets/profile/img1.png',
+                      'assets/illustrations/profile.png',
                       width: 64,
                       height: 64,
                       fit: BoxFit.cover,
@@ -107,114 +149,92 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
             ),
             Column(
               children: [
-                Card(
-                  elevation: 3,
-                  shadowColor: inputBackground,
-                  color: whiteColor,
-                  surfaceTintColor: whiteColor,
-                  child: Padding(
-                    padding: const EdgeInsets.all(16.0),
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            Text(
-                              "3576447103920003",
-                              style: GoogleFonts.poppins(
-                                fontSize: 12,
-                                fontWeight: FontWeight.w600,
-                              ),
-                            ),
-                            Text(
-                              "Lukas Valentino",
-                              style: GoogleFonts.poppins(
-                                fontSize: 12,
-                                fontWeight: FontWeight.w600,
-                                color: grayColor,
-                              ),
-                            ),
-                          ],
-                        ),
-                        Container(
-                          width: 64,
-                          height: 64,
-                          decoration: BoxDecoration(
-                            color: successLightColor,
-                            borderRadius: BorderRadius.circular(8),
-                          ),
-                          child: Center(
-                            child: Text(
-                              "Valid",
-                              style: GoogleFonts.poppins(
-                                color: Colors.green,
-                                fontWeight: FontWeight.w600,
-                                fontSize: 12,
-                              ),
-                              textAlign: TextAlign.center,
-                            ),
-                          ),
-                        ),
-                      ],
-                    ),
-                  ),
-                ),
                 const SizedBox(
                   height: 8,
                 ),
-                Card(
-                  elevation: 3,
-                  shadowColor: inputBackground,
-                  color: whiteColor,
-                  surfaceTintColor: whiteColor,
-                  child: Padding(
-                    padding: const EdgeInsets.all(16.0),
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            Text(
-                              "3576447103920003",
-                              style: GoogleFonts.poppins(
-                                fontSize: 12,
-                                fontWeight: FontWeight.w600,
-                              ),
-                            ),
-                            Text(
-                              "Lukas Valentino",
-                              style: GoogleFonts.poppins(
-                                fontSize: 12,
-                                fontWeight: FontWeight.w600,
-                                color: grayColor,
-                              ),
-                            ),
-                          ],
-                        ),
-                        Container(
-                          width: 64,
-                          height: 64,
-                          decoration: BoxDecoration(
-                            color: dangerLightColor,
-                            borderRadius: BorderRadius.circular(8),
-                          ),
-                          child: Center(
-                            child: Text(
-                              "Tidak Valid",
-                              style: GoogleFonts.poppins(
-                                color: Colors.red,
-                                fontWeight: FontWeight.w600,
-                                fontSize: 12,
-                              ),
-                              textAlign: TextAlign.center,
-                            ),
-                          ),
-                        ),
-                      ],
+                Column(
+                  children: [
+                    // Use FutureBuilder to handle asynchronous operations
+                    FutureBuilder(
+                      future: fetchData(),
+                      builder: (context, snapshot) {
+                        if (snapshot.connectionState ==
+                            ConnectionState.waiting) {
+                          return CircularProgressIndicator();
+                        } else if (snapshot.hasError) {
+                          // Handle errors
+                          return Text('Error: ${snapshot.error}');
+                        } else {
+                          return Column(
+                            children: querySnapshot.docs.map((data) {
+                              return Card(
+                                elevation: 3,
+                                shadowColor: inputBackground,
+                                color: whiteColor,
+                                surfaceTintColor: whiteColor,
+                                child: Padding(
+                                  padding: const EdgeInsets.all(16.0),
+                                  child: Row(
+                                    mainAxisAlignment:
+                                        MainAxisAlignment.spaceBetween,
+                                    children: [
+                                      Column(
+                                        crossAxisAlignment:
+                                            CrossAxisAlignment.start,
+                                        children: [
+                                          Text(
+                                            data['nik'] ?? "",
+                                            style: GoogleFonts.poppins(
+                                              fontSize: 12,
+                                              fontWeight: FontWeight.w600,
+                                            ),
+                                          ),
+                                          Text(
+                                            data['name'] ?? "",
+                                            style: GoogleFonts.poppins(
+                                              fontSize: 12,
+                                              fontWeight: FontWeight.w600,
+                                              color: grayColor,
+                                            ),
+                                          ),
+                                        ],
+                                      ),
+                                      Container(
+                                        width: 64,
+                                        height: 64,
+                                        decoration: BoxDecoration(
+                                          color: data['isValid'] == true
+                                              ? successLightColor
+                                              : dangerLightColor,
+                                          borderRadius:
+                                              BorderRadius.circular(8),
+                                        ),
+                                        child: Center(
+                                          child: Text(
+                                            data['isValid'] == true
+                                                ? "Valid"
+                                                : "Tidak Valid",
+                                            style: GoogleFonts.poppins(
+                                              color: data['isValid'] == true
+                                                  ? Colors.green
+                                                  : Colors.red,
+                                              fontWeight: FontWeight.w600,
+                                              fontSize: 12,
+                                            ),
+                                            textAlign: TextAlign.center,
+                                          ),
+                                        ),
+                                      ),
+                                    ],
+                                  ),
+                                ),
+                              );
+                            }).toList(),
+                          );
+                        }
+                      },
                     ),
-                  ),
+                  ],
                 ),
               ],
             ),
