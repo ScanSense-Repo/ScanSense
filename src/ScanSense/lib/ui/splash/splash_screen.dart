@@ -2,11 +2,12 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:scan_sense/base/provider/box_provider.dart';
 import 'package:scan_sense/base/provider/firebase_auth_provider.dart';
 import 'package:scan_sense/common/navigation.dart';
 import 'package:scan_sense/common/styles.dart';
+import 'package:scan_sense/ui/company/company_home_screen.dart';
 import 'package:scan_sense/ui/layout/layout_screen.dart';
-import 'package:scan_sense/ui/onboarding/onboarding_screen.dart';
 
 class SplashScreen extends ConsumerStatefulWidget {
   static const String routeName = '/';
@@ -21,14 +22,22 @@ class _SplashScreenState extends ConsumerState<SplashScreen> {
   @override
   void initState() {
     final auth = ref.read(firebaseAuthProvider);
+    final box = ref.read(boxProvider);
     Future.delayed(const Duration(seconds: 3), () {
-      auth.userChanges().listen((user) {
-        if (user != null) {
+      // auth.userChanges().listen((user) {
+      //   if (user != null) {
+      //     Navigation.replaceNamed(routeName: LayoutScreen.routeName);
+      //   } else {
+      //     Navigation.replaceNamed(routeName: OnboardingScreen.routeName);
+      //   }
+      // });
+      if (box.read("isLoggedIn") ?? false == true) {
+        if (box.read("role") == "user") {
           Navigation.replaceNamed(routeName: LayoutScreen.routeName);
         } else {
-          Navigation.replaceNamed(routeName: OnboardingScreen.routeName);
+          Navigation.replaceNamed(routeName: CompanyHomeScreen.routeName);
         }
-      });
+      }
       // Navigation.replaceNamed(routeName: OnboardingScreen.routeName);
     });
     super.initState();

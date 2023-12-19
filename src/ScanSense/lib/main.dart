@@ -1,15 +1,17 @@
 import 'package:camera/camera.dart';
 import 'package:firebase_core/firebase_core.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:get_storage/get_storage.dart';
 import 'package:scan_sense/common/navigation.dart';
 import 'package:scan_sense/firebase_options.dart';
 import 'package:scan_sense/ui/about%20us/about_us.dart';
 import 'package:scan_sense/ui/career/career_screen.dart';
+import 'package:scan_sense/ui/career/field_screen.dart';
 import 'package:scan_sense/ui/career/karir_screen.dart';
+import 'package:scan_sense/ui/company/company_home_screen.dart';
+import 'package:scan_sense/ui/company/detail_company_screen.dart';
 import 'package:scan_sense/ui/history/history_screen.dart';
-import 'package:scan_sense/ui/home/home_screen.dart';
 import 'package:scan_sense/ui/layout/layout_screen.dart';
 import 'package:scan_sense/ui/login/login_screen.dart';
 import 'package:scan_sense/ui/notification/notification_screen.dart';
@@ -23,12 +25,12 @@ import 'package:scan_sense/ui/setting/setting_screen.dart';
 import 'package:scan_sense/ui/splash/splash_screen.dart';
 import 'package:scan_sense/ui/test/test_screen.dart';
 import 'package:scan_sense/utils/helper.dart';
-import 'package:scan_sense/ui/career/field_screen.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
   cameras = await availableCameras();
   await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
+  await GetStorage.init();
   runApp(ProviderScope(child: MyApp()));
 }
 
@@ -37,7 +39,7 @@ class MyApp extends StatelessWidget {
 
   final Map<String, WidgetBuilder> routes = {
     SplashScreen.routeName: (context) => const SplashScreen(),
-    HomeScreen.routeName: (context) => const HomeScreen(),
+    // HomeScreen.routeName: (context) => const HomeScreen(),
     HistoryScreen.routeName: (context) => const HistoryScreen(),
     ScanScreen.routeName: (context) => const ScanScreen(),
     ResultScreen.routeName: (context) => const ResultScreen(),
@@ -53,7 +55,9 @@ class MyApp extends StatelessWidget {
     TestScreen.routeName: (context) => const TestScreen(),
     NotificationScreen.routeName: (context) => const NotificationScreen(),
     ForgotPasswordScreen.routeName: (context) => ForgotPasswordScreen(),
-    FieldScreen.routeName: (context) => FieldScreen(),
+    FieldScreen.routeName: (context) => const FieldScreen(),
+    CompanyHomeScreen.routeName: (context) => const CompanyHomeScreen(),
+    DetailCompanyScreen.routeName: (context) => const DetailCompanyScreen(),
   };
 
   // This widget is the root of your application.
@@ -66,10 +70,11 @@ class MyApp extends StatelessWidget {
         useMaterial3: true,
       ),
       initialRoute: SplashScreen.routeName,
-      onGenerateRoute: (settings) {
-        return CupertinoPageRoute(
-            builder: (context) => routes[settings.name]!(context));
-      },
+      routes: routes,
+      // onGenerateRoute: (settings) {
+      //   return CupertinoPageRoute(
+      //       builder: (context) => routes[settings.name]!(context));
+      // },
       navigatorKey: navigatorKey,
     );
   }

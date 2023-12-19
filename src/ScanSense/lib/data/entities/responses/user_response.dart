@@ -8,13 +8,15 @@ class UserResponse {
   final String id;
   final String email;
   final String name;
-  final String phoneNumber;
+  final String? phoneNumber;
+  final String role;
 
   UserResponse({
     required this.id,
     required this.email,
     required this.name,
-    required this.phoneNumber,
+    this.phoneNumber,
+    required this.role,
   });
 
   factory UserResponse.fromJson(Map<String, dynamic> json) =>
@@ -26,6 +28,7 @@ class UserResponse {
         id: id,
         email: email,
         name: name,
-        phoneNumber: phoneNumber,
+        phoneNumber: phoneNumber ?? "-",
+        role: role,
       );
 }

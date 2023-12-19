@@ -1,16 +1,19 @@
 import 'package:either_dart/either.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:get_storage/get_storage.dart';
 import 'package:scan_sense/base/failures/failure.dart';
-import 'package:scan_sense/domain/model/UserProfile.dart';
+import 'package:scan_sense/base/provider/box_provider.dart';
+import 'package:scan_sense/domain/model/auth.dart' as auth_model;
 import 'package:scan_sense/domain/model/auth.dart';
 import 'package:scan_sense/domain/repositories/auth_repository.dart';
+
 import 'auth_service.dart';
-import 'package:scan_sense/domain/model/auth.dart' as auth_model;
-import 'package:scan_sense/providers/auth/auth_service.dart';
 
 class AuthNotifier extends ChangeNotifier {
   final AuthRepository _authRepository;
+  final GetStorage _box;
+
   final authProvider = StreamProvider.autoDispose<auth_model.Auth>((ref) {
     // alias used
     return AuthService().authChanges();
@@ -23,7 +26,7 @@ class AuthNotifier extends ChangeNotifier {
   bool get isLoading => _isLoading;
   auth_model.Auth? get auth => _auth; // alias used
 
-  AuthNotifier(this._authRepository);
+  AuthNotifier(this._authRepository, this._box);
 
   void setLoading(bool isLoading) {
     _isLoading = isLoading;
@@ -99,6 +102,9 @@ class AuthNotifier extends ChangeNotifier {
       (auth) async {
         _auth = auth;
 
+        _box.write('isLoggedIn', true);
+        _box.write('role', auth.user.role);
+
         return true;
       },
     );
@@ -119,6 +125,9 @@ class AuthNotifier extends ChangeNotifier {
     }, (right) {
       _auth = null;
       _isLoading = false;
+
+      _box.remove('isLoggedIn');
+      _box.remove('role');
       notifyListeners();
       return true;
     });
@@ -148,5 +157,6 @@ class AuthNotifier extends ChangeNotifier {
 
 final authProvider = ChangeNotifierProvider<AuthNotifier>((ref) {
   final authRepository = ref.read(authRepositoryProvider);
-  return AuthNotifier(authRepository);
+  final box = ref.read(boxProvider);
+  return AuthNotifier(authRepository, box);
 });

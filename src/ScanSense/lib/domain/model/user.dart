@@ -10,6 +10,7 @@ class User with _$User {
     required String name,
     required String email,
     required String phoneNumber,
+    @Default('user') String role,
   }) = _User;
 
   factory User.fromJson(Map<String, dynamic> json) => _$UserFromJson(json);
@@ -18,5 +19,6 @@ class User with _$User {
         name: '',
         email: '',
         phoneNumber: '',
+        role: '',
       );
 }

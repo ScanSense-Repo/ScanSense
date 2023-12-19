@@ -5,6 +5,7 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:scan_sense/common/navigation.dart';
 import 'package:scan_sense/common/styles.dart';
 import 'package:scan_sense/providers/auth/auth_provider.dart';
+import 'package:scan_sense/ui/company/company_home_screen.dart';
 import 'package:scan_sense/ui/layout/layout_screen.dart';
 import 'package:scan_sense/ui/password/forgot_password.dart';
 import 'package:scan_sense/ui/register/register_screen.dart';
@@ -119,8 +120,8 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
                               final login =
                                   await auth.login(username, password);
                               auth.setLoading(false);
-
-                              if (login) {
+                              print("hasil: ${auth.auth!.user.role}");
+                              if (login == true) {
                                 // Jika login berhasil
                                 if (mounted) {
                                   AnimatedSnackBar.material(
@@ -128,8 +129,14 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
                                     type: AnimatedSnackBarType.success,
                                     duration: const Duration(seconds: 2),
                                   ).show(context);
-                                  Navigation.toNamed(
-                                      routeName: LayoutScreen.routeName);
+
+                                  if (auth.auth!.user.role == "user") {
+                                    Navigation.toNamed(
+                                        routeName: LayoutScreen.routeName);
+                                  } else {
+                                    Navigation.toNamed(
+                                        routeName: CompanyHomeScreen.routeName);
+                                  }
                                 }
                               } else {
                                 // Jika login gagal

@@ -1,25 +1,25 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
-part of 'verify_repository.dart';
+part of 'rank_repository.dart';
 
 // **************************************************************************
 // RiverpodGenerator
 // **************************************************************************
 
-String _$verifyRepositoryHash() => r'b61eb3aee9491e50812acdf2abc3c9e3c90b5819';
+String _$rankRepositoryHash() => r'04bf0cb1dc5f99ac5c1b9d2361fd325a7becb1f1';
 
-/// See also [verifyRepository].
-@ProviderFor(verifyRepository)
-final verifyRepositoryProvider = AutoDisposeProvider<VerifyRepository>.internal(
-  verifyRepository,
-  name: r'verifyRepositoryProvider',
+/// See also [rankRepository].
+@ProviderFor(rankRepository)
+final rankRepositoryProvider = AutoDisposeProvider<RankRepository>.internal(
+  rankRepository,
+  name: r'rankRepositoryProvider',
   debugGetCreateSourceHash: const bool.fromEnvironment('dart.vm.product')
       ? null
-      : _$verifyRepositoryHash,
+      : _$rankRepositoryHash,
   dependencies: null,
   allTransitiveDependencies: null,
 );
 
-typedef VerifyRepositoryRef = AutoDisposeProviderRef<VerifyRepository>;
+typedef RankRepositoryRef = AutoDisposeProviderRef<RankRepository>;
 // ignore_for_file: type=lint
 // ignore_for_file: subtype_of_sealed_class, invalid_use_of_internal_member, invalid_use_of_visible_for_testing_member
