@@ -14,7 +14,6 @@ import 'package:scan_sense/ui/history/history_screen.dart';
 import 'package:scan_sense/ui/home/home_screen.dart';
 import 'package:scan_sense/ui/layout/layout_screen.dart';
 import 'package:scan_sense/ui/login/login_screen.dart';
-import 'package:scan_sense/ui/notification/notification_screen.dart';
 import 'package:scan_sense/ui/onboarding/onboarding_screen.dart';
 import 'package:scan_sense/ui/password/forgot_password.dart';
 import 'package:scan_sense/ui/profile/profile_screen.dart';
@@ -52,7 +51,7 @@ class MyApp extends StatelessWidget {
     CareerScreen.routeName: (context) => const CareerScreen(),
     AboutUsScreen.routeName: (context) => const AboutUsScreen(),
     TestScreen.routeName: (context) => const TestScreen(),
-    NotificationScreen.routeName: (context) => const NotificationScreen(),
+    //NotificationScreen.routeName: (context) => const NotificationScreen(),
     ForgotPasswordScreen.routeName: (context) => ForgotPasswordScreen(),
     FieldScreen.routeName: (context) => const FieldScreen(),
     CompanyHomeScreen.routeName: (context) => const CompanyHomeScreen(),
