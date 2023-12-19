@@ -86,7 +86,6 @@ class _KarirScreenState extends State<KarirScreen> {
 
   @override
   Widget build(BuildContext context) {
-    List<String> genderOptions = ['Laki-Laki', 'Perempuan'];
     List<String> experienceOptions = [
       '>1 Tahun',
       '1-3 Tahun',
@@ -144,17 +143,10 @@ class _KarirScreenState extends State<KarirScreen> {
                   color: Colors.black,
                 ),
               ),
-              SizedBox(height: 20),
+              SizedBox(height: 40),
               Expanded(
                 child: ListView(
                   children: [
-                    _buildListTile("NIK", _nikController,
-                        keyboardType: TextInputType.number),
-                    _buildListTile("Nama", _namaController),
-                    _buildListTileDate("Tanggal Lahir"),
-                    _buildListTileDropdown("Jenis Kelamin",
-                        _jenisKelaminController, genderOptions),
-                    _buildListTile("Alamat", _alamatController),
                     _buildListTile("Umur", _umurController,
                         keyboardType: TextInputType.number),
                     _buildListTileDropdown("Pengalaman Kerja",
