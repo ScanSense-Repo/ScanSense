@@ -38,7 +38,7 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
                   },
                   child: ClipOval(
                     child: Image.asset(
-                      'assets/illustrations/profile.png',
+                      'assets/profile/img1.png',
                       width: 64,
                       height: 64,
                       fit: BoxFit.cover,
