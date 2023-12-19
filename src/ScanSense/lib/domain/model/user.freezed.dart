@@ -24,6 +24,7 @@ mixin _$User {
   String get name => throw _privateConstructorUsedError;
   String get email => throw _privateConstructorUsedError;
   String get phoneNumber => throw _privateConstructorUsedError;
+  String get role => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -35,7 +36,8 @@ abstract class $UserCopyWith<$Res> {
   factory $UserCopyWith(User value, $Res Function(User) then) =
       _$UserCopyWithImpl<$Res, User>;
   @useResult
-  $Res call({String id, String name, String email, String phoneNumber});
+  $Res call(
+      {String id, String name, String email, String phoneNumber, String role});
 }
 
 /// @nodoc
@@ -55,6 +57,7 @@ class _$UserCopyWithImpl<$Res, $Val extends User>
     Object? name = null,
     Object? email = null,
     Object? phoneNumber = null,
+    Object? role = null,
   }) {
     return _then(_value.copyWith(
       id: null == id
@@ -73,6 +76,10 @@ class _$UserCopyWithImpl<$Res, $Val extends User>
           ? _value.phoneNumber
           : phoneNumber // ignore: cast_nullable_to_non_nullable
               as String,
+      role: null == role
+          ? _value.role
+          : role // ignore: cast_nullable_to_non_nullable
+              as String,
     ) as $Val);
   }
 }
@@ -84,7 +91,8 @@ abstract class _$$UserImplCopyWith<$Res> implements $UserCopyWith<$Res> {
       __$$UserImplCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({String id, String name, String email, String phoneNumber});
+  $Res call(
+      {String id, String name, String email, String phoneNumber, String role});
 }
 
 /// @nodoc
@@ -101,6 +109,7 @@ class __$$UserImplCopyWithImpl<$Res>
     Object? name = null,
     Object? email = null,
     Object? phoneNumber = null,
+    Object? role = null,
   }) {
     return _then(_$UserImpl(
       id: null == id
@@ -119,6 +128,10 @@ class __$$UserImplCopyWithImpl<$Res>
           ? _value.phoneNumber
           : phoneNumber // ignore: cast_nullable_to_non_nullable
               as String,
+      role: null == role
+          ? _value.role
+          : role // ignore: cast_nullable_to_non_nullable
+              as String,
     ));
   }
 }
@@ -130,7 +143,8 @@ class _$UserImpl implements _User {
       {required this.id,
       required this.name,
       required this.email,
-      required this.phoneNumber});
+      required this.phoneNumber,
+      this.role = 'user'});
 
   factory _$UserImpl.fromJson(Map<String, dynamic> json) =>
       _$$UserImplFromJson(json);
@@ -143,10 +157,13 @@ class _$UserImpl implements _User {
   final String email;
   @override
   final String phoneNumber;
+  @override
+  @JsonKey()
+  final String role;
 
   @override
   String toString() {
-    return 'User(id: $id, name: $name, email: $email, phoneNumber: $phoneNumber)';
+    return 'User(id: $id, name: $name, email: $email, phoneNumber: $phoneNumber, role: $role)';
   }
 
   @override
@@ -158,12 +175,14 @@ class _$UserImpl implements _User {
             (identical(other.name, name) || other.name == name) &&
             (identical(other.email, email) || other.email == email) &&
             (identical(other.phoneNumber, phoneNumber) ||
-                other.phoneNumber == phoneNumber));
+                other.phoneNumber == phoneNumber) &&
+            (identical(other.role, role) || other.role == role));
   }
 
   @JsonKey(ignore: true)
   @override
-  int get hashCode => Object.hash(runtimeType, id, name, email, phoneNumber);
+  int get hashCode =>
+      Object.hash(runtimeType, id, name, email, phoneNumber, role);
 
   @JsonKey(ignore: true)
   @override
@@ -184,7 +203,8 @@ abstract class _User implements User {
       {required final String id,
       required final String name,
       required final String email,
-      required final String phoneNumber}) = _$UserImpl;
+      required final String phoneNumber,
+      final String role}) = _$UserImpl;
 
   factory _User.fromJson(Map<String, dynamic> json) = _$UserImpl.fromJson;
 
@@ -196,6 +216,8 @@ abstract class _User implements User {
   String get email;
   @override
   String get phoneNumber;
+  @override
+  String get role;
   @override
   @JsonKey(ignore: true)
   _$$UserImplCopyWith<_$UserImpl> get copyWith =>

@@ -1,6 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:either_dart/either.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:scan_sense/base/failures/failure.dart';
 import 'package:scan_sense/data/entities/responses/user_response.dart';
 import 'package:scan_sense/domain/model/UserProfile.dart';
@@ -57,7 +57,6 @@ class AuthRepositoryImpl implements AuthRepository {
           email: email, password: password);
 
       final user = await getUser();
-
       return Right(Auth(
           uid: userCredential.user!.uid,
           user: user.fold((left) => model.User.empty(), (user) => user)));
@@ -104,7 +103,6 @@ class AuthRepositoryImpl implements AuthRepository {
 
       final user =
           UserResponse.fromJson(response.data() as Map<String, dynamic>);
-
       return Right(user.toUser());
     } catch (e) {
       return Future.value(
