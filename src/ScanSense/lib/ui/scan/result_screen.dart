@@ -6,6 +6,7 @@ import 'package:giffy_dialog/giffy_dialog.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:scan_sense/common/navigation.dart';
 import 'package:scan_sense/common/styles.dart';
+import 'package:scan_sense/domain/model/ktp.dart';
 import 'package:scan_sense/providers/scan/scan_provider.dart';
 import 'package:scan_sense/ui/layout/layout_screen.dart';
 import 'package:scan_sense/widgets/custom_input.dart';
@@ -25,15 +26,36 @@ class _ResultScreenState extends ConsumerState<ResultScreen> {
   TextEditingController cTtl = TextEditingController();
   TextEditingController cGender = TextEditingController();
   TextEditingController cAlamat = TextEditingController();
+  TextEditingController cRt = TextEditingController();
+  TextEditingController cRw = TextEditingController();
+  TextEditingController cKelDesa = TextEditingController();
+  TextEditingController cKecamatan = TextEditingController();
+  TextEditingController cAgama = TextEditingController();
+  TextEditingController cStatus = TextEditingController();
+  TextEditingController cPekerjaan = TextEditingController();
+  TextEditingController cKewarganegaraan = TextEditingController();
+  TextEditingController cBerlaku = TextEditingController();
 
   @override
   void initState() {
-    cNik.text = "3507322912020002";
-    cNama.text = "wiradarma nurmagika bagaskara";
-    cTtl.text = "CELLENGENGE, 25-10-1972";
-    cGender.text = "LAKI-LAKI";
-    cAlamat.text = "JL. MERDEKA NO 43";
-    // TODO: implement initState
+    final scan = ref.read(scanProvider);
+    final Ktp ktp = scan.ktp!;
+
+    cNik.text = ktp.nik;
+    cNama.text = ktp.nama;
+    cTtl.text = ktp.ttl;
+    cGender.text = ktp.jenisKelamin;
+    cAlamat.text = ktp.alamat;
+    cRt.text = ktp.rt;
+    cRw.text = ktp.rw;
+    cKelDesa.text = ktp.kelDesa;
+    cKecamatan.text = ktp.kecamatan;
+    cAgama.text = ktp.agama;
+    cStatus.text = ktp.statusPerkawinan;
+    cPekerjaan.text = ktp.pekerjaan;
+    cKewarganegaraan.text = ktp.kewarganegaraan;
+    cBerlaku.text = ktp.berlakuHingga;
+
     super.initState();
   }
 
@@ -45,7 +67,23 @@ class _ResultScreenState extends ConsumerState<ResultScreen> {
       nik: cNik.text,
     );
 
-    await scan.saveResult(name: cNama.text, nik: cNik.text, isValid: verify);
+    Ktp ktp = Ktp(
+        nik: cNik.text,
+        nama: cNama.text,
+        ttl: cTtl.text,
+        jenisKelamin: cGender.text,
+        alamat: cAlamat.text,
+        rt: cRt.text,
+        rw: cRw.text,
+        kelDesa: cKelDesa.text,
+        kecamatan: cKecamatan.text,
+        agama: cAgama.text,
+        statusPerkawinan: cStatus.text,
+        pekerjaan: cPekerjaan.text,
+        kewarganegaraan: cKewarganegaraan.text,
+        berlakuHingga: cBerlaku.text);
+
+    await scan.saveResult(ktp: ktp, isValid: verify);
     if (verify) {
       showSuccessDialog();
     } else {
@@ -254,28 +292,136 @@ class _ResultScreenState extends ConsumerState<ResultScreen> {
                     ),
                     CustomInput(
                       controller: cNama,
-                      hint: "E-mail",
+                      hint: "Nama",
                     ),
                     const SizedBox(
                       height: 16,
                     ),
                     CustomInput(
                       controller: cTtl,
-                      hint: "No Telepon",
+                      hint: "Ttl",
                     ),
                     const SizedBox(
                       height: 16,
                     ),
-                    CustomInput(
-                      controller: cGender,
-                      hint: "Kata Sandi",
+                    Container(
+                      decoration: BoxDecoration(
+                        color: inputBackground,
+                        borderRadius: BorderRadius.circular(10),
+                      ),
+                      child: DropdownMenu<String>(
+                        width: MediaQuery.of(context).size.width - 48,
+                        inputDecorationTheme: const InputDecorationTheme(
+                          border: InputBorder.none,
+                          contentPadding: EdgeInsets.symmetric(
+                            horizontal: 16,
+                            vertical: 16,
+                          ),
+                        ),
+                        initialSelection: "Laki-Laki",
+                        controller: cGender,
+                        dropdownMenuEntries: const [
+                          DropdownMenuEntry(
+                              value: "Laki-Laki", label: "Laki-Laki"),
+                          DropdownMenuEntry(
+                              value: "Perempuan", label: "Perempuan")
+                        ],
+                      ),
                     ),
                     const SizedBox(
                       height: 16,
                     ),
                     CustomInput(
                       controller: cAlamat,
-                      hint: "Konfirmasi Kata Sandi",
+                      hint: "Alamat",
+                    ),
+                    const SizedBox(
+                      height: 16,
+                    ),
+                    CustomInput(
+                      controller: cRt,
+                      hint: "Rt",
+                    ),
+                    const SizedBox(
+                      height: 16,
+                    ),
+                    CustomInput(
+                      controller: cRw,
+                      hint: "Rw",
+                    ),
+                    const SizedBox(
+                      height: 16,
+                    ),
+                    CustomInput(
+                      controller: cKelDesa,
+                      hint: "Kel/Desa",
+                    ),
+                    const SizedBox(
+                      height: 16,
+                    ),
+                    CustomInput(
+                      controller: cKecamatan,
+                      hint: "Kecamatan",
+                    ),
+                    const SizedBox(
+                      height: 16,
+                    ),
+                    Container(
+                      decoration: BoxDecoration(
+                        color: inputBackground,
+                        borderRadius: BorderRadius.circular(10),
+                      ),
+                      child: DropdownMenu<String>(
+                        width: MediaQuery.of(context).size.width - 48,
+                        inputDecorationTheme: const InputDecorationTheme(
+                          border: InputBorder.none,
+                          contentPadding: EdgeInsets.symmetric(
+                            horizontal: 16,
+                            vertical: 16,
+                          ),
+                        ),
+                        initialSelection: "Islam",
+                        controller: cAgama,
+                        dropdownMenuEntries: const [
+                          DropdownMenuEntry(value: "Islam", label: "Islam"),
+                          DropdownMenuEntry(value: "Kristen", label: "Kristen"),
+                          DropdownMenuEntry(value: "Budha", label: "Budha"),
+                          DropdownMenuEntry(value: "Hindu", label: "Hindu"),
+                          DropdownMenuEntry(
+                              value: "Konghucu", label: "Konghucu"),
+                        ],
+                      ),
+                    ),
+                    const SizedBox(
+                      height: 16,
+                    ),
+                    CustomInput(
+                      controller: cStatus,
+                      hint: "Status Perkawinan",
+                    ),
+                    const SizedBox(
+                      height: 16,
+                    ),
+                    CustomInput(
+                      controller: cPekerjaan,
+                      hint: "Pekerjaan",
+                    ),
+                    const SizedBox(
+                      height: 16,
+                    ),
+                    CustomInput(
+                      controller: cKewarganegaraan,
+                      hint: "Kewarganegaraan",
+                    ),
+                    const SizedBox(
+                      height: 16,
+                    ),
+                    CustomInput(
+                      controller: cBerlaku,
+                      hint: "Berlaku Hingga",
+                    ),
+                    const SizedBox(
+                      height: 16,
                     ),
                   ],
                 ),

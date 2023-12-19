@@ -8,6 +8,7 @@ import 'package:scan_sense/common/navigation.dart';
 import 'package:scan_sense/common/styles.dart';
 import 'package:scan_sense/ui/company/company_home_screen.dart';
 import 'package:scan_sense/ui/layout/layout_screen.dart';
+import 'package:scan_sense/ui/login/login_screen.dart';
 import 'package:scan_sense/ui/onboarding/onboarding_screen.dart';
 
 class SplashScreen extends ConsumerStatefulWidget {
@@ -38,8 +39,11 @@ class _SplashScreenState extends ConsumerState<SplashScreen> {
         } else {
           Navigation.replaceNamed(routeName: CompanyHomeScreen.routeName);
         }
+      } else if (box.read("isOnboarding") ?? false == true) {
+        Navigation.replaceNamed(routeName: LoginScreen.routeName);
+      } else {
+        Navigation.replaceNamed(routeName: OnboardingScreen.routeName);
       }
-      Navigation.replaceNamed(routeName: OnboardingScreen.routeName);
     });
     super.initState();
   }

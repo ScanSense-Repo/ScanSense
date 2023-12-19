@@ -9,6 +9,7 @@ import 'package:path/path.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:permission_handler/permission_handler.dart';
 import 'package:scan_sense/base/failures/failure.dart';
+import 'package:scan_sense/domain/model/ktp.dart';
 import 'package:scan_sense/domain/repositories/verify_repository.dart';
 
 class ScanNotifier extends ChangeNotifier {
@@ -29,6 +30,9 @@ class ScanNotifier extends ChangeNotifier {
 
   Failure? get failure => _failure;
   bool get isLoading => _isLoading;
+
+  Ktp? _ktp;
+  Ktp? get ktp => _ktp;
 
   final VerifyRepository _verifyRepository;
 
@@ -59,10 +63,7 @@ class ScanNotifier extends ChangeNotifier {
     });
   }
 
-  Future<bool> saveResult(
-      {required String name,
-      required String nik,
-      required bool isValid}) async {
+  Future<bool> saveResult({required Ktp ktp, required bool isValid}) async {
     _failure = null;
     _isLoading = true;
     notifyListeners();
@@ -72,7 +73,7 @@ class ScanNotifier extends ChangeNotifier {
     }
 
     final response =
-        await _verifyRepository.saveResult(_imageFile!, name, nik, isValid);
+        await _verifyRepository.saveResult(_imageFile!, ktp, isValid);
 
     return response.fold((failure) {
       _failure = failure;
@@ -198,6 +199,28 @@ class ScanNotifier extends ChangeNotifier {
     _imagePath = null;
     _image = null;
     notifyListeners();
+  }
+
+  Future<bool> ocrKtp(File ktp) async {
+    _failure = null;
+    _isLoading = true;
+    notifyListeners();
+
+    final response = await _verifyRepository.ocr(ktp);
+
+    return response.fold((failure) {
+      _failure = failure;
+      _isLoading = false;
+      notifyListeners();
+
+      return false;
+    }, (right) {
+      _isLoading = false;
+      _ktp = right;
+      notifyListeners();
+
+      return true;
+    });
   }
 }
 

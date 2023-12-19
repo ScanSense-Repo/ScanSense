@@ -1,20 +1,22 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:introduction_screen/introduction_screen.dart';
+import 'package:scan_sense/base/provider/box_provider.dart';
 import 'package:scan_sense/common/navigation.dart';
 import 'package:scan_sense/common/styles.dart';
 import 'package:scan_sense/ui/login/login_screen.dart';
 
-class OnboardingScreen extends StatefulWidget {
+class OnboardingScreen extends ConsumerStatefulWidget {
   static const String routeName = '/onboarding-screen';
 
   const OnboardingScreen({super.key});
 
   @override
-  State<OnboardingScreen> createState() => _OnboardingScreenState();
+  ConsumerState<OnboardingScreen> createState() => _OnboardingScreenState();
 }
 
-class _OnboardingScreenState extends State<OnboardingScreen> {
+class _OnboardingScreenState extends ConsumerState<OnboardingScreen> {
   final introKey = GlobalKey<IntroductionScreenState>();
 
   List<PageViewModel> listPages = [
@@ -103,6 +105,7 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
 
   @override
   Widget build(BuildContext context) {
+    final box = ref.read(boxProvider);
     return Scaffold(
       body: Padding(
         padding: const EdgeInsets.only(top: 24),
@@ -131,6 +134,7 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
             ),
           ),
           onDone: () {
+            box.write("isOnboarding", true);
             Navigation.replaceNamed(routeName: LoginScreen.routeName);
           },
           onSkip: () {

@@ -1,63 +1,67 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:persistent_bottom_nav_bar/persistent_tab_view.dart';
 import 'package:scan_sense/common/navigation.dart';
 import 'package:scan_sense/common/styles.dart';
+import 'package:scan_sense/providers/scan/scan_provider.dart';
 import 'package:scan_sense/ui/home/home_screen.dart';
 import 'package:scan_sense/ui/scan/scan_screen.dart';
 import 'package:scan_sense/ui/setting/setting_screen.dart';
 
-class LayoutScreen extends StatefulWidget {
+class LayoutScreen extends ConsumerStatefulWidget {
   static const String routeName = '/layout-screen';
 
   const LayoutScreen({super.key});
 
   @override
-  State<LayoutScreen> createState() => _LayoutScreenState();
+  ConsumerState<LayoutScreen> createState() => _LayoutScreenState();
 }
 
-class _LayoutScreenState extends State<LayoutScreen> {
+class _LayoutScreenState extends ConsumerState<LayoutScreen> {
   final PersistentTabController _controller =
       PersistentTabController(initialIndex: 0);
 
-  List<Widget> _buildScreens() {
-    return [const HomeScreen(), const SizedBox(), const SettingScreen()];
-  }
-
-  List<PersistentBottomNavBarItem> _navBarsItems() {
-    return [
-      PersistentBottomNavBarItem(
-        icon: const Icon(CupertinoIcons.home),
-        title: ("Beranda"),
-        activeColorPrimary: CupertinoColors.activeBlue,
-        inactiveColorPrimary: CupertinoColors.systemGrey,
-      ),
-      PersistentBottomNavBarItem(
-        icon: const Icon(
-          CupertinoIcons.camera,
-          color: whiteColor,
-        ),
-        onPressed: (context) =>
-            Navigation.toNamed(routeName: ScanScreen.routeName),
-        activeColorPrimary: CupertinoColors.activeBlue,
-        inactiveColorPrimary: CupertinoColors.systemGrey,
-      ),
-      PersistentBottomNavBarItem(
-        icon: const Icon(CupertinoIcons.settings),
-        title: ("Pengaturan"),
-        activeColorPrimary: CupertinoColors.activeBlue,
-        inactiveColorPrimary: CupertinoColors.systemGrey,
-      ),
-    ];
-  }
-
   @override
   Widget build(BuildContext context) {
+    List<Widget> buildScreens() {
+      return [const HomeScreen(), const SizedBox(), const SettingScreen()];
+    }
+
+    List<PersistentBottomNavBarItem> navBarsItems() {
+      return [
+        PersistentBottomNavBarItem(
+          icon: const Icon(CupertinoIcons.home),
+          title: ("Beranda"),
+          activeColorPrimary: CupertinoColors.activeBlue,
+          inactiveColorPrimary: CupertinoColors.systemGrey,
+        ),
+        PersistentBottomNavBarItem(
+          icon: const Icon(
+            CupertinoIcons.camera,
+            color: whiteColor,
+          ),
+          onPressed: (context) {
+            ref.invalidate(scanProvider);
+            Navigation.toNamed(routeName: ScanScreen.routeName);
+          },
+          activeColorPrimary: CupertinoColors.activeBlue,
+          inactiveColorPrimary: CupertinoColors.systemGrey,
+        ),
+        PersistentBottomNavBarItem(
+          icon: const Icon(CupertinoIcons.settings),
+          title: ("Pengaturan"),
+          activeColorPrimary: CupertinoColors.activeBlue,
+          inactiveColorPrimary: CupertinoColors.systemGrey,
+        ),
+      ];
+    }
+
     return PersistentTabView(
       context,
       controller: _controller,
-      screens: _buildScreens(),
-      items: _navBarsItems(),
+      screens: buildScreens(),
+      items: navBarsItems(),
       confineInSafeArea: true,
       backgroundColor: Colors.white, // Default is Colors.white.
       handleAndroidBackButtonPress: true, // Default is true.

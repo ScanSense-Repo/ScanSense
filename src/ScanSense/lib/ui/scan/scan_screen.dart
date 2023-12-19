@@ -1,5 +1,4 @@
-import 'dart:typed_data';
-
+import 'package:animated_snack_bar/animated_snack_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -18,6 +17,8 @@ class ScanScreen extends ConsumerStatefulWidget {
 }
 
 class _ScanScreenState extends ConsumerState<ScanScreen> {
+  bool loading = false;
+
   @override
   Widget build(BuildContext context) {
     final scan = ref.watch(scanProvider);
@@ -69,10 +70,8 @@ class _ScanScreenState extends ConsumerState<ScanScreen> {
                                 'assets/illustrations/ktp.png',
                                 fit: BoxFit.cover,
                               )
-                            : Image.memory(
-                                Uint8List.fromList(
-                                  scan.imageUint!,
-                                ),
+                            : Image.file(
+                                scan.imageFile!,
                                 fit: BoxFit.cover,
                               ),
                       ),
@@ -135,8 +134,32 @@ class _ScanScreenState extends ConsumerState<ScanScreen> {
                       height: 16,
                     ),
                     ElevatedButton(
-                      onPressed: () =>
-                          Navigation.toNamed(routeName: ResultScreen.routeName),
+                      onPressed: () async {
+                        if (scan.image == null) {
+                          return;
+                        }
+                        setState(() {
+                          loading = true;
+                        });
+
+                        final res = await scan.ocrKtp(scan.imageFile!);
+
+                        if (res == true) {
+                          Navigation.toNamed(routeName: ResultScreen.routeName);
+                        } else {
+                          if (mounted) {
+                            AnimatedSnackBar.material(
+                              "Gagal rekognisi gambar !",
+                              type: AnimatedSnackBarType.warning,
+                              duration: const Duration(seconds: 2),
+                            ).show(context);
+                          }
+                        }
+
+                        setState(() {
+                          loading = false;
+                        });
+                      },
                       style: ElevatedButton.styleFrom(
                         padding: const EdgeInsets.symmetric(vertical: 20),
                         shape: RoundedRectangleBorder(
@@ -146,14 +169,22 @@ class _ScanScreenState extends ConsumerState<ScanScreen> {
                         fixedSize:
                             Size.fromWidth(MediaQuery.of(context).size.width),
                       ),
-                      child: Text(
-                        "Verifikasi",
-                        style: GoogleFonts.poppins(
-                          fontSize: 14,
-                          fontWeight: FontWeight.w600,
-                          color: whiteColor,
-                        ),
-                      ),
+                      child: (loading)
+                          ? const SizedBox(
+                              height: 20,
+                              width: 20,
+                              child: CircularProgressIndicator(
+                                color: whiteColor,
+                              ),
+                            )
+                          : Text(
+                              "Verifikasi",
+                              style: GoogleFonts.poppins(
+                                fontSize: 14,
+                                fontWeight: FontWeight.w600,
+                                color: whiteColor,
+                              ),
+                            ),
                     ),
                   ],
                 ),
