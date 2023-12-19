@@ -5,6 +5,7 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:scan_sense/common/styles.dart';
 import 'package:scan_sense/providers/auth/auth_provider.dart';
 import 'package:scan_sense/widgets/custom_input.dart';
+import 'package:image_picker/image_picker.dart';
 
 final GlobalKey<NavigatorState> navigatorKunci = GlobalKey<NavigatorState>();
 final GlobalKey<_ProfileScreenState> _profileKey = GlobalKey();
@@ -65,15 +66,18 @@ class _ProfileScreenState extends ConsumerState<ProfileScreen> {
         padding: const EdgeInsets.symmetric(horizontal: 24),
         child: ListView(
           children: [
-            _buildProfilePicture(), // Panggil fungsi _buildProfilePicture
             const SizedBox(height: 16),
-            Text(
-              "Ubah Foto Profil",
-              style: GoogleFonts.poppins(
-                  fontSize: 13,
-                  fontWeight: FontWeight.w600,
-                  color: primaryColor),
-              textAlign: TextAlign.center,
+            CircleAvatar(
+              radius:
+                  80, // Adjust the radius as needed// Set your desired background color
+              child: ClipOval(
+                child: Image.asset(
+                  'assets/profile/img1.png',
+                  width: 160, // Adjust the width as needed
+                  height: 160, // Adjust the height as needed
+                  fit: BoxFit.cover,
+                ),
+              ),
             ),
             const SizedBox(height: 24),
             CustomInput(
@@ -147,67 +151,5 @@ class _ProfileScreenState extends ConsumerState<ProfileScreen> {
         ),
       ),
     );
-  }
-
-  // Pindahkan fungsi _buildProfilePicture ke sini
-  Widget _buildProfilePicture() {
-    return Stack(
-      alignment: Alignment.bottomRight,
-      children: [
-        GestureDetector(
-          onTap: () {
-            _pickImage();
-          },
-          child: Container(
-            width: 90,
-            height: 90,
-            decoration: BoxDecoration(
-              shape: BoxShape.circle,
-              image: DecorationImage(
-                image: NetworkImage(imagePath),
-                fit: BoxFit.fill,
-              ),
-              boxShadow: [
-                BoxShadow(
-                  color: Color(0x3F000000),
-                  blurRadius: 6,
-                  offset: Offset(0, 0),
-                  spreadRadius: 0,
-                )
-              ],
-            ),
-          ),
-        ),
-        Positioned(
-          bottom: 8.0,
-          right: 8.0,
-          child: GestureDetector(
-            onTap: () {
-              _pickImage();
-            },
-            child: Container(
-              width: 24,
-              height: 24,
-              decoration: BoxDecoration(
-                shape: BoxShape.circle,
-                color: Colors.white,
-              ),
-              child: Center(
-                child: Icon(
-                  Icons.camera_alt,
-                  color: Colors.black,
-                ),
-              ),
-            ),
-          ),
-        ),
-      ],
-    );
-  }
-
-  // Tambah fungsi _pickImage untuk memilih gambar
-  void _pickImage() {
-    // Implementasi pemilihan gambar
-    // Misalnya menggunakan package image_picker
   }
 }

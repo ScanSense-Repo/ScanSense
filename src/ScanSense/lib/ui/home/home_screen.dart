@@ -1,3 +1,6 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -6,8 +9,6 @@ import 'package:scan_sense/common/styles.dart';
 import 'package:scan_sense/providers/auth/auth_provider.dart';
 import 'package:scan_sense/ui/history/history_screen.dart';
 import 'package:scan_sense/ui/profile/profile_screen.dart';
-
-import '../notification/notification_screen.dart';
 
 class HomeScreen extends ConsumerStatefulWidget {
   static const String routeName = '/home-screen';
@@ -19,6 +20,45 @@ class HomeScreen extends ConsumerStatefulWidget {
 }
 
 class _HomeScreenState extends ConsumerState<HomeScreen> {
+  List<Map<String, dynamic>> historyData = [];
+  late QuerySnapshot<Map<String, dynamic>> querySnapshot;
+
+  @override
+  void initState() {
+    super.initState();
+    fetchData(); // Fetch data when the widget is initialized
+  }
+
+  Future<void> fetchData() async {
+    try {
+      final User? currentUser = FirebaseAuth.instance.currentUser;
+
+      if (currentUser != null) {
+        querySnapshot = await FirebaseFirestore.instance
+            .collection('users')
+            .doc(currentUser.uid)
+            .collection('ktp')
+            .get();
+
+        // Extract data from the documents
+        historyData = querySnapshot.docs.map((doc) {
+          return {
+            'nik': doc['nik'],
+            'name': doc['nama'],
+            'createdAt': doc['createdAt'],
+            'isValid': doc['isValid'],
+            'ktpUrl': doc['ktpUrl'],
+          };
+        }).toList();
+
+        // Update the UI
+        setState(() {});
+      }
+    } catch (e) {
+      print('Error fetching data: $e');
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     final auth = ref.watch(authProvider);
@@ -29,9 +69,7 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
         padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 24),
         child: ListView(
           children: [
-            const SizedBox(
-              height: 16,
-            ),
+            const SizedBox(height: 16),
             Row(
               children: [
                 GestureDetector(
@@ -71,47 +109,10 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
                   ),
                 ),
                 // Add new widget for notification
-                const SizedBox(
-                  width: 48,
-                ),
-                IconButton(
-                  onPressed: () {
-                    Navigation.toNamed(routeName: NotificationScreen.routeName);
-                  },
-                  icon: Stack(
-                    children: [
-                      const Icon(
-                        Icons.notifications_none_outlined,
-                        size: 30,
-                        color: blackColor, // Set the size to 10
-                      ),
-                      Positioned(
-                        top: 0,
-                        right: 0,
-                        child: Container(
-                          padding: const EdgeInsets.all(5),
-                          decoration: BoxDecoration(
-                            color: dangerColor,
-                            borderRadius: BorderRadius.circular(50),
-                          ),
-                          child: const Text(
-                            "5",
-                            style: TextStyle(
-                              color: Colors.white,
-                              fontSize: 5,
-                              fontWeight: FontWeight.bold,
-                            ),
-                          ),
-                        ),
-                      ),
-                    ],
-                  ),
-                ),
+                const SizedBox(width: 48),
               ],
             ),
-            const SizedBox(
-              height: 30,
-            ),
+            const SizedBox(height: 30),
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
@@ -137,12 +138,16 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
                 ),
               ],
             ),
-            const SizedBox(
-              height: 16,
-            ),
-            Column(
-              children: [
-                Card(
+            const SizedBox(height: 16),
+            // Use ListView.builder for dynamic card list
+            ListView.builder(
+              shrinkWrap: true,
+              physics: NeverScrollableScrollPhysics(),
+              itemCount: historyData.length,
+              itemBuilder: (context, index) {
+                final data = historyData[index];
+
+                return Card(
                   elevation: 3,
                   shadowColor: inputBackground,
                   color: whiteColor,
@@ -156,14 +161,14 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
                             Text(
-                              "3576447103920003",
+                              data['nik'] ?? "",
                               style: GoogleFonts.poppins(
                                 fontSize: 12,
                                 fontWeight: FontWeight.w600,
                               ),
                             ),
                             Text(
-                              "Lukas Valentino",
+                              data['name'] ?? "",
                               style: GoogleFonts.poppins(
                                 fontSize: 12,
                                 fontWeight: FontWeight.w600,
@@ -176,14 +181,18 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
                           width: 64,
                           height: 64,
                           decoration: BoxDecoration(
-                            color: successLightColor,
+                            color: data['isValid'] == true
+                                ? successLightColor
+                                : dangerLightColor,
                             borderRadius: BorderRadius.circular(8),
                           ),
                           child: Center(
                             child: Text(
-                              "Valid",
+                              data['isValid'] == true ? "Valid" : "Tidak Valid",
                               style: GoogleFonts.poppins(
-                                color: Colors.green,
+                                color: data['isValid'] == true
+                                    ? Colors.green
+                                    : Colors.red,
                                 fontWeight: FontWeight.w600,
                                 fontSize: 12,
                               ),
@@ -194,64 +203,8 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
                       ],
                     ),
                   ),
-                ),
-                const SizedBox(
-                  height: 8,
-                ),
-                Card(
-                  elevation: 3,
-                  shadowColor: inputBackground,
-                  color: whiteColor,
-                  surfaceTintColor: whiteColor,
-                  child: Padding(
-                    padding: const EdgeInsets.all(16.0),
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            Text(
-                              "3576447103920003",
-                              style: GoogleFonts.poppins(
-                                fontSize: 12,
-                                fontWeight: FontWeight.w600,
-                              ),
-                            ),
-                            Text(
-                              "Lukas Valentino",
-                              style: GoogleFonts.poppins(
-                                fontSize: 12,
-                                fontWeight: FontWeight.w600,
-                                color: grayColor,
-                              ),
-                            ),
-                          ],
-                        ),
-                        Container(
-                          width: 64,
-                          height: 64,
-                          decoration: BoxDecoration(
-                            color: dangerLightColor,
-                            borderRadius: BorderRadius.circular(8),
-                          ),
-                          child: Center(
-                            child: Text(
-                              "Tidak Valid",
-                              style: GoogleFonts.poppins(
-                                color: Colors.red,
-                                fontWeight: FontWeight.w600,
-                                fontSize: 12,
-                              ),
-                              textAlign: TextAlign.center,
-                            ),
-                          ),
-                        ),
-                      ],
-                    ),
-                  ),
-                ),
-              ],
+                );
+              },
             ),
           ],
         ),
