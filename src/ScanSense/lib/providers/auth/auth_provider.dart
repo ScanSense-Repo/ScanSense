@@ -26,7 +26,25 @@ class AuthNotifier extends ChangeNotifier {
   bool get isLoading => _isLoading;
   auth_model.Auth? get auth => _auth; // alias used
 
-  AuthNotifier(this._authRepository, this._box);
+  AuthNotifier(this._authRepository, this._box) {
+    _checkCurrentUser();
+  }
+
+  Future<void> _checkCurrentUser() async {
+    final isLoggedIn = _box.read('isLoggedIn') ?? false;
+
+    if (isLoggedIn) {
+      final response = await _authRepository.getUser();
+
+      response.fold((failure) {
+        _failure = failure;
+        notifyListeners();
+      }, (user) {
+        _auth = Auth(uid: user.id, user: user);
+        notifyListeners();
+      });
+    }
+  }
 
   void setLoading(bool isLoading) {
     _isLoading = isLoading;

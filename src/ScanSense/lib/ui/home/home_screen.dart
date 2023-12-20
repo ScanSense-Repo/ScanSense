@@ -37,6 +37,8 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
             .collection('users')
             .doc(currentUser.uid)
             .collection('ktp')
+            .orderBy('createdAt', descending: true)
+            .limit(4)
             .get();
 
         // Extract data from the documents

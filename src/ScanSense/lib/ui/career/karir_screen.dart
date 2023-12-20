@@ -5,6 +5,7 @@ import 'package:scan_sense/common/styles.dart';
 import 'package:scan_sense/ui/career/result_karir.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:scan_sense/ui/setting/setting_screen.dart';
 
 class KarirScreen extends StatefulWidget {
   static const String routeName = '/karir-screen';
@@ -194,7 +195,7 @@ class _KarirScreenState extends State<KarirScreen> {
                     Navigator.push(
                       context,
                       MaterialPageRoute(
-                        builder: (context) => ResultKarirScreen(),
+                        builder: (context) => SettingScreen(),
                       ),
                     );
                   }
