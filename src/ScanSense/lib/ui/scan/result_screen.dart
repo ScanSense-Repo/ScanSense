@@ -1,5 +1,3 @@
-import 'dart:typed_data';
-
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:giffy_dialog/giffy_dialog.dart';
@@ -274,8 +272,8 @@ class _ResultScreenState extends ConsumerState<ResultScreen> {
                                 'assets/illustrations/ktp.png',
                                 fit: BoxFit.cover,
                               )
-                            : Image.memory(
-                                Uint8List.fromList(scan.imageUint!),
+                            : Image.file(
+                                scan.imageFile!,
                                 fit: BoxFit.cover,
                               ),
                       ),
